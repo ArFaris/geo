@@ -1,0 +1,76 @@
+@use '@/styles/variables.scss' as *;
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: $padd-40;
+    margin-block: $padd-80;
+    align-items: center;
+}
+
+.link {
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    background-color: $accent;
+    padding-block: $padd-24;
+    text-align: center;
+    transition: $transition;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    @media(hover: hover) {
+        &:hover {
+            background-color: #635343;
+        }
+    }
+}
+
+.earth {
+    &__wrapper {
+        position: fixed;
+        max-height: 64%;
+        width: 100%;
+        overflow-y: hidden;
+        z-index: -1;
+        bottom: -220px;
+    }
+}
+
+.types {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-inline: 80px;
+    margin-inline: auto;
+    max-width: 693px;
+    margin-top: 40px;
+    gap: 15px;
+}
+
+.type {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+@media(max-width: 1024px) {
+    .links {
+        padding-inline: 20px;
+        width: 100%;
+    }
+
+    .types {
+        padding-inline: 20px;
+    }
+
+    .earth {
+        &__wrapper {
+            bottom: 0;
+        }
+    }
+
+    .home {
+        padding: $padd-20;
+    }
+}

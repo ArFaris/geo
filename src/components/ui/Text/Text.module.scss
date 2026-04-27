@@ -1,0 +1,110 @@
+@use '@/styles/variables.scss' as *;
+
+.text {
+    font-weight: 400;
+
+    &_view {
+        &-title-big {
+            font-size: $font-size-title-big;
+            line-height: $line-height-title;
+        }
+
+        &-title-small {
+            font-size: $font-size-title-small;
+            line-height: $line-height-title;
+        }
+
+        &-subtitle {
+            font-size: $font-size-subtitle;
+            line-height: $line-height-subtitle;
+        }
+
+        &-button {
+            font-size: $font-size-button;
+            line-height: $line-height-button;
+        }
+
+        &-p-24 {
+            font-size: $font-size-p24;
+            line-height: $line-height-p20;
+        }
+
+        &-p-16 {
+            font-size: $font-size-p16;
+            line-height: $line-height-p16;
+        }
+
+        &-p-14 {
+            font-size: $font-size-p14;
+            line-height: $line-height-p14;
+        }
+    }
+
+    &_weight {
+        &-normal {
+            font-weight: 400;
+        }
+
+        &-medium {
+            font-weight: 500;
+        }
+
+        &-bold {
+            font-weight: 700;
+        }
+    }
+
+    &_color {
+        &-primary {
+            color: #000;
+        }
+
+        &-secondary {
+            color: $secondary;
+        }
+
+        &-accent {
+            color: $accent;
+        }
+
+        &-gray {
+            color: $text-gray;
+        }
+    }
+
+    &_multi-elliplsis {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: var(--max-lines-count);
+    }
+}
+
+@media(max-width: 1024px) {
+    .text {
+        &_view {
+            &-title-small {
+                font-size: 32px;
+            }
+        }
+    }
+}
+
+@media(max-width: 768px) {
+    .text {
+        &_view {
+            &-title-small {
+                font-size: 28px;
+            }
+
+            &-subtitle {
+                font-size: 24px;
+            }
+
+            &-p-14 {
+                font-size: 16px;
+            }
+        }
+    }
+}

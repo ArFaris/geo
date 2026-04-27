@@ -1,0 +1,41 @@
+@use '@/styles/variables.scss' as *;
+
+.switcher {
+  display: flex;
+  gap: 4px;
+  background: $secondary;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+.option {
+  padding: 7px 14px;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: $transition;
+  color: #666;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.active {
+  background: $primary;
+  color: $secondary;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+@media(max-width: 1024px) {
+    .switcher {
+        width: fit-content;
+        margin-inline: auto;
+    }
+}

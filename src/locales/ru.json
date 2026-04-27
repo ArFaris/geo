@@ -1,0 +1,69 @@
+{
+  "nav": {
+    "home": "Главная",
+    "news": "Новости",
+    "reviews": "Обзоры",
+    "analytics": "Аналитика",
+    "articles": "Статьи",
+    "partners": "Партнеры",
+    "sources": "Ссылки",
+    "shop": "Магазин",
+    "about": "О проекте",
+    "dict": "Словарь"
+  },
+  "buttons": {
+    "download": "Скачать PDF",
+    "register": "Регистрация",
+    "login": "Вход",
+    "profile": "Профиль"
+  },
+  "common": {
+    "author": "Автор",
+    "date": "Дата",
+    "reading_time": "Время чтения",
+    "views": "Просмотров",
+    "part": "Часть"
+  },
+  "subtitles": {
+    "vestnik": "Маркшейдерский вестник",
+    "other": "Другие статьи"
+  },
+  "profile": {
+    "name": "Имя пользователя",
+    "email": "Почта",
+    "out": "Выйти из профиля",
+    "delete": "Удалить профиль",
+    "change": "Изменить данные"
+  },
+  "form": {
+    "register": "Зарегистрироваться",
+    "login": "Войти",
+    "name": "Имя пользователя",
+    "password": "Пароль",
+    "repeat": "Повторите пароль",
+    "email": "Почта"
+  },
+  "title": {
+    "home": "Разделы",
+    "news": "Новости",
+    "reviews": "Обзоры",
+    "analytics": "Аналитика",
+    "articles": "Статьи",
+    "partners": "Партнеры",
+    "sources": "Ссылки",
+    "shop": "Магазин",
+    "about": "О проекте",
+    "dict": "Словарь",
+    "register": "Регистрация",
+    "login": "Вход",
+    "profile": "Профиль",
+    "coordinates": "Координаты",
+    "time": "Время",
+    "geodynamics": "Геодинамика",
+    "geodesy": "Геодезия",
+    "navigation": "Навигация",
+    "positioning": "Позиционирование",
+    "synchronization": "Синхронизация",
+    "miscellaneous": "Разное"
+  }
+}

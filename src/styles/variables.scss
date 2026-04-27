@@ -1,0 +1,71 @@
+/* Colors */
+$primary: #251810;
+$secondary: rgb(218, 210, 202);
+// $accent: #DAD2CA;
+$accent: #7b6753;
+$dark: #100A07;
+$light: #ffffff;
+$text-gray: #C9C9C9;
+
+$button-dark-hover: #32261fb5;
+$button-dark-active: #523c31;
+
+$button-light-hover: #BEB7AF;
+$button-light-active: #B1ABA5;
+
+$button-strong-hover: #94877D;
+$button-strong-active: #70645C;
+
+$button-strong-border-hover: #DAD2CA;
+$button-strong-border-active: #ada7a0;
+
+$disabled: #D9D9D9;
+
+$section-name: #3A3A3A;
+
+$line: #BFC1CC;
+$table-line: rgba(201, 201, 201, 0.6);
+
+$border: #000000;
+$body-bg: #f6f6f6;
+
+/* Main */
+$transition: all 0.3s ease;
+
+/* Loader */
+$loader-size-s: 24px;
+$loader-size-m: 48px;
+$loader-size-l: 60px;
+
+$loader-svg-s: 16px;
+$loader-svg-m: 32px;
+$loader-svg-l: 40px;
+
+/* Text */
+$font-size-title-big: 64px;
+$font-size-title-small: 36px;
+$font-size-subtitle: 22px;
+$font-size-button: 16px;
+$font-size-p24: 24px;
+$font-size-p16: 16px;
+$font-size-p14: 14px;
+
+$line-height-title: 143%;
+$line-height-subtitle: 30px;
+$line-height-button: 18px;
+$line-height-p20: 24px;
+$line-height-p16: 20px;
+$line-height-p14: 18px;
+
+/* Padding */
+$padd-80: 80px;
+$padd-40: 40px;
+$padd-32: 32px;
+$padd-20: 20px;
+$padd-24: 24px;
+$padd-16: 16px;
+$padd-12: 12px;
+
+/* Button */
+$button-height: 35px;
+$button-gap: 8px;

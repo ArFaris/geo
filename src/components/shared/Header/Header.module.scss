@@ -1,0 +1,94 @@
+@use '@/styles/variables.scss' as *;
+
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    &__main {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $padd-16 $padd-80;
+        background-color: $primary;
+        position: relative;
+        z-index: 10;
+    }
+
+    &__links {
+        display: flex;
+        gap: 28px;
+        justify-content: center;
+        align-items: center;
+        min-height: 54px;
+        background-color: $accent;
+        border-bottom: 3px solid $accent;
+        background-color: rgb(218, 210, 202, 0.5);
+        backdrop-filter: blur(20px);
+        position: relative;
+        z-index: 1;
+        transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+
+        &.hidden {
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+    }
+}
+
+.logo {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 20;
+}
+
+.menu {
+    display: none;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+@media(max-width: 1280px) {
+    .header {
+        &__main {
+            padding-inline: $padd-40;  
+        }
+    }
+}
+
+@media(max-width: 1024px) {
+    .header {
+        &__main {
+            padding-inline: $padd-20;  
+        }
+
+        &__links {
+            display: none;
+        }
+    }
+
+    .switch {
+        display: none;
+    }
+
+    .headerButtons {
+        display: none;
+    }
+
+    .menu {
+        display: inline;
+    }   
+
+    .user {
+        display: none;
+    }
+}

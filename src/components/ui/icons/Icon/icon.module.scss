@@ -1,0 +1,15 @@
+@use '@/styles/variables.scss' as *;
+
+.color {
+    &-secondary {
+        color: $secondary;
+    }
+
+    &-primary {
+        color: $primary;
+    }
+
+    &-accent {
+        color: $accent;
+    }
+}

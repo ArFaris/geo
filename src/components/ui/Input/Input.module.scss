@@ -1,0 +1,81 @@
+@use '@/styles/variables.scss' as *;
+
+.input input:focus:not(:disabled) {
+    border: 1px solid $accent;
+    outline: none;
+}
+
+.input input {
+    border: 1px solid $dark;
+    min-width: 100%;
+    max-height: 35px;
+    padding: $padd-12 $padd-20;
+    color: $light;
+    background-color: $primary;
+}
+
+.input input::placeholder {
+    color: $accent;
+}
+
+.input input:disabled {
+    background-color: $primary;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.light {
+     input {
+        transition: all 0.5s ease;
+        background-color: $secondary;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        border: none;
+        color: $primary;
+     }
+
+    .input input::placeholder {
+        color: $primary;
+    }
+}
+
+.error {
+    input {
+        transition: all 0.5s ease;
+        background-color: rgba(#b42432, 0.2);
+
+        @media(hover: hover) {
+            &:hover:not(:disabled) {
+                background-color: rgba(#b02432d7, 0.3);
+            }
+        }
+
+        &:focus:not(:disabled), &:active:not(:disabled) {
+            background-color: $primary;
+            border: 1px solid #b42432;
+        }
+    }
+}
+
+.editmode input:not(:disabled) {
+    display: block;
+    min-width: auto;
+    width: 100%;
+}
+
+@media(max-width: 768px) {
+    .editmode input:not(:disabled) {
+        min-width: 100%;
+        max-width: auto;
+    }
+
+    .input.editmode {
+        min-width: 100%;
+    }
+    
+    .error {
+        input {
+            &:active:not(:disabled) {
+                background-color: rgba(#b02432d7, 0.3);
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+@use '@/styles/variables.scss' as *;
+
+.button {
+    --l-button-text: #{$primary};
+    --l-button-background: #{$secondary};
+
+    font-family: 'Playfair Display';
+    background-color: var(--l-button-background);
+    display: flex;
+    gap: $button-gap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: none;
+    padding-inline: $padd-20;
+    height: $button-height;
+    transition: all 0.3s ease;
+
+    &__text,
+    &__loader {
+        transition: color 0.3s ease;
+    }
+
+    & &__text {
+        color: var(--l-button-text);
+    }
+
+    & &__loader {
+        color: var(--l-button-text);
+    }
+
+    &-light { 
+        border: 1px solid $dark;
+        
+        @media(hover: hover) {
+            &:hover:not(:disabled) {
+                --l-button-background: #{$button-light-hover};
+            }
+        }
+
+        &:active:not(:disabled) {
+            --l-button-background: #{$button-light-active};
+        }
+    }
+
+    &-dark {
+        --l-button-text: #{$secondary};
+        --l-button-background: #{$primary};   
+        
+        @media(hover: hover) {
+            &:hover:not(:disabled) {
+                --l-button-background: #{$button-dark-hover};
+            }
+        }
+
+        &:active:not(:disabled) {
+            --l-button-background: #{$button-dark-active};
+        }
+    }
+
+    &-strong {
+        border: 1px solid $primary;
+        transition: $transition;
+
+        @media(hover: hover) {
+            &:hover:not(:disabled) {
+                --l-button-background: #{$button-strong-hover};
+                border: 1px solid $button-strong-border-hover;
+                box-shadow: 0 0 0 1px $button-strong-border-hover;
+            }
+        }
+
+        &:active:not(:disabled) {
+            --l-button-background: #{$button-strong-active};
+            border: 1px solid $button-strong-border-active;
+        }      
+    }
+
+    &:disabled {
+        pointer-events: none;
+    }
+
+    &_disabled {
+        --l-button-background: #{$disabled};
+    }
+}

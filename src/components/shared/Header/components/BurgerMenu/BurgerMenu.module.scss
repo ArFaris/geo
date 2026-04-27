@@ -1,0 +1,111 @@
+@use '@/styles/variables.scss' as *;
+
+.menu {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 12000;
+    text-align: center;
+    padding: $padd-80 $padd-40;
+    background-color: $primary;
+    transition: $transition;
+    animation: fadeIn 0.3s ease forwards;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.open {
+    display: block;
+}
+
+.close {
+    display: none;
+}
+
+.menu {
+    &__buttons {
+        flex-direction: column;
+        animation: slideIn 0.5s ease 0.3s forwards;
+        opacity: 0;
+        margin-top: $padd-40;
+    }
+}
+
+.links {
+    border: 1px solid $secondary;
+    padding-top: $padd-24;
+    margin-top: $padd-40;
+}
+
+.link {
+    margin-bottom: $padd-24;
+    width: fit-content;
+    margin-inline: auto;
+    padding-bottom: 2px;
+    cursor: pointer;
+    transition: $transition;
+
+    opacity: 0;
+    animation: slideIn 0.4s ease forwards;
+    
+    @for $i from 1 through 9 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.1 + 0.4}s;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: $accent;
+        transition: width 0.3s ease;
+    }
+    
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+.btn {
+    border: 1px solid $accent;
+}
+
+.icon {
+    position: absolute;
+    right: $padd-40;
+    top: $padd-40;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .link {
+        ::after {
+            width: 100%;
+        }
+    }
+}

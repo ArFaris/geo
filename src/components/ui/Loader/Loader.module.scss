@@ -1,0 +1,49 @@
+@use '@/styles/variables.scss' as *;
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $dark;
+    animation: spin 1s infinite linear;
+}
+
+.loader-s {
+    width: $loader-size-s;
+    height: $loader-size-s;
+}
+
+.loader-m {
+    width: $loader-size-m;
+    height: $loader-size-m;
+}
+
+.loader-l {
+    width: $loader-size-l;
+    height: $loader-size-l;
+}
+
+.loader__svg-s {
+    width: $loader-svg-s;
+}
+
+.loader__svg-m {
+    width: $loader-svg-m;
+}
+
+.loader__svg-l {
+    width: $loader-svg-l;
+}
+
+.loader__btn {
+    color: $primary;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

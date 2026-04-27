@@ -1,0 +1,319 @@
+{
+  "a": {},
+  "b": {
+    "barycenter": {
+      "title": "Barycenter (barycentre)",
+      "definition": "The common center of mass of two or more bodies orbiting each other. In geodesy and geodynamics, the Solar System barycenter serves as the origin for the International Celestial Reference System (ICRS) and is essential for modeling the motion of the Earth-Moon system, computing precise orbits for geodetic satellites (e.g., LAGEOS, GPS, GRACE), and analyzing gravitational perturbations affecting Earth's orientation.",
+      "source": "IERS Conventions; ICRS definition"
+    },
+    "barycentric-coordinate-time": {
+      "title": "Barycentric Coordinate Time (TCB)",
+      "definition": "A coordinate time scale defined in the barycentric reference frame of the solar system. In relativistic geodesy, TCB serves as the independent time argument for equations of motion of solar system bodies, including the Earth. It accounts for relativistic time dilation effects and is fundamental for high-precision modeling of interplanetary spacecraft tracking, pulsar timing arrays used in geodetic VLBI, and the relativistic transformation between celestial and terrestrial reference frames.",
+      "source": "IAU 1991 Resolution; IERS Conventions 2010"
+    },
+    "barycentric-dynamical-time": {
+      "title": "Barycentric Dynamical Time (TDB)",
+      "definition": "A relativistic coordinate time scale in the Solar-System-barycentric reference frame, used as a time standard for calculating orbits and astronomical ephemerides. In geodetic applications, TDB is the time argument for planetary ephemerides (e.g., JPL DE series) used in Very Long Baseline Interferometry (VLBI) analysis to model the positions of extragalactic radio sources and to determine Earth Orientation Parameters (EOP). Since IAU 2006 Resolution B3, TDB is defined as a linear scaling of TCB: TDB = TCB − L_B × (JD_TCB − T_0) × 86400 + TDB_0, where L_B = 1.550519768×10⁻⁸. A key feature for Earth-based geodesy is that TDB remains within 2 milliseconds of Terrestrial Time (TT) over millennia.",
+      "source": "IAU 2006 Resolution B3; IERS Technical Note 36"
+    }
+  },
+  "c": {
+    "celestial-ephemeris-origin": {
+      "title": "Celestial Ephemeris Origin (CEO)",
+      "definition": "In geodetic astrometry, the point on the true equator of the Celestial Intermediate Pole (CIP) used as the origin for measuring Earth rotation, replacing the conventional equinox. The CEO is defined as a Non-Rotating Origin (NRO) on the moving equator, meaning it has no instantaneous motion along the equator. The CEO was located on the CIP equator of J2000.0 at 2.012 milliarcseconds from the ICRS prime meridian. Its adoption in the IAU 2000 resolutions eliminated the need for the equation of the equinoxes in Earth rotation measurement, simplifying the transformation between celestial and terrestrial reference frames for geodetic VLBI and GNSS.",
+      "source": "IERS Glossary; IAU 2000 Resolution B1.8"
+    },
+    "celestial-ephemeris-pole": {
+      "title": "Celestial Ephemeris Pole (CEP)",
+      "definition": "A former reference pole used in pre-IAU 2000 celestial reference systems, defined as the pole of Earth's rotation including both precession-nutation and the Chandler wobble. In modern geodetic practice (post-2000), the CEP has been replaced by the Celestial Intermediate Pole (CIP), which separates the modeling of precession-nutation (in the celestial frame) from polar motion (in the terrestrial frame). This separation improved the consistency of Earth Orientation Parameter determination from VLBI, SLR, and GPS.",
+      "source": "IERS Conventions (pre-2000)"
+    },
+    "celestial-intermediate-origin": {
+      "title": "Celestial Intermediate Origin (CIO)",
+      "definition": "The origin for right ascension on the intermediate equator of the Celestial Intermediate Pole (CIP) in the Geocentric Celestial Reference System (GCRS). The CIO is a Non-Rotating Origin (NRO), meaning it has no instantaneous rotational motion along the CIP equator. In geodetic applications, the CIO replaces the equinox as the reference point for Earth rotation measurement. The Earth Rotation Angle (ERA), which measures the rotation of the Earth in the CIO-based system, is a linear function of UT1, simplifying the transformation between the GCRS and the International Terrestrial Reference System (ITRS) for high-precision positioning.",
+      "source": "IERS Glossary; IAU 2006 Resolution B2"
+    },
+    "celestial-intermediate-pole": {
+      "title": "Celestial Intermediate Pole (CIP)",
+      "definition": "The reference pole for the Celestial Intermediate Reference System (CIRS) and the transformation between the Geocentric Celestial Reference System (GCRS) and the International Terrestrial Reference System (ITRS). In geodesy and geodynamics, the CIP is the fundamental pole for Earth Orientation Parameters (EOP), separating the modeling of precession-nutation (motion of the CIP in the GCRS) from polar motion (motion of the CIP relative to the Earth's crust in the ITRS). The CIP position is given by the IAU 2006 precession-nutation model with celestial pole offsets (dX, dY) provided by the IERS to account for unmodeled variations including Free Core Nutation (FCN).",
+      "source": "IERS Conventions 2010; geodesy.science"
+    },
+    "celestial-intermediate-reference-system": {
+      "title": "Celestial Intermediate Reference System (CIRS)",
+      "definition": "A geocentric reference system defined by the intermediate equator (of the CIP) and the Celestial Intermediate Origin (CIO). In geodetic practice, the CIRS serves as an intermediate frame for transforming between the GCRS and the ITRS. The transformation from CIRS to the Terrestrial Intermediate Reference System (TIRS) is given solely by the Earth Rotation Angle (ERA), which is a linear function of UT1. This framework eliminates the need for the equation of the equinoxes and simplifies high-precision Earth orientation determination from VLBI and GNSS observations.",
+      "source": "IERS Glossary; IAU 2006 Resolution B2"
+    },
+    "celestial-pole-offsets": {
+      "title": "Celestial pole offsets",
+      "definition": "In geodetic Earth orientation determination, the time-dependent differences between the observed position of the Celestial Intermediate Pole (CIP) in the GCRS and its position predicted by the IAU precession-nutation model. The IERS provides celestial pole offsets as (dX, dY) in coordinates relative to the GCRS. These offsets are critical for monitoring Free Core Nutation (FCN), a free rotational mode of the Earth caused by the misalignment of the fluid outer core and the mantle. Celestial pole offsets are determined primarily by Very Long Baseline Interferometry (VLBI) and are essential for maintaining the accuracy of the ICRF-ITRF transformation.",
+      "source": "IERS Glossary; IERS Conventions"
+    },
+    "chandler-wobble": {
+      "title": "Chandler wobble",
+      "definition": "A free nutation of the Earth's rotation axis with a period of approximately 433 days, superimposed on the annual wobble due to seasonal mass redistributions. In geodynamics, the Chandler wobble arises from the Earth not being perfectly rigid and is influenced by the elastic properties of the mantle, core-mantle coupling, and oceanic and atmospheric angular momentum variations. It is a key component of polar motion, monitored continuously by the IERS using VLBI, GNSS, and SLR observations. The damping and excitation of the Chandler wobble provide constraints on Earth's internal structure and rheology.",
+      "source": "IERS Conventions; Geodynamics literature"
+    },
+    "coordinate-time": {
+      "title": "Coordinate time",
+      "definition": "In relativistic geodesy, the time coordinate associated with a specific reference system in spacetime, as distinguished from proper time measured by a physical clock. The primary coordinate time scales used in geodesy are Barycentric Coordinate Time (TCB) for the solar system barycentric frame, Geocentric Coordinate Time (TCG) for the geocentric frame, and Terrestrial Time (TT) as a re-scaling of TCG for Earth-surface applications. The differences between these time scales are essential for modeling relativistic effects in satellite orbit determination (e.g., GPS, Galileo), VLBI, and interplanetary spacecraft tracking.",
+      "source": "General relativity; IERS Conventions"
+    },
+    "coordinated-universal-time": {
+      "title": "Coordinated Universal Time (UTC)",
+      "definition": "The international time standard maintained by atomic clocks and kept within 0.9 seconds of Universal Time (UT1) by the insertion of leap seconds. In geodesy, the difference UT1−UTC (also known as the 'dUT1' Earth Orientation Parameter) is of critical importance for transforming between celestial and terrestrial reference frames. UTC is the time reference for GNSS (with system-specific offsets: GPS−UTC = 18 seconds, Galileo−UTC = 18 seconds, GLONASS−UTC = 0 seconds with leap second corrections). The IERS monitors UT1−UTC and announces leap seconds when necessary.",
+      "source": "BIPM; IERS"
+    }
+  },
+  "d": {},
+  "e": {
+    "earth-rotation-angle": {
+      "title": "Earth Rotation Angle (ERA)",
+      "definition": "The angle between the Celestial Intermediate Origin (CIO) and the Terrestrial Intermediate Origin (TIO) along the intermediate equator of the CIP. In modern geodetic practice, the ERA provides a direct measure of the rotation of the Earth in a consistent relativistic framework, replacing Greenwich Sidereal Time (GST). The ERA is a linear function of UT1: ERA = 2π (0.7790572732640 + 1.00273781191135448 × TU1), where TU1 is the number of UT1 days since J2000.0. The ERA is fundamental for computing the transformation from the GCRS to the ITRS in VLBI and GNSS data processing.",
+      "source": "IAU 2000 Resolution B1.8; IERS Conventions"
+    },
+    "ecliptic": {
+      "title": "Ecliptic",
+      "definition": "The apparent path of the Sun across the celestial sphere, representing the plane of Earth's orbit projected onto the celestial sphere. In geodetic astrometry and Earth orientation modeling, the ecliptic is the reference plane for nutation theory, as nutation arises from the gravitational torques of the Sun and Moon on the Earth's equatorial bulge. The obliquity of the ecliptic (approximately 23.5°) is a fundamental astronomical constant in precession-nutation models (e.g., IAU 2006 precession).",
+      "source": "Fundamental astronomy; IERS Conventions"
+    },
+    "ellipsoid": {
+      "title": "Ellipsoid (reference ellipsoid)",
+      "definition": "A mathematically defined oblate spheroid that approximates the geoid, used as the reference surface for geodetic coordinates (latitude, longitude, and ellipsoidal height). In physical geodesy, the reference ellipsoid provides a basis for computing gravity anomalies and modeling the Earth's external gravity field. The standard reference ellipsoid for the IERS Conventions and global geodetic systems is the Geodetic Reference System 1980 (GRS80), which defines the semi-major axis a = 6378137 m and flattening f = 1/298.257222101. The WGS84 ellipsoid, used for GPS, is functionally equivalent to GRS80.",
+      "source": "IERS Conventions; IAG"
+    },
+    "epoch": {
+      "title": "Epoch",
+      "definition": "A specific instant in time used as a reference point for geodetic and astrometric measurements. Common astronomical epochs include J2000.0 (January 1, 2000, 12:00 TT) for the International Celestial Reference System (ICRS) and B1950.0 for older catalogs. In reference frame realization, all station coordinates and velocities in the ITRF are defined at a reference epoch (e.g., ITRF2020 uses epoch 2015.0). Epochs also define the time-dependent transformation between reference systems, including precession and nutation models.",
+      "source": "IERS Conventions"
+    },
+    "equation-of-the-equinoxes": {
+      "title": "Equation of the equinoxes (EE)",
+      "definition": "In classical astrometry and geodesy, the difference between apparent sidereal time and mean sidereal time, representing the contribution of nutation to the position of the equinox. It is given by EE = Δψ cos ε, where Δψ is the nutation in longitude and ε is the obliquity of the ecliptic. In modern Earth rotation modeling based on the CIO, the equation of the equinoxes has been replaced by the Equation of the Origins, which relates the CIO and the equinox. However, the equation of the equinoxes remains relevant for legacy systems and for computing apparent places of stars in classical positional geodesy.",
+      "source": "IAU precession-nutation models; IERS Conventions"
+    },
+    "equation-of-the-origins": {
+      "title": "Equation of the origins (EO)",
+      "definition": "The angle between the Celestial Intermediate Origin (CIO) and the true equinox, representing the difference between CIO-based right ascension and equinox-based right ascension. In modern geodetic Earth orientation practice, the Equation of the Origins equals the difference between the Earth Rotation Angle (ERA) and Greenwich Apparent Sidereal Time (GAST): EO = ERA − GAST. This quantity replaces the classical equation of the equinoxes in the CIO-based celestial intermediate reference system and is essential for maintaining consistency between the older equinox-based and newer CIO-based transformation methods in VLBI and GNSS analysis.",
+      "source": "IAU 2000 Resolution B1.8; IERS Conventions; IAU 2000 NFA Glossary"
+    },
+    "equinox": {
+      "title": "Equinox",
+      "definition": "One of the two points on the celestial sphere where the ecliptic intersects the celestial equator. The vernal equinox (first point of Aries) serves as the traditional origin for right ascension in equatorial coordinate systems. In geodetic astrometry and Earth orientation, the equinox has historically been used as the reference point for Greenwich Sidereal Time (GST). However, due to precession and nutation, the equinox moves along the equator (approximately 50 arcseconds per year), complicating its use for high-precision applications. Modern geodetic practice (IAU 2000/2006) has largely replaced the equinox with the Celestial Intermediate Origin (CIO), a fixed Non-Rotating Origin on the moving equator.",
+      "source": "Fundamental astronomy; IERS Conventions"
+    }
+  },
+  "f": {
+    "fifth-fundamental-catalogue": {
+      "title": "Fifth Fundamental Catalogue (FK5)",
+      "definition": "The fifth and final version of the FK (Fundamental-Katalog) series of star catalogs, published in 1988 and based on the equinox of J2000.0. FK5 was the international standard celestial reference frame before the adoption of the ICRS in 1998. In geodesy, the transition from FK5 to ICRS marked a paradigm shift from an equinox-based, dynamically defined reference system (aligned to the mean equator and equinox of J2000.0) to a kinematically non-rotating system defined by extragalactic radio sources. The FK5 system is now obsolete but remains relevant for reducing historical astrometric and geodetic data.",
+      "source": "IAU; IERS Conventions"
+    },
+    "free-core-nutation": {
+      "title": "Free Core Nutation (FCN)",
+      "definition": "A rotational normal mode of the Earth resulting from the misalignment of the rotation axes of the solid mantle and the fluid outer core [citation:8]. In geodynamics, FCN is a free oscillation of the Earth that appears in any model consisting of a solid mantle and a fluid core, characterized as a retrograde motion with a period of approximately 430 days in the celestial frame (or nearly diurnal in the terrestrial frame) [citation:8]. FCN is the primary signal observed in celestial pole offsets (CPO) from Very Long Baseline Interferometry (VLBI), with amplitudes typically under 1 milliarcsecond [citation:4][citation:8]. Variations in FCN parameters provide constraints on core-mantle boundary coupling, the ellipticity of the core-mantle boundary, and dissipation processes in the Earth's deep interior. FCN is driven by atmospheric and oceanic angular momentum variations at the retrograde diurnal frequency band.",
+      "source": "Sasao et al., 1980; Wahr, 1981; Kiani Shahvandi et al., JGR: Solid Earth, 2024; Journal of Geodynamics, 2016"
+    },
+    "fundamental-arguments": {
+      "title": "Fundamental arguments",
+      "definition": "A set of angular variables based on the mean longitudes of the Sun, Moon, and planets, used as time arguments in analytical theories of precession, nutation, and tides. In geodetic Earth orientation modeling, the fundamental arguments (Delaunay variables and planetary arguments) are used to compute the forced nutations of the CIP and the tidal variations in Earth rotation (UT1 and Length of Day). The IAU 2006 precession-nutation model implements these fundamental arguments as defined by the IERS Conventions.",
+      "source": "IAU 2006 precession-nutation; IERS Conventions 2010"
+    }
+  },
+  "g": {
+    "geocenter": {
+      "title": "Geocenter (geocentre)",
+      "definition": "The center of mass of the entire Earth system, including the solid Earth, oceans, atmosphere, and cryosphere. In geodetic reference frame definition, the geocenter is the origin of the International Terrestrial Reference System (ITRS) and the Geocentric Celestial Reference System (GCRS). Geocenter motion — the displacement of the center of mass relative to the center of the ITRF network — is a critical geodynamical signal induced by large-scale mass redistributions, including seasonal water storage changes, atmospheric pressure variations, ocean currents, and post-glacial rebound. Geocenter variations are on the order of millimeters to centimeters with annual and semi-annual periods and are routinely estimated from SLR, GPS, and GRACE-FO data.",
+      "source": "IERS Conventions; ITRF2020 definition"
+    },
+    "geocenter-motion": {
+      "title": "Geocenter motion",
+      "definition": "The time-varying displacement of the Earth's center of mass relative to the origin of the International Terrestrial Reference Frame (ITRF), which is typically realized as the center of a network of geodetic stations. In geodynamics, geocenter motion is driven by large-scale mass redistributions within the Earth system, including atmospheric mass transport, ocean bottom pressure variations, terrestrial water storage changes (including snow and groundwater), and post-glacial rebound. The ITRF2020 provides a standard seasonal geocenter motion model with annual and semi-annual variations for precise orbit determination of altimetry and gravity missions. Geocenter motion is measured primarily by Satellite Laser Ranging (SLR) and GPS, and is consistent with independent estimates from GRACE and GRACE-FO gravity field coefficients.",
+      "source": "IERS Conventions; ITRF2020; CPOD Service documentation"
+    },
+    "geocentric-celestial-reference-system": {
+      "title": "Geocentric Celestial Reference System (GCRS)",
+      "definition": "A relativistic reference system with origin at the Earth's center of mass (geocenter) and spatial axes oriented to the International Celestial Reference System (ICRS). In geodetic practice, the GCRS is the fundamental reference frame for Earth orbital dynamics and the starting point for transformations to the terrestrial frame. The GCRS is related to the Barycentric Celestial Reference System (BCRS) by a Lorentz transformation, and its time scale is Geocentric Coordinate Time (TCG). All near-Earth satellite orbits (GPS, Galileo, LEO missions) are computed in the GCRS or frames aligned to it.",
+      "source": "IAU 1991 Resolution; IERS Conventions"
+    },
+    "geocentric-coordinate-time": {
+      "title": "Geocentric Coordinate Time (TCG)",
+      "definition": "A coordinate time scale defined in the Geocentric Celestial Reference System (GCRS) with the SI second as the unit, as measured by an ideal clock at the geocenter. In relativistic geodesy, TCG is the fundamental time scale for the GCRS and is related to Terrestrial Time (TT) by TT = TCG − L_G × (JD_TCG − T_0) × 86400, where L_G = 6.969290134×10⁻¹⁰. While TCG is the natural independent variable for equations of motion in the geocentric frame, most ground-based geodetic applications use TT due to its closeness to proper time on the Earth's surface (French: Temps-coordonnée géocentrique).",
+      "source": "IAU 1991 Resolution; IERS Conventions"
+    },
+    "geocentric-terrestrial-reference-system": {
+      "title": "Geocentric Terrestrial Reference System (GTRS)",
+      "definition": "A reference system co-rotating with the Earth, with origin at the geocenter and axes fixed relative to the Earth's crust. The GTRS is the terrestrial analog to the GCRS, and the transformation between the two (incorporating Earth rotation, precession, nutation, and polar motion) is the central problem of Earth orientation determination in geodesy. The International Terrestrial Reference System (ITRS) is the conventional GTRS adopted by the IUGG and maintained by the IERS.",
+      "source": "IERS Conventions"
+    },
+    "geoid": {
+      "title": "Geoid",
+      "definition": "The equipotential surface of the Earth's gravity field that coincides with mean sea level in the absence of tides, winds, and currents. In physical geodesy, the geoid serves as the fundamental reference surface for heights (orthometric heights) and is the primary target of gravimetric geoid determination. The geoid is approximated by the reference ellipsoid (GRS80/WGS84) with deviations (geoid undulations) ranging from approximately −106 m to +85 m globally. Geoid models are essential for converting between ellipsoidal heights (from GNSS) and orthometric heights (used in engineering and geophysics). Modern geoid models (e.g., EGM2008, EGM2020, XGM2019) are derived from satellite gravity missions (GRACE, GOCE) and terrestrial gravimetry.",
+      "source": "Physical geodesy; IERS Conventions"
+    },
+    "global-positioning-system": {
+      "title": "Global Positioning System (GPS)",
+      "definition": "A United States satellite-based navigation system that provides positioning, navigation, and timing services globally. In geodesy and geodynamics, GPS is a fundamental geodetic technique for: (1) realizing the International Terrestrial Reference Frame (ITRF) through global network solutions; (2) measuring Earth Orientation Parameters (EOP) including polar motion and Length of Day; (3) monitoring crustal deformation, plate tectonics, and post-seismic displacements; (4) estimating atmospheric water vapor (precipitable water) through tropospheric delay modeling; and (5) detecting geocenter motion and loading deformations. GPS satellites broadcast on L-band frequencies (L1: 1575.42 MHz, L2: 1227.60 MHz, L5: 1176.45 MHz) with the GPS time scale steered to UTC(USNO).",
+      "source": "Fundamental geodesy; IERS Techniques"
+    },
+    "greenwich-mean-sidereal-time": {
+      "title": "Greenwich Mean Sidereal Time (GMST)",
+      "definition": "The hour angle of the mean vernal equinox at the Greenwich meridian, representing Earth's rotation relative to the mean equinox. In classical geodetic astrometry, GMST is related to UT1 by a polynomial expression (GMST = 24110.54841 + 8640184.812866 × TU1 + 0.093104 × TU1² − 6.2×10⁻⁶ × TU1³ seconds, where TU1 is Julian centuries of UT1 since J2000.0). In modern Earth rotation modeling (IAU 2000/2006), GMST has been largely replaced by the Earth Rotation Angle (ERA) as the preferred measure of Earth rotation in the CIO-based framework, though GMST remains relevant for classical applications and for computing Greenwich Apparent Sidereal Time (GAST = GMST + equation of the equinoxes).",
+      "source": "Fundamental astronomy; IERS Conventions"
+    },
+    "greenwich-sidereal-time": {
+      "title": "Greenwich Sidereal Time (GST)",
+      "definition": "The hour angle of the true vernal equinox at the Greenwich meridian, accounting for both precession and nutation. GST (also called Greenwich Apparent Sidereal Time, GAST) equals GMST plus the equation of the equinoxes. In modern geodetic practice, the Earth Rotation Angle (ERA) in the CIO-based framework provides an alternative to GST. Both systems yield consistent results when used appropriately: ERA-based transformation is simpler and more rigorous in a relativistic context, while GST remains widely used in classical astrometry and many software implementations. The difference between GAST and ERA is the Equation of the Origins.",
+      "source": "Fundamental astronomy; IERS Conventions; Heidelberg University"
+    }
+  },
+  "h": {},
+  "i": {
+    "international-astronomical-union": {
+      "title": "International Astronomical Union (IAU)",
+      "definition": "The internationally recognized authority for establishing astronomical and astrometric standards, including celestial reference systems, time scales, precession-nutation models, and fundamental constants. For geodesy and geodynamics, key IAU resolutions affecting Earth orientation and reference frames include: 1976 (astronomical constants, TDT), 1991 (TCB, TCG, ICRS concept), 2000 (CIP, CEO, CIO, Earth Rotation Angle), and 2006 (TDB redefinition, precession-nutation model P03). The IAU collaborates with the IUGG (through the IERS) to maintain consistency between celestial and terrestrial reference systems.",
+      "source": "IAU"
+    },
+    "international-atomic-time": {
+      "title": "International Atomic Time (TAI)",
+      "definition": "A high-precision time scale computed by the International Bureau of Weights and Measures (BIPM) from a weighted average of over 400 atomic clocks worldwide. TAI is continuous (no leap seconds) and serves as the physical basis for other time scales: Terrestrial Time (TT = TAI + 32.184 s) and Coordinated Universal Time (UTC = TAI − n seconds, where n is the cumulative number of leap seconds, currently 37 seconds as of 2026). In geodetic applications, accurate knowledge of the difference between TAI, UTC, and the GNSS system times (GPS time = TAI − 19 s, Galileo system time = TAI − 19 s, GLONASS time = UTC(SU)) is essential for precise positioning and timing.",
+      "source": "BIPM; IERS Conventions"
+    },
+    "international-celestial-reference-frame": {
+      "title": "International Celestial Reference Frame (ICRF)",
+      "definition": "The physical realization of the International Celestial Reference System (ICRS), based on precise positions of approximately 3000 extragalactic radio sources (mostly quasars and active galactic nuclei) observed by Very Long Baseline Interferometry (VLBI). In geodesy, the ICRF defines the fundamental inertial reference frame for all celestial observations, serving as the fixed backdrop for measuring Earth's rotation (precession-nutation and UT1). The current realization is ICRF3, adopted by the IAU in 2018, with three frequency bands (S/X at 2.3/8.4 GHz, K-band at 24 GHz, and X/Ka-band at 8.4/32 GHz). ICRF3 provides source positions with accuracies of order 10−50 microarcseconds, essential for geodetic VLBI Earth Orientation Parameter determination.",
+      "source": "IERS; IAU 1997 Resolution; IAU 2018 Resolution"
+    },
+    "international-celestial-reference-system": {
+      "title": "International Celestial Reference System (ICRS)",
+      "definition": "A kinematically non-rotating reference system with origin at the Solar System barycenter, with axes defined by the positions of distant extragalactic objects (quasars) that are assumed to have no detectable proper motion. The ICRS replaced the FK5 equinox-based system as the fundamental celestial reference system in 1998. In geodetic practice, the ICRS is the inertial reference frame for which all Earth orientation parameters (precession, nutation, UT1, polar motion) are defined. Its axes are aligned to the mean equator and equinox of J2000.0 to within approximately 20 milliarcseconds, but it is not tied to any moving point (such as the equinox).",
+      "source": "IAU 1991 Resolution; IERS Conventions"
+    },
+    "international-terrestrial-reference-frame": {
+      "title": "International Terrestrial Reference Frame (ITRF)",
+      "definition": "The physical realization of the International Terrestrial Reference System (ITRS), consisting of a set of station coordinates and velocities for a global network of geodetic observatories. The ITRF is generated by the IERS through the combination of four space geodetic techniques: VLBI, SLR, GPS, and DORIS. Each ITRF version (e.g., ITRF2000, ITRF2005, ITRF2008, ITRF2014, ITRF2020) provides improved accuracy and coverage. ITRF2020, the current realization, includes: (1) station coordinates at epoch 2015.0, (2) linear velocities (including post-seismic deformation models), (3) seasonal geocenter motion and loading deformation models, and (4) improved handling of non-tidal loading. The ITRF is the fundamental frame for global geodetic, geophysical, and navigation applications.",
+      "source": "IERS; ITRF"
+    },
+    "international-terrestrial-reference-system": {
+      "title": "International Terrestrial Reference System (ITRS)",
+      "definition": "A geocentric terrestrial reference system co-rotating with the Earth, defined by the International Union of Geodesy and Geophysics (IUGG) and maintained by the IERS. The ITRS is defined by: (1) origin at the Earth's center of mass (geocenter); (2) unit of length as the meter (SI); (3) orientation defined by the Bureau International de l'Heure (BIH) at epoch 1984.0; and (4) orientation time evolution defined by the Tisserand condition (no net rotation relative to the Earth's crust). The ITRS is the standard reference system for all geodetic applications requiring consistency with global reference frames, and is realized through the International Terrestrial Reference Frame (ITRF).",
+      "source": "IUGG; IERS Conventions"
+    }
+  },
+  "j": {},
+  "k": {},
+  "l": {},
+  "m": {},
+  "n": {},
+  "o": {},
+  "p": {
+    "permanent-tide": {
+      "title": "Permanent tide",
+      "definition": "The permanent deformation of the Earth caused by the time-averaged tidal forces of the Sun and Moon. In geodesy, conventions for handling the permanent tide are critical for defining the geoid, the reference ellipsoid, and gravity field models. The IERS Conventions specify the 'tide-free' (non-tidal) system, where the permanent tide is removed, and the 'mean-tide' system, where it is included. The choice of permanent tide convention affects station coordinates by up to several centimeters, particularly for the radial component, and must be consistent across all geodetic products (ITRF, gravity models, Earth Orientation Parameters).",
+      "source": "IERS Conventions 2010"
+    },
+    "polar-motion": {
+      "title": "Polar motion",
+      "definition": "The movement of the Earth's instantaneous rotation axis relative to the Earth's crust (the terrestrial reference frame). In geodesy, polar motion is one of the Earth Orientation Parameters (EOP) along with UT1, precession-nutation, and Length of Day. Polar motion consists of two main components: the Chandler wobble (a free nutation with approximately 433-day period) and the annual wobble (forced by seasonal mass redistributions). The IERS monitors polar motion through VLBI, GNSS, and SLR, and provides daily predictions of the pole coordinates (xp, yp) for real-time navigation and positioning applications. Polar motion reaches amplitudes of up to 0.5 arcseconds (~15 meters at the Earth's surface) and is essential for transforming between celestial and terrestrial reference frames.",
+      "source": "IERS Conventions; IERS Glossary"
+    },
+    "pole-angles": {
+      "title": "Pole angles",
+      "definition": "In Earth orientation determination, the parameters defining the instantaneous orientation of the Earth's rotation pole relative to the celestial reference frame (celestial pole offsets dX, dY) and relative to the terrestrial reference frame (polar motion coordinates xp, yp). In the IAU 2000/2006 framework, the precession-nutation model gives the motion of the Celestial Intermediate Pole (CIP) in the GCRS as a function of time, while celestial pole offsets (dX, dY) from VLBI account for unmodeled variations including Free Core Nutation (FCN). Polar motion (xp, yp) describes the motion of the CIP relative to the ITRF. Together, these pole angles enable the complete transformation between the GCRS and ITRS.",
+      "source": "IAU precession-nutation models; IERS"
+    },
+    "precession-nutation": {
+      "title": "Precession-nutation",
+      "definition": "The combined motion of the Earth's rotation axis in space due to gravitational torques from the Sun, Moon, and planets. In geodesy and Earth orientation determination, precession refers to the long-term secular motion (approximately 5029 arcseconds per century, period ~26,000 years), while nutation refers to superimposed periodic oscillations (amplitudes up to about 17 arcseconds, primarily at periods related to the lunar orbit). The IAU 2006 precession-nutation model (P03 precession + M2006 nutation) is the current international standard, implemented in VLBI, GNSS, and SLR analysis software. The model provides the position of the Celestial Intermediate Pole (CIP) in the GCRS as a function of time, with celestial pole offsets provided by the IERS to account for unmodeled variations such as Free Core Nutation (FCN).",
+      "source": "IAU 2006 Resolution; IERS Conventions"
+    }
+  },
+  "q": {},
+  "r": {
+    "regularized-ut1": {
+      "title": "Regularized UT1 (UT1R)",
+      "definition": "A smoothed version of Universal Time (UT1) from which high-frequency tidal and other periodic variations have been removed. In geodetic applications, UT1R is used in certain precise positioning and orbit determination contexts where the irregular high-frequency variations in Earth rotation due to oceanic tides, atmospheric angular momentum, and other short-term effects are not desired. The regularized series is typically produced by applying a low-pass filter to the observed UT1 series (from VLBI) to remove diurnal and sub-diurnal variations.",
+      "source": "IERS Conventions; Earth rotation studies"
+    }
+  },
+  "s": {
+    "site-displacements": {
+      "title": "Site displacements",
+      "definition": "Time-varying displacements of geodetic stations (VLBI, SLR, GNSS, DORIS) relative to their mean positions due to various geophysical effects. In the IERS Conventions 2010, the following site displacement models are specified for precise positioning and reference frame realization: (1) solid Earth tides (displacements up to ~50 cm); (2) ocean tidal loading (up to ~10 cm); (3) atmospheric pressure loading (up to ~2 cm); (4) pole tide (displacement due to polar motion); (5) post-glacial rebound (secular motion, up to ~1 cm/year); (6) non-tidal ocean loading; and (7) hydrological loading. Proper modeling of site displacements is essential for achieving millimeter-level reference frame accuracy in global geodesy.",
+      "source": "IERS Conventions 2010"
+    },
+    "slr": {
+      "title": "Satellite Laser Ranging (SLR)",
+      "definition": "A geodetic technique that measures the round-trip travel time of laser pulses from ground stations to satellites equipped with retroreflectors (such as LAGEOS-1/2, LARES, Etalon-1/2, GPS, GLONASS, Galileo, and geodetic LEO missions). In geodesy and geodynamics, SLR provides precise measurements of: (1) station positions and velocities for ITRF realization; (2) Earth Orientation Parameters (EOP), particularly polar motion and UT1; (3) geocenter motion (the only technique sensitive to all three components of geocenter variation); (4) Earth's low-degree gravity field coefficients (C₂₀, C₃₀, C₄₀); (5) post-glacial rebound; and (6) tidal parameters. SLR is unique among space geodetic techniques in its direct sensitivity to the geocenter and its ability to operate without atmospheric delay models (except for refraction correction).",
+      "source": "IERS techniques; ILRS"
+    },
+    "stellar-angle": {
+      "title": "Stellar angle",
+      "definition": "In geodetic astrometry and Earth orientation determination, the angular separation between two celestial objects as measured from an observation point, or the angle between a star's direction and a reference direction (e.g., the local meridian). Stellar angles measured by optical astrometry were historically used to determine UT1 (through star transit timings) and polar motion (through latitude variations). In modern practice, these measurements have been largely superseded by VLBI, which provides far higher accuracy for Earth orientation parameters. However, stellar angle measurements from digital zenith cameras and robotic astrometric telescopes continue to contribute to regional polar motion monitoring and to calibration of other techniques.",
+      "source": "Fundamental astrometry"
+    }
+  },
+  "t": {
+    "teph": {
+      "title": "Teph (Ephemeris Time argument)",
+      "definition": "The time argument used in the Jet Propulsion Laboratory (JPL) Development Ephemerides (e.g., DE405, DE430, DE440) for solar system ephemerides. In geodetic practice, Teph is a relativistic coordinate time scale approximated by TDB. The IAU 2006 Resolution B3 explicitly acknowledges that 'the long-established JPL ephemeris time argument Teph, as implemented in JPL Development Ephemeris DE405, is for practical purposes the same as TDB defined in this Resolution.' The distinction between Teph and TDB is at the level of 10⁻⁵ seconds over centuries, which is negligible for most VLBI and GNSS Earth orientation applications.",
+      "source": "IAU 2006 Resolution B3; JPL"
+    },
+    "temps-coordonnee-barycentrique": {
+      "title": "Temps-coordonnée barycentrique (TCB)",
+      "definition": "The French name for Barycentric Coordinate Time. TCB is a coordinate time scale defined in the barycentric reference frame of the solar system. The acronym TCB is derived from the French name. In geodetic practice, TCB is the independent time variable for equations of motion in the Barycentric Celestial Reference System (BCRS). See Barycentric Coordinate Time (TCB).",
+      "source": "IAU; IERS Glossary"
+    },
+    "temps-coordonnee-geocentrique": {
+      "title": "Temps-coordonnée géocentrique (TCG)",
+      "definition": "The French name for Geocentric Coordinate Time. TCG is a coordinate time scale defined in the Geocentric Celestial Reference System (GCRS). The acronym TCG is derived from the French name. See Geocentric Coordinate Time (TCG).",
+      "source": "IAU; IERS Glossary"
+    },
+    "terrestrial-dynamical-time": {
+      "title": "Terrestrial Dynamical Time (TDT)",
+      "definition": "A former name for Terrestrial Time (TT), adopted by the IAU in 1976 as the successor to Ephemeris Time (ET) for geocentric ephemerides. TDT was defined with the SI second as the unit and was intended for Earth-based observations of solar system bodies. In 1991, the IAU renamed TDT to Terrestrial Time (TT) to avoid confusion with the concept of 'dynamical time' and to establish consistent nomenclature with TCB and TCG. In modern geodetic practice, TT = TAI + 32.184 s remains the standard time scale for Earth-fixed observations, GNSS system times, and geocentric ephemerides.",
+      "source": "IAU 1976 Resolutions; IAU 1991 Resolutions"
+    },
+    "terrestrial-ephemeris-origin": {
+      "title": "Terrestrial Ephemeris Origin (TEO)",
+      "definition": "The terrestrial counterpart to the Celestial Ephemeris Origin (CEO), defined as the point on the true equator of the Celestial Intermediate Pole (CIP) that serves as the origin for longitude measurement in the Earth rotation framework. The Earth Rotation Angle (ERA) is defined as the angle between the Celestial Ephemeris Origin (CEO) and the Terrestrial Ephemeris Origin (TEO) along the intermediate equator. This terminology has been largely superseded by the more common designations Celestial Intermediate Origin (CIO) and Terrestrial Intermediate Origin (TIO).",
+      "source": "IAU 2000 Resolutions; IERS Conventions"
+    },
+    "terrestrial-intermediate-origin": {
+      "title": "Terrestrial Intermediate Origin (TIO)",
+      "definition": "The origin for longitude in the Terrestrial Intermediate Reference System (TIRS), serving as the terrestrial counterpart to the Celestial Intermediate Origin (CIO). In modern geodetic Earth orientation practice, the Earth Rotation Angle (ERA) is defined as the angle between the CIO and the TIO along the intermediate equator of the CIP [citation:5]. The TIO is a Non-Rotating Origin on the terrestrial equator, remaining fixed relative to the Earth's crust. The adoption of the TIO and CIO framework in the IAU 2000 resolutions simplified the transformation between celestial and terrestrial reference frames by eliminating the need for the equation of the equinoxes [citation:9].",
+      "source": "IAU 2000 Resolution B1.8; IERS Conventions; IAG"
+    },
+    "terrestrial-intermediate-reference-system": {
+      "title": "Terrestrial Intermediate Reference System (TIRS)",
+      "definition": "A geocentric reference system co-rotating with the Earth, defined by the intermediate equator (of the CIP) and the Terrestrial Intermediate Origin (TIO). The TIRS is the terrestrial counterpart to the Celestial Intermediate Reference System (CIRS). The transformation between CIRS and TIRS is given solely by the Earth Rotation Angle (ERA), which measures the rotation of the Earth about the CIP. This framework, adopted in the IAU 2000/2006 resolutions, provides a consistent and relativistic foundation for linking celestial and terrestrial reference frames in VLBI, GNSS, and other precise positioning applications.",
+      "source": "IAU 2000 Resolutions; IERS Conventions"
+    },
+    "terrestrial-reference-frame": {
+      "title": "Terrestrial Reference Frame (TRF)",
+      "definition": "The physical realization of a Terrestrial Reference System (TRS), consisting of a set of station coordinates and velocities for geodetic monuments. The International Terrestrial Reference Frame (ITRF) maintained by the IERS is the global standard TRF for geodesy and Earth sciences. Regional TRFs provide densification and higher accuracy for specific geographic areas: EUREF (Europe), SIRGAS (South and Central America), AFREF (Africa), APREF (Asia-Pacific), and GDA2020 (Australia). All modern TRFs are aligned to the ITRS and are realized through the combination of VLBI, SLR, GPS, DORIS, and, increasingly, GNSS constellations (Galileo, BeiDou).",
+      "source": "IERS; IAG"
+    },
+    "terrestrial-reference-system": {
+      "title": "Terrestrial Reference System (TRS)",
+      "definition": "A reference system co-rotating with the Earth, with origin at the geocenter and axes oriented relative to the Earth's crust. The International Terrestrial Reference System (ITRS) is the international standard TRS, defined by the IUGG and maintained by the IERS. The ITRS definition specifies: (1) origin at the geocenter (Earth's center of mass); (2) unit of length as the meter (SI); (3) orientation aligned to the BIH Terrestrial System at epoch 1984.0; and (4) orientation time evolution defined by the Tisserand condition (no net rotation relative to the Earth's crust). This definition ensures that the ITRS is consistent with geophysical conventions for plate motion and mass transport.",
+      "source": "IUGG; IERS Conventions"
+    },
+    "terrestrial-time": {
+      "title": "Terrestrial Time (TT)",
+      "definition": "A coordinate time scale defined at the geocenter, used as the time standard for Earth-based observations, geocentric ephemerides, and as the basis for GNSS system times. TT is related to International Atomic Time (TAI) by TT = TAI + 32.184 s. TT is also related to Geocentric Coordinate Time (TCG) by TT = TCG − L_G × (JD_TCG − T_0) × 86400, where L_G = 6.969290134×10⁻¹⁰. TT is close to proper time on the geoid and is the appropriate time scale for most Earth-based geodetic applications. TT was formerly known as Terrestrial Dynamical Time (TDT). In relativistic geodesy, TT is a re-scaling of TCG that removes secular drift, making it more practical for Earth-surface clock comparisons.",
+      "source": "IAU 1991 Resolution; IERS Conventions"
+    }
+  },
+  "u": {
+    "universal-time-ut1": {
+      "title": "Universal Time (UT1)",
+      "definition": "A time scale determined by the actual rotation of the Earth, representing the true spin angle of the Earth about its axis. UT1 is computed from UT0 (raw rotational time at a particular observatory) by correcting for the effect of polar motion on the observer's longitude. In geodesy and Earth orientation determination, UT1 is the Earth Orientation Parameter (EOP) that quantifies the irregular rotation of the Earth, with UT1−UTC distributed by the IERS. The Earth Rotation Angle (ERA) is a linear function of UT1: ERA = 2π · UT1/86400 seconds of time. UT1 is essential for: (1) transforming celestial coordinates to terrestrial coordinates; (2) celestial navigation; (3) pointing radio telescopes and optical telescopes; (4) satellite orbit determination; and (5) geodetic VLBI analysis. Unlike atomic time (TAI, UTC), UT1 varies due to tidal friction, atmospheric angular momentum variations, and core-mantle coupling, with variations on timescales from days to millennia.",
+      "source": "IERS Glossary; IERS Conventions"
+    }
+  },
+  "v": {},
+  "w": {},
+  "x": {},
+  "y": {},
+  "z": {}
+}

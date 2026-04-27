@@ -1,0 +1,74 @@
+{
+  "iot": {
+    "ru": {
+      "title": "Интернет вещей (IoT)",
+      "definition": "Концепция сети физических объектов («вещей»), оснащённых встроенными технологиями для взаимодействия друг с другом или с внешней средой. В геодезии IoT применяется для создания систем мониторинга деформаций зданий, контроля состояния дорог и умных сельскохозяйственных решений.",
+      "examples": [
+        "Датчики на опорах моста передают данные о наклоне в реальном времени.",
+        "Умные маячки на буровых установках."
+      ]
+    },
+    "en": {
+      "title": "Internet of Things (IoT)",
+      "definition": "The concept of a network of physical objects ('things') embedded with technologies to interact with each other or the environment. In geodesy, IoT is used for monitoring building deformations, road conditions, and smart agriculture.",
+      "examples": [
+        "Sensors on bridge supports transmit tilt data in real time.",
+        "Smart beacons on drilling rigs."
+      ]
+    }
+  },
+  "gnss-receiver": {
+    "ru": {
+      "title": "ГНСС-приемник",
+      "definition": "Устройство для определения координат и времени по сигналам спутниковых систем (GPS, ГЛОНАСС, Galileo, BeiDou). Современные геодезические приемники обеспечивают точность до миллиметров в режиме постобработки и сантиметров в реальном времени (RTK/PPP).",
+      "examples": [
+        "Двухчастотный геодезический приёмник для топографической съёмки.",
+        "Интеграция ГНСС-приёмника с дроном для аэрофотосъёмки."
+      ]
+    },
+    "en": {
+      "title": "GNSS Receiver",
+      "definition": "A device that determines coordinates and time using satellite signals (GPS, GLONASS, Galileo, BeiDou). Modern geodetic receivers achieve millimeter-level accuracy in post-processing and centimeter-level in real time (RTK/PPP).",
+      "examples": [
+        "Dual-frequency geodetic receiver for topographic surveying.",
+        "GNSS receiver integration with drones for aerial mapping."
+      ]
+    }
+  },
+  "ar": {
+    "ru": {
+      "title": "Дополненная реальность (AR)",
+      "definition": "Технология наложения цифровых объектов на физический мир в реальном времени. В геодезии AR используется для визуализации подземных коммуникаций на стройплощадке, навигации по кадастровым границам и обучения персонала.",
+      "examples": [
+        "Наведение камеры смартфона на участок показывает границы и высотные отметки.",
+        "AR-очки для геодезиста с проекцией плана здания."
+      ]
+    },
+    "en": {
+      "title": "Augmented Reality (AR)",
+      "definition": "Technology that overlays digital objects onto the physical world in real time. In geodesy, AR is used to visualize underground utilities on construction sites, navigate cadastral boundaries, and train personnel.",
+      "examples": [
+        "Pointing a smartphone camera at a site displays boundary lines and elevation marks.",
+        "AR glasses for surveyors projecting building plans."
+      ]
+    }
+  },
+  "sla": {
+    "ru": {
+      "title": "Соглашение об уровне обслуживания (SLA)",
+      "definition": "Договор между поставщиком услуг и клиентом, определяющий ключевые показатели качества. Для ГНСС-сервисов (например, PPP) SLA включает время доступности, точность позиционирования, время ответа поддержки и время восстановления.",
+      "examples": [
+        "SLA с гарантией доступности 99,5% и точностью 2 см (RMS).",
+        "Штрафные санкции за превышение времени недоступности сервиса."
+      ]
+    },
+    "en": {
+      "title": "Service Level Agreement (SLA)",
+      "definition": "A contract between a service provider and a client defining key quality indicators. For GNSS services (e.g., PPP), SLA includes availability uptime, positioning accuracy, support response time, and recovery time.",
+      "examples": [
+        "SLA guaranteeing 99.5% availability and 2 cm (RMS) accuracy.",
+        "Penalties for exceeding service downtime limits."
+      ]
+    }
+  }
+}
