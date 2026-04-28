@@ -1,0 +1,21 @@
+# Humans.txt for Geo-D7
+
+/* TEAM */
+    Developer: Faris
+    Role: Full-stack Developer
+    Stack: Next.js, TypeScript, Supabase, SCSS
+
+/* SITE */
+    Title: Гео-D7 | Геодезия, GNSS и спутниковая навигация
+    Description: Научно-технический портал по геодезии, геодинамике, спутниковой навигации GNSS/GPS/ГЛОНАСС, позиционированию и синхронизации
+    Language: Russian, English
+    Technologies: Next.js 16, React 19, TypeScript, Supabase, SCSS
+    Platform: Vercel
+
+/* LAST UPDATE */
+    Last updated: 2026-04-28
+
+/* CONTACT */
+    Telegram: https://t.me/geod7
+    Maks: https://maks.ru/geod7
+    Email: info@geo-d7.vercel.app
