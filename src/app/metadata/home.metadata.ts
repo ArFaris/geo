@@ -53,16 +53,6 @@ export const SITE_CONFIG: Metadata = {
         yandex: 'yandex-verification=ваш_код',
     },
     
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes',
-    themeColor: '#0a3e6d',
-    colorScheme: 'light dark',
-    referrer: 'origin-when-cross-origin',
-    formatDetection: {
-        email: true,
-        address: true,
-        telephone: true,
-    },
-    
     category: 'science/technology',
     classification: 'Научно-технический портал',
     
