@@ -25,7 +25,7 @@ const HomePage = async () => {
                 {
                     types.map(type => (
                         <div key={type} className={s.type}>
-                            <Link href={`/content/${type}`} className={'borderEffect'}>
+                            <Link href={`/sections/${type}`} className={'borderEffect'}>
                               <Text weight="medium">{t(`title.${type}`)}</Text>
                             </Link>
                         </div>
