@@ -1,0 +1,60 @@
+@use '@/styles/variables.scss' as *;
+
+.wrapper {
+    min-width: 50vw;
+    max-width: 50vw;
+    border: 1px solid $secondary;
+    max-height: calc(100vh - 284px);
+    height: calc(100vh - 284px);
+    margin-top: 124px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    overscroll-behavior: contain;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls {
+    position: absolute;
+    top: 104px;
+    display: flex;
+    gap: 12px;
+    background: $secondary;
+    padding: 8px 16px;
+    border-radius: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.controlBtn {
+    max-width: 10px;
+    max-height: 20px;
+    background-color: $accent;
+    border: none;
+
+    &:hover {
+        background-color: $button-strong-hover;
+    }
+}
+
+@media(max-width: 1024px) {
+    .wrapper {
+        margin-top: $padd-40;
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 60px;
+        overscroll-behavior: unset;
+    }
+
+    .controls {
+        top: 20px;
+    }
+}

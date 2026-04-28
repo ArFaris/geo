@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { createT } from './core';
 
-async function getLocale() {
+export async function getLocale() {
     const cookieStore = await cookies();
     return (cookieStore.get('locale')?.value as 'ru' | 'en') || 'ru';
 }

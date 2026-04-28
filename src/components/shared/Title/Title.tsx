@@ -1,10 +1,11 @@
+'use client'
 import s from './Title.module.scss';
 import Text from '@/components/ui/Text';
 import cn from 'classnames';
-import { createServerT } from '@/lib/i18n/server';
+import { createClientT } from '@/lib/i18n/client';
 
-const Title = async ({ title, className }: { title: string, className?: string }) => {
-    const t = await createServerT();
+const Title = ({ title, className, locale }: { title: string, className?: string, locale: 'en' | 'ru' }) => {
+    const t = createClientT(locale);
 
     return (
         <header className={cn(s.header, className)}>

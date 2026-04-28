@@ -1,4 +1,4 @@
-import { createServerT } from '@/lib/i18n/server';
+import { createServerT, getLocale } from '@/lib/i18n/server';
 import EarthIcon from '@/components/ui/icons/EarthHoriz';
 import Title from '@/components/shared/Title';
 import Text from '@/components/ui/Text';
@@ -13,12 +13,13 @@ const types = ["coordinates", "time", "geodynamics", "geodesy", "navigation", "p
 
 const HomePage = async () => {
     const t = await createServerT();
+    const locale = await getLocale();
 
     return (
         <section>
             <div className={s.earth__wrapper}><EarthIcon className={s.earth}/></div>
 
-            <Title title={'home'} className={s.home}/>
+            <Title title={'home'} className={s.home} locale={locale} />
 
             <div className={s.types}>
                 {

@@ -17,13 +17,15 @@ export type TextProps = {
     color?: 'primary' | 'secondary' | 'accent' | 'gray';
     /** Максимальное кол-во строк */
     maxLines?: number;
+
+    onClick?: () => void;
 };
 
-const Text: React.FC<TextProps> = ({ className, view = 'p-16', tag, weight, children, color = 'primary', maxLines }: TextProps) => {
+const Text: React.FC<TextProps> = ({ className, onClick, view = 'p-16', tag, weight, children, color = 'primary', maxLines }: TextProps) => {
     const Tag = tag || 'p';
 
     return (
-        <Tag className={cn(s.text, s[`text_view-${view}`], weight && s[`text_weight-${weight}`], color && s[`text_color-${color}`],
+        <Tag onClick={onClick} className={cn(s.text, s[`text_view-${view}`], weight && s[`text_weight-${weight}`], color && s[`text_color-${color}`],
             maxLines, className)}
             style={
                 { '--max-lines-count': maxLines } as React.CSSProperties
