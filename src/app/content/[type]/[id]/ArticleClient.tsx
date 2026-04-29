@@ -9,17 +9,27 @@ import PdfViewer from '@/components/shared/PdfViewer';
 import { Article } from '@/types/articles';
 import { createClientT } from '@/lib/i18n/client';
 import '@/styles/global.scss';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { incrementArticleViewsAction } from '@/app/actions/articles';
+import { pluralizeViews } from '@/lib/utils/pluralize';
 
 type ArticleClientProps = {
     article: Article;
-    pdfUrl: string | null;
+    pdfPath: string | null;
     locale: 'ru' | 'en';
 };
 
-const ArticleClient = ({ article, pdfUrl, locale }: ArticleClientProps) => {
+const ArticleClient = ({ article, pdfPath, locale }: ArticleClientProps) => {
     const t = createClientT(locale);
     const [copied, setCopied] = useState(false);
+    const hasRecordedView = useRef(false);
+
+    useEffect(() => {
+        if (hasRecordedView.current) return;
+        hasRecordedView.current = true;
+
+        incrementArticleViewsAction(article.slug).catch(console.error);
+    }, [article.slug]);
 
     const handleCopy = async () => {
         try {
@@ -45,9 +55,11 @@ const ArticleClient = ({ article, pdfUrl, locale }: ArticleClientProps) => {
         window.open(authorChannelUrl, '_blank', 'noopener,noreferrer');
     };
 
+    const views = pluralizeViews(article.views, locale);
+
     return (
         <section className={cn('page', s.article)}>
-            <PdfViewer pdfUrl={pdfUrl}/>
+            <PdfViewer pdfPath={pdfPath}/>
             
             <div className={s.main}>
                 <div>
@@ -58,7 +70,7 @@ const ArticleClient = ({ article, pdfUrl, locale }: ArticleClientProps) => {
                 <div>
                     <Text color='accent'>{locale === 'ru' ? `время чтения: ${article.readingTime} минут` : `Reading time: ${article.readingTime} minutes`}</Text>
                     <div className={s.group}>
-                        <Text>{locale === 'ru' ? `${article.views} просмотров` : `${article.views} views`}</Text>
+                        <Text>{views}</Text>
                     </div>
                 </div>
 

@@ -1,18 +1,9 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-export const getPdfUrl = async (pdfPath: string): Promise<string | null> => {
-  const { data, error } = await supabase.storage
-    .from('articles')
-    .createSignedUrl(pdfPath, 60);
-
-  if (error) {
-    console.error('Supabase error:', error);
+export async function getPdfUrl(pdfPath: string): Promise<string | null> {
+  try {
+    const apiUrl = `/api/pdf?path=${encodeURIComponent(pdfPath)}`;
+    return apiUrl;
+  } catch (error) {
+    console.error('Error generating PDF URL:', error);
     return null;
   }
-
-  return data?.signedUrl;
-};
+}

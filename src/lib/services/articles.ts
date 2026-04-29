@@ -65,32 +65,3 @@ export const getArticle = async (id: string): Promise<Article | null> => {
     pdfPath: data.pdf_path || null,
   };
 };
-
-import { cookies } from 'next/headers';
-
-export const incrementArticleViews = async (id: string) => {
-    const cookieStore = await cookies();
-    const viewedKey = `viewed_${id}`;
-    
-    if (cookieStore.get(viewedKey)) {
-        return;
-    }
-    
-    const supabase = await createServerClient();
-    
-    const { error } = await supabase.rpc('increment_views', {
-        article_id: id
-    });
-    
-    if (!error) {
-        cookieStore.set(viewedKey, '1', {
-            maxAge: 60 * 60 * 24,
-            path: '/',
-            httpOnly: true,
-        });
-    }
-    
-    if (error) {
-        console.error('Failed to increment views:', error);
-    }
-};

@@ -39,15 +39,10 @@ export default async function ArticleWithSubcategoryPage({ params }: PageProps) 
         notFound();
     }
     
-    let pdfUrl: string | null = null;
-    if (article.pdfPath) {
-        pdfUrl = await getPdfUrl(article.pdfPath);
-    }
-    
     return (
         <ArticleClient 
             article={article} 
-            pdfUrl={pdfUrl} 
+            pdfPath={article.pdfPath} 
             locale={locale} 
         />
     );

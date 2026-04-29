@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
@@ -8,15 +8,28 @@ import Text from '@/components/ui/Text';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import Button from '@/components/ui/Button';
 
-if (typeof window !== 'undefined') {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
-}
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString();
 
-const PdfViewer = ({ pdfUrl }: { pdfUrl: string | null}) => {
+const PdfViewer = ({ pdfPath }: { pdfPath: string | null }) => {
     const [numPages, setNumPages] = useState<number>(0);
     const [scale, setScale] = useState(1.2);
+    const [proxiedUrl, setProxiedUrl] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    if (!pdfUrl) return;
+    useEffect(() => {
+        if (pdfPath) {
+            setIsLoading(true);
+            const proxyUrl = `/api/pdf?path=${encodeURIComponent(pdfPath)}`;
+            setProxiedUrl(proxyUrl);
+            setIsLoading(false);
+        }
+    }, [pdfPath]);
+
+    if (!pdfPath) return null;
+    if (isLoading) return <LoadingScreen />;
 
     const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 3));
     const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.5));
@@ -40,21 +53,24 @@ const PdfViewer = ({ pdfUrl }: { pdfUrl: string | null}) => {
             )}
 
             <div className={s.wrapper}>
-                <Document
-                    file={pdfUrl}
-                    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                    loading={<LoadingScreen />}
-                    error={<Text view='subtitle'>Ошибка загрузки файла. Попробуйте позже</Text>}
-                >
-                    {Array.from(new Array(numPages), (_, index) => (
-                        <Page
-                            pageNumber={index + 1}
-                            scale={scale}
-                            renderTextLayer={false}
-                            renderAnnotationLayer={true}
-                        />
-                    ))}
-                </Document>
+                {proxiedUrl && (
+                    <Document
+                        file={proxiedUrl}
+                        onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                        loading={<LoadingScreen />}
+                        error={<Text view='subtitle'>Ошибка загрузки файла. Попробуйте позже</Text>}
+                    >
+                        {Array.from(new Array(numPages), (_, index) => (
+                            <Page
+                                key={index}
+                                pageNumber={index + 1}
+                                scale={scale}
+                                renderTextLayer={false}
+                                renderAnnotationLayer={true}
+                            />
+                        ))}
+                    </Document>
+                )}
             </div>
         </section>
     );

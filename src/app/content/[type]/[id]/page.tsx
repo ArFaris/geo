@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getArticle, incrementArticleViews } from '@/lib/services/articles';
+import { getArticle } from '@/lib/services/articles';
 import { getPdfUrl } from '@/lib/services/pdf';
 import { createServerT, getLocale } from '@/lib/i18n/server';
 import ArticleClient from './ArticleClient';
@@ -59,17 +59,10 @@ export default async function ArticlePage({ params }: PageProps) {
         notFound();
     }
     
-    let pdfUrl: string | null = null;
-    if (article.pdfPath) {
-        pdfUrl = await getPdfUrl(article.pdfPath);
-    }
-
-    await incrementArticleViews(id).catch(console.error);
-    
     return (
         <ArticleClient 
             article={article} 
-            pdfUrl={pdfUrl} 
+            pdfPath={article.pdfPath}
             locale={locale} 
         />
     );
