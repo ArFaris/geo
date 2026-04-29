@@ -65,5 +65,8 @@
     "positioning": "Позиционирование",
     "synchronization": "Синхронизация",
     "miscellaneous": "Разное"
+  },
+  "other": {
+    "copied": "Скопировано!"
   }
 }

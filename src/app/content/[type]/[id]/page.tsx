@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getArticle } from '@/lib/services/articles';
+import { getArticle, incrementArticleViews } from '@/lib/services/articles';
 import { getPdfUrl } from '@/lib/services/pdf';
 import { createServerT, getLocale } from '@/lib/i18n/server';
 import ArticleClient from './ArticleClient';
@@ -63,6 +63,8 @@ export default async function ArticlePage({ params }: PageProps) {
     if (article.pdfPath) {
         pdfUrl = await getPdfUrl(article.pdfPath);
     }
+
+    await incrementArticleViews(id).catch(console.error);
     
     return (
         <ArticleClient 

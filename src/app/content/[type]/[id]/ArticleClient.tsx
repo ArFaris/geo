@@ -9,6 +9,7 @@ import PdfViewer from '@/components/shared/PdfViewer';
 import { Article } from '@/types/articles';
 import { createClientT } from '@/lib/i18n/client';
 import '@/styles/global.scss';
+import { useState } from 'react';
 
 type ArticleClientProps = {
     article: Article;
@@ -18,6 +19,31 @@ type ArticleClientProps = {
 
 const ArticleClient = ({ article, pdfUrl, locale }: ArticleClientProps) => {
     const t = createClientT(locale);
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(`https://geo-d7.vercel.app/content/${article.category}/${article.subcategory ? `${article.subcategory}/` : ''}${article.slug}`);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (error) {
+            console.error('Copy error:', error);
+        }
+    };
+    
+    const handleEmail = () => {
+        const email = 'fariseeva.a.d@yandex.ru';
+        const subject = encodeURIComponent(`Вопрос по статье: ${article.name}`);
+        const body = encodeURIComponent(
+            `Здравствуйте!\n\nПрочитал(а) вашу статью "${article.name}" и хотел(а) бы задать вопрос:\n\n`
+        );
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    };
+    
+    const handleMaks = () => {
+        const authorChannelUrl = 'https://maks.ru';
+        window.open(authorChannelUrl, '_blank', 'noopener,noreferrer');
+    };
 
     return (
         <section className={cn('page', s.article)}>
@@ -37,9 +63,12 @@ const ArticleClient = ({ article, pdfUrl, locale }: ArticleClientProps) => {
                 </div>
 
                 <div className={s.links}>
-                    <CopyIcon />
-                    <EmailIcon />
-                    <MaksIcon />
+                    <div className={s.copy}>
+                        <CopyIcon onClick={handleCopy} />
+                        {copied && <span className={s.tooltip}>{t('other.copied')}</span>}
+                    </div>
+                    <EmailIcon onClick={handleEmail}/>
+                    <MaksIcon onClick={handleMaks}/>
                 </div>
             </div>
         </section>

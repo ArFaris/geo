@@ -34,6 +34,25 @@
     gap: $padd-20;
 }
 
+.tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $primary;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.copy {
+    position: relative;
+    max-height: 24px;
+}
+
 @media(max-width: 1024px) {
     .article {
         flex-direction: column-reverse;

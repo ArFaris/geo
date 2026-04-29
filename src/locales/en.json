@@ -65,5 +65,8 @@
     "positioning": "Positioning",
     "synchronization": "Synchronization",
     "miscellaneous": "Miscellaneous"
+  },
+  "other": {
+    "copied": "Copied!"
   }
 }
