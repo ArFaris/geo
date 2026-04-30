@@ -71,21 +71,8 @@
     z-index: -1;
 }
 
-.search {
-    background-color: $secondary;
-    position: relative;
-
-    &__icon {
-        position: absolute;
-        right: 5px;
-        top: 5.5px;
-    }
-
-    &__title {
-        text-align: center;
-        margin-top: 56px;
-        margin-bottom: $padd-20;
-    }
+.searchPage {
+    margin-top: 56px;
 }
 
 @media(max-width: 1024px) {

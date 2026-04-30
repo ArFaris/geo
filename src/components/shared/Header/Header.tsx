@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import cn from 'classnames';
 import Text from '@/components/ui/Text';
@@ -13,6 +13,8 @@ import s from './Header.module.scss';
 import { User } from '@supabase/supabase-js';
 import { createClientT } from '@/lib/i18n/client';
 import '@/styles/global.scss';
+import Input from '@/components/ui/Input';
+import { debounce } from 'lodash';
 
 export type Link = {
     key: string,
@@ -38,7 +40,7 @@ type HeaderProps = {
     user: User | null;
 }
 
-const Header: React.FC<HeaderProps> = ({image='/logo.svg', links=navKeys, locale, user}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale, user}: HeaderProps) => {
     const { isOpen, close, open } = useBurgerMenu();
     const [isSecondLevelVisible, setIsSecondLevelVisible] = useState(true);
     const lastScrollY = useRef(0);
@@ -85,11 +87,11 @@ const Header: React.FC<HeaderProps> = ({image='/logo.svg', links=navKeys, locale
             <div className={s.header}>
                 <div className={s.header__main}>
                     <div className={s.icons}>
-                        <SearchIcon />
+                        <SearchIcon onClick={() => router.push('/search')}/>
                         <span className={s.switch}><LanguageSwitcher locale={locale} /></span>
                     </div>
 
-                    <img src={image} alt='Логотип' onClick={() => handleNavigate('/')} className={s.logo}/>
+                    <img src={image} alt='Логотип' width='130px' onClick={() => handleNavigate('/')} className={s.logo}/>
 
                     {!user && 
                         <div className={cn('buttons', s.headerButtons)}>

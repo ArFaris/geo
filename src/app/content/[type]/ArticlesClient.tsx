@@ -4,7 +4,6 @@ import s from './page.module.scss';
 import cn from 'classnames';
 import { useRouter } from 'next/navigation';
 import EarthLeftIcon from '@/components/ui/icons/EarthLeft';
-import LoadingScreen from '@/components/ui/LoadingScreen';
 import Title from '@/components/shared/Title';
 import Input from '@/components/ui/Input';
 import SearchIcon from '@/components/ui/icons/SearchIcon';
@@ -27,16 +26,19 @@ const ArticlesClient = ({ initialArticles, category, subcategory, locale }: Arti
     const isArticlesCategory = category === 'articles';
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
+    const [articles, setArticles] = useState<Articles[]>(initialArticles);
+    const isSearch = category === 'search';
 
-    const filteredData = useMemo(() => {
+    useMemo(() => {
         if (!searchQuery.trim()) return initialArticles;
 
         const query = searchQuery.toLowerCase().trim();
         
-        return initialArticles.filter(item => {
+        const filteredData = initialArticles.filter(item => {
             const searchField = locale === 'ru' ? item.name : item.name_en;
             return searchField?.toLowerCase().includes(query);
         });
+        setArticles(filteredData);
     }, [initialArticles, searchQuery, locale]);
 
     const debouncedSetSearch = useCallback(
@@ -46,6 +48,15 @@ const ArticlesClient = ({ initialArticles, category, subcategory, locale }: Arti
         []
     );
 
+    const handleSearch = async () => {
+        if (category === 'search') {
+            const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+            const results = await response.json();
+
+            setArticles(results);
+        }
+    }
+
     return (
         <section className={'page'}>
             <EarthLeftIcon className={s.earh}/>
@@ -53,8 +64,8 @@ const ArticlesClient = ({ initialArticles, category, subcategory, locale }: Arti
             <Title title={category} locale={locale} />
             {initialArticles && <TableOfContents headers={initialArticles} locale={locale} />}
 
-            <Text className={s.search__title} color='primary' view='subtitle'>{locale === 'ru' ? 'Поиск' : 'Searching'}</Text>
-            <Input value={searchQuery} onChange={(e) => debouncedSetSearch(e)} className={s.search} theme='light' afterSlot={<SearchIcon className={s.search__icon}/>}/>
+            {!isSearch && <Text className={s.search__title} color='primary' view='subtitle'>{locale === 'ru' ? 'Поиск' : 'Searching'}</Text>}
+            <Input value={searchQuery} onChange={(e) => debouncedSetSearch(e)} className={cn('search', isSearch && s.searchPage)} theme='light' afterSlot={<SearchIcon onClick={handleSearch} className={'search__icon'}/>}/>
 
             <div>
                 {isArticlesCategory && <div className={s.subcategories}>
@@ -71,10 +82,10 @@ const ArticlesClient = ({ initialArticles, category, subcategory, locale }: Arti
                 </div>}
 
                 <div className={s.articles}>
-                    {filteredData.length > 0 && filteredData.map(item => (
+                    {articles.length > 0 && articles.map(item => (
                         <article key={item.slug} 
                                  id={item.slug}
-                                 onClick={() => router.push(`/content/${category}${subcategory ? `/${subcategory}` : ''}/${item.slug}`)}
+                                 onClick={() => router.push(`/content/${item.category}${subcategory ? `/${subcategory}` : ''}/${item.slug}`)}
                                  className={s.article}>
                             {item.part && <span className={s.article__part}><Text color='primary'>{`${t('common.part')} ${item.part}`}</Text></span>}
                             <Text color='primary'>{locale === 'ru' ? `${item.name}` : `${item.name_en}`}</Text>

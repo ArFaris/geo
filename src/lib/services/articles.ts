@@ -1,5 +1,5 @@
 import { createClient as createServerClient } from '@/lib/supabase/server';
-import type { Article, Articles } from '@/types/articles';
+import type { Article, Articles, ArticleSearchResult } from '@/types/articles';
 
 export const getArticlesByCategory = async ({
   category,
@@ -12,7 +12,7 @@ export const getArticlesByCategory = async ({
 
   let query = supabase
     .from('articles')
-    .select('id, title, title_en, part')
+    .select('id, title, title_en, category, part')
     .eq('category', category)
     .order('part', { ascending: true });
 
@@ -32,6 +32,7 @@ export const getArticlesByCategory = async ({
     name_en: item.title_en,
     slug: item.id,
     part: item.part || undefined,
+    category: item.category
   }));
 };
 

@@ -17,4 +17,13 @@ export type Articles = {
     name_en: string;
     slug: string;
     part?: string;
+    category: string;
+}
+
+export type ArticleSearchResult = {
+  id: string;
+  title: string;
+  title_en: string;
+  part: string | null;
+  category: string;
 }

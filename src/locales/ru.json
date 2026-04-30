@@ -64,7 +64,8 @@
     "navigation": "Навигация",
     "positioning": "Позиционирование",
     "synchronization": "Синхронизация",
-    "miscellaneous": "Разное"
+    "miscellaneous": "Разное",
+    "search": "Поиск"
   },
   "other": {
     "copied": "Скопировано!"

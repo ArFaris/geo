@@ -64,7 +64,8 @@
     "navigation": "Navigation",
     "positioning": "Positioning",
     "synchronization": "Synchronization",
-    "miscellaneous": "Miscellaneous"
+    "miscellaneous": "Miscellaneous",
+    "search": "Search"
   },
   "other": {
     "copied": "Copied!"
