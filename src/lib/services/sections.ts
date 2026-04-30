@@ -31,7 +31,7 @@ export const getArticlesBySectionSlug = async (slug: string): Promise<Articles[]
     
     const { data: articles, error: articlesError } = await supabase
         .from('articles')
-        .select('id, title, title_en, part')
+        .select('id, title, title_en, category, part')
         .in('id', articleIds)
         .order('part', { ascending: true, nullsFirst: false });
 
@@ -43,6 +43,7 @@ export const getArticlesBySectionSlug = async (slug: string): Promise<Articles[]
         name: item.title,
         name_en: item.title_en,
         slug: item.id,
+        category: item.category,
         part: item.part || undefined,
     }));
 };
