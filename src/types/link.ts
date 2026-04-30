@@ -1,7 +1,7 @@
-import type { Category } from "./category";
-
 export interface Link {
     name: string;
+    name_en: string;
     link: string;
-    category: Category;
+    description?: string;
+    description_en?: string;
 }

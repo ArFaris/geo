@@ -28,7 +28,7 @@ const navKeys: Link[] = [
   { key: 'nav.analytics', to: '/content/analytics' },
   { key: 'nav.articles', to: '/content/articles/vestnik' },
   { key: 'nav.partners', to: '/partners' },
-  { key: 'nav.sources', to: '/links' },
+  { key: 'nav.sources', to: '/sources' },
   { key: 'nav.shop', to: '/shop' },
   { key: 'nav.about', to: '/about' }
 ];
