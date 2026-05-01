@@ -59,7 +59,7 @@ const ArticleClient = ({ article, pdfPath, locale }: ArticleClientProps) => {
 
     return (
         <section className={cn('page', s.article)}>
-            <PdfViewer pdfPath={pdfPath}/>
+            <PdfViewer pdfPath={pdfPath} locale={locale} />
             
             <div className={s.main}>
                 <div>

@@ -65,7 +65,7 @@ const ArticlesClient = ({ initialArticles, category, subcategory, locale }: Arti
             {initialArticles && <TableOfContents headers={initialArticles} locale={locale} />}
 
             {!isSearch && <Text className={s.search__title} color='primary' view='subtitle'>{locale === 'ru' ? 'Поиск' : 'Searching'}</Text>}
-            <Input value={searchQuery} onChange={(e) => debouncedSetSearch(e)} className={cn('search', isSearch && s.searchPage)} theme='light' afterSlot={<SearchIcon onClick={handleSearch} className={'search__icon'}/>}/>
+            <Input placeholder={locale === 'ru' ? 'Введите текст' : 'Enter text'} value={searchQuery} onChange={(e) => debouncedSetSearch(e)} className={cn('search', isSearch && s.searchPage)} theme='light' afterSlot={<SearchIcon onClick={handleSearch} className={'search__icon'}/>}/>
 
             <div>
                 {isArticlesCategory && <div className={s.subcategories}>

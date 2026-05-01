@@ -5,7 +5,7 @@ import styles from './LoadingScreen.module.scss';
 import { useEffect } from "react";
 import cn from 'classnames';
 
-const LoadingScreen = ({className}: {className?: string}) => {
+const LoadingScreen = ({className, locale}: {className?: string, locale: 'ru' | 'en'}) => {
     useEffect(() => {
         document.body.style.overflow = 'hidden';
 
@@ -17,7 +17,7 @@ const LoadingScreen = ({className}: {className?: string}) => {
     return (
         <div className={cn(styles.loading, className)}>
                 <Loader />
-                <Text view='subtitle'>Загрузка...</Text>
+                <Text view='subtitle'>{locale === 'ru' ? 'Загрузка...' : 'Loading...'}</Text>
         </div>
     )
 }

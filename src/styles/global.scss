@@ -155,6 +155,17 @@ input {
     }
 }
 
+.earth {
+    &__wrapper {
+        position: fixed;
+        max-height: 64%;
+        width: 100%;
+        overflow-y: hidden;
+        z-index: -1;
+        bottom: -220px;
+    }
+}
+
 @media(max-width: 1280px) {
   .page {
     padding-inline: $padd-40;
@@ -164,6 +175,12 @@ input {
 @media(max-width: 1024px) {
   .page {
     padding-inline: $padd-20;
+  }
+
+  .earth {
+      &__wrapper {
+          bottom: 0;
+      }
   }
 }
 

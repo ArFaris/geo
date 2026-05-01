@@ -29,7 +29,7 @@ const LinksWrapper: React.FC<LinksWrapperProps> = async ({ title, locale, links 
 
                                 <a className={s.a} href={link.link}>{link.link}</a>
 
-                                {link.description && <Text>{link.description}</Text>}
+                                {link.description && <Text>{locale === 'ru' ? link.description : link.description_en}</Text>}
                             </div>
                         )
                     }

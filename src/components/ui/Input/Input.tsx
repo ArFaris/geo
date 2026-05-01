@@ -18,7 +18,7 @@ export type InputProps = Omit<
 
   editmode?: boolean;
 
-  theme?: 'light' | 'dark'
+  theme?: 'light' | 'dark';
 };
 
 const Input: React.FC<InputProps> = ({

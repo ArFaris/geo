@@ -13,7 +13,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-const PdfViewer = ({ pdfPath }: { pdfPath: string | null }) => {
+const PdfViewer = ({ pdfPath, locale }: { pdfPath: string | null, locale: 'en' | 'ru'}) => {
     const [numPages, setNumPages] = useState<number>(0);
     const [scale, setScale] = useState(1.2);
     const [proxiedUrl, setProxiedUrl] = useState<string | null>(null);
@@ -29,7 +29,7 @@ const PdfViewer = ({ pdfPath }: { pdfPath: string | null }) => {
     }, [pdfPath]);
 
     if (!pdfPath) return null;
-    if (isLoading) return <LoadingScreen />;
+    if (isLoading) return <LoadingScreen locale={locale}/>;
 
     const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 3));
     const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.5));
@@ -57,7 +57,7 @@ const PdfViewer = ({ pdfPath }: { pdfPath: string | null }) => {
                     <Document
                         file={proxiedUrl}
                         onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                        loading={<LoadingScreen />}
+                        loading={<LoadingScreen locale={locale}/>}
                         error={<Text view='subtitle'>Ошибка загрузки файла. Попробуйте позже</Text>}
                     >
                         {Array.from(new Array(numPages), (_, index) => (

@@ -13,8 +13,6 @@ import s from './Header.module.scss';
 import { User } from '@supabase/supabase-js';
 import { createClientT } from '@/lib/i18n/client';
 import '@/styles/global.scss';
-import Input from '@/components/ui/Input';
-import { debounce } from 'lodash';
 
 export type Link = {
     key: string,

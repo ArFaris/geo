@@ -17,7 +17,7 @@ const HomePage = async () => {
 
     return (
         <section>
-            <div className={s.earth__wrapper}><EarthIcon className={s.earth}/></div>
+            <div className={'earth__wrapper'}><EarthIcon className={'earth'}/></div>
 
             <Title title={'home'} className={s.home} locale={locale} />
 

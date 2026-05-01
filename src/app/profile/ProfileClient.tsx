@@ -8,6 +8,7 @@ import Title from '@/components/shared/Title';
 import EarthIcon from '@/components/ui/icons/EarthHoriz';
 import { signOutUser } from '@/lib/services/auth';
 import s from './page.module.scss';
+import '@/styles/global.scss';
 import { createClientT } from '@/lib/i18n/client';
 
 type ProfileClientProps = {
@@ -37,7 +38,7 @@ const ProfilePage = ({ user, locale }: ProfileClientProps) => {
 
     return (
         <>
-            <div className={s.earth__wrapper}><EarthIcon className={s.earth}/></div>
+            <div className={'earth__wrapper'}><EarthIcon className={'earth'}/></div>
 
             <section className={'page'}>
                 <Title title={'profile'} locale={locale}/>

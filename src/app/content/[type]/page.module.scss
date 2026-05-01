@@ -75,6 +75,14 @@
     margin-top: 56px;
 }
 
+.search {
+    &__title {
+        text-align: center;
+        margin-top: $padd-40;
+        margin-bottom: $padd-20;
+    }
+}
+
 @media(max-width: 1024px) {
     .links {
         padding-inline: 20px;

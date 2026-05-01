@@ -1,16 +1,5 @@
 @use '@/styles/variables.scss' as *;
 
-.earth {
-    &__wrapper {
-        position: absolute;
-        max-height: 64%;
-        width: 100%;
-        overflow-y: hidden;
-        z-index: -1;
-        bottom: 0;
-    }
-}
-
 .fields {
     display: flex;
     flex-direction: column;
@@ -32,8 +21,9 @@
 .btn {
     max-width: fit-content;
     margin-top: $padd-40;
-    background-color: $accent;
-    border: 1px solid $secondary;
+    background-color: $secondary;
+    background-color: rgb(218, 210, 202, 0.5);
+    border: 3px solid $secondary;
 }
 
 @media(max-width: 1024px) {
