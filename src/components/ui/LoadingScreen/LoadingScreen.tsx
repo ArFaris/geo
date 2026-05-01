@@ -5,7 +5,7 @@ import styles from './LoadingScreen.module.scss';
 import { useEffect } from "react";
 import cn from 'classnames';
 
-const LoadingScreen = ({className, locale}: {className?: string, locale: 'ru' | 'en'}) => {
+const LoadingScreen = ({className, locale}: {className?: string, locale?: 'ru' | 'en'}) => {
     useEffect(() => {
         document.body.style.overflow = 'hidden';
 

@@ -3,11 +3,9 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import LoadingScreen from '@/components/ui/LoadingScreen';
-import { getLocale } from '@/lib/i18n/server';
 
-export default async function AuthCallbackPage() {
+export default function AuthCallbackPage() {
     const router = useRouter();
-    const locale = await getLocale();
 
     useEffect(() => {
         const handleAuth = async () => {
@@ -25,5 +23,5 @@ export default async function AuthCallbackPage() {
         handleAuth();
     }, [router]);
 
-    return <LoadingScreen locale={locale} />;
+    return <LoadingScreen locale={'ru'} />;
 }
