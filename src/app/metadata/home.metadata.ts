@@ -65,4 +65,13 @@ export const SITE_CONFIG: Metadata = {
         'maks:profile': 'https://maks.ru/geod7',
         'profile:username': 'geod7',
     },
+
+    icons: {
+        icon: [
+        {
+            url: '/favicon.png',
+            type: 'image/png',
+        },
+        ],
+    },
 };
