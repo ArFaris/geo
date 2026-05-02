@@ -1,5 +1,11 @@
 {
-  "a": {},
+  "a": {
+    "ar": {
+      "title": "AR (Augmented Reality)",
+      "definition": "A technology that overlays digital information (images, text, 3D models) onto real-world objects in real time through a smartphone, tablet, or AR glasses screen. In geodetic applications, AR is used to visualize underground utilities, design elevations, and engineering network routes directly on site with centimeter-level GNSS positioning accuracy.",
+      "source": "International Association of Geodesy (IAG)"
+    }
+  },
   "b": {
     "barycenter": {
       "title": "Barycenter (barycentre)",
@@ -15,6 +21,11 @@
       "title": "Barycentric Dynamical Time (TDB)",
       "definition": "A relativistic coordinate time scale in the Solar-System-barycentric reference frame, used as a time standard for calculating orbits and astronomical ephemerides. In geodetic applications, TDB is the time argument for planetary ephemerides (e.g., JPL DE series) used in Very Long Baseline Interferometry (VLBI) analysis to model the positions of extragalactic radio sources and to determine Earth Orientation Parameters (EOP). Since IAU 2006 Resolution B3, TDB is defined as a linear scaling of TCB: TDB = TCB − L_B × (JD_TCB − T_0) × 86400 + TDB_0, where L_B = 1.550519768×10⁻⁸. A key feature for Earth-based geodesy is that TDB remains within 2 milliseconds of Terrestrial Time (TT) over millennia.",
       "source": "IAU 2006 Resolution B3; IERS Technical Note 36"
+    },
+    "beidou": {
+      "title": "BeiDou (BDS)",
+      "definition": "The Chinese global navigation satellite system of the third generation, providing positioning, navigation, and timing services worldwide. In geodesy and geodynamics, BeiDou is used for realizing global reference frames, monitoring crustal deformations, and high-precision positioning. The system includes satellites in geostationary, inclined geosynchronous, and medium Earth orbits, providing improved coverage in the Asia-Pacific region. The full BDS-3 constellation consists of 30 satellites.",
+      "source": "China National Space Administration (CNSA); IAG"
     }
   },
   "c": {
@@ -64,7 +75,18 @@
       "source": "BIPM; IERS"
     }
   },
-  "d": {},
+  "d": {
+    "dp": {
+      "title": "DP (Dynamic Positioning)",
+      "definition": "A technology for automatically maintaining a floating object (vessel, platform, drilling rig) at a given point using its own thrusters (propellers, tunnel thrusters). DP compensates for wind, wave, and current effects and allows precise marine operations without anchoring. DP requires high-precision, high-frequency positioning (GNSS, INS, hydroacoustics).",
+      "source": "Marine geodesy; IMCA"
+    },
+    "sdp": {
+      "title": "DP system (Dynamic Positioning system)",
+      "definition": "An automated control system managing a vessel's thrusters and propellers to automatically maintain its position at a given point or along a given trajectory. Uses data from GNSS, inertial systems (INS/IMU), gyrocompasses, wind and current sensors. Essential for precise marine operations: drilling, pipe laying, FPSO operations, subsea works.",
+      "source": "Marine geodesy; Kongsberg Maritime; IMCA"
+    }
+  },
   "e": {
     "earth-rotation-angle": {
       "title": "Earth Rotation Angle (ERA)",
@@ -85,6 +107,11 @@
       "title": "Epoch",
       "definition": "A specific instant in time used as a reference point for geodetic and astrometric measurements. Common astronomical epochs include J2000.0 (January 1, 2000, 12:00 TT) for the International Celestial Reference System (ICRS) and B1950.0 for older catalogs. In reference frame realization, all station coordinates and velocities in the ITRF are defined at a reference epoch (e.g., ITRF2020 uses epoch 2015.0). Epochs also define the time-dependent transformation between reference systems, including precession and nutation models.",
       "source": "IERS Conventions"
+    },
+    "epn": {
+      "title": "EPN (European Permanent Network)",
+      "definition": "A European continuously operating GNSS station network providing high-precision data for geodetic and navigation applications. EPN is used for GNSS receiver calibration, correction of satellite signal errors (ephemeris, ionospheric and tropospheric delays), and achieving sub-centimeter positioning accuracy in real-time and post-processing modes. The network consists of several hundred Continuously Operating Reference Stations (CORS) distributed across Europe.",
+      "source": "EUREF; IAG"
     },
     "equation-of-the-equinoxes": {
       "title": "Equation of the equinoxes (EE)",
@@ -120,6 +147,11 @@
     }
   },
   "g": {
+    "galileo": {
+      "title": "Galileo",
+      "definition": "The European global navigation satellite system developed by the European Union and the European Space Agency. In geodesy and geodynamics, Galileo is used for high-precision positioning, determining Earth orientation parameters, monitoring crustal deformations, and realizing global reference frames. The system is civilian-controlled from the outset and provides open high-accuracy services, including the High Accuracy Service (HAS) with global centimeter-level accuracy. The full constellation includes 28 satellites in three orbital planes (altitude ~23,222 km, inclination 56°).",
+      "source": "European Space Agency (ESA); IAG"
+    },
     "geocenter": {
       "title": "Geocenter (geocentre)",
       "definition": "The center of mass of the entire Earth system, including the solid Earth, oceans, atmosphere, and cryosphere. In geodetic reference frame definition, the geocenter is the origin of the International Terrestrial Reference System (ITRS) and the Geocentric Celestial Reference System (GCRS). Geocenter motion — the displacement of the center of mass relative to the center of the ITRF network — is a critical geodynamical signal induced by large-scale mass redistributions, including seasonal water storage changes, atmospheric pressure variations, ocean currents, and post-glacial rebound. Geocenter variations are on the order of millimeters to centimeters with annual and semi-annual periods and are routinely estimated from SLR, GPS, and GRACE-FO data.",
@@ -140,20 +172,55 @@
       "definition": "A coordinate time scale defined in the Geocentric Celestial Reference System (GCRS) with the SI second as the unit, as measured by an ideal clock at the geocenter. In relativistic geodesy, TCG is the fundamental time scale for the GCRS and is related to Terrestrial Time (TT) by TT = TCG − L_G × (JD_TCG − T_0) × 86400, where L_G = 6.969290134×10⁻¹⁰. While TCG is the natural independent variable for equations of motion in the geocentric frame, most ground-based geodetic applications use TT due to its closeness to proper time on the Earth's surface (French: Temps-coordonnée géocentrique).",
       "source": "IAU 1991 Resolution; IERS Conventions"
     },
+    "geocentricheskoe-prostranstvo": {
+      "title": "Geocentric space",
+      "definition": "A three-dimensional coordinate system with origin at the Earth's center of mass (geocenter) used for high-precision modeling of object positions on and near the Earth's surface. Unlike flat map projections, geocentric space accounts for Earth's curvature, geodynamic effects (plate tectonics, tidal deformations) and enables unambiguous coordinate determination in the global reference frame (ITRS/ITRF).",
+      "source": "IAG; IERS Conventions"
+    },
     "geocentric-terrestrial-reference-system": {
       "title": "Geocentric Terrestrial Reference System (GTRS)",
       "definition": "A reference system co-rotating with the Earth, with origin at the geocenter and axes fixed relative to the Earth's crust. The GTRS is the terrestrial analog to the GCRS, and the transformation between the two (incorporating Earth rotation, precession, nutation, and polar motion) is the central problem of Earth orientation determination in geodesy. The International Terrestrial Reference System (ITRS) is the conventional GTRS adopted by the IUGG and maintained by the IERS.",
       "source": "IERS Conventions"
+    },
+    "geodeziya": {
+      "title": "Geodesy",
+      "definition": "The science of determining the Earth's shape, size, and gravity field, as well as methods for measuring and representing coordinates of points on the Earth's surface. Geodesy is divided into higher geodesy (Earth's figure, gravity field, reference systems), engineering geodesy (construction support), and topography (mapping). Geodetic measurements are performed using GNSS, EDM, theodolites, and levels.",
+      "source": "IAG; fundamental geodesy"
+    },
+    "geodinamika": {
+      "title": "Geodynamics",
+      "definition": "The branch of Earth sciences studying the movements and deformations of the Earth's crust, mantle, and core under tectonic, gravitational, tidal, and other forces. In the geodetic context, geodynamic research includes monitoring plate tectonics, vertical and horizontal displacements, post-glacial rebound, tidal deformations, and seismic processes using GNSS, InSAR, and satellite laser ranging.",
+      "source": "IAG; IUGG"
     },
     "geoid": {
       "title": "Geoid",
       "definition": "The equipotential surface of the Earth's gravity field that coincides with mean sea level in the absence of tides, winds, and currents. In physical geodesy, the geoid serves as the fundamental reference surface for heights (orthometric heights) and is the primary target of gravimetric geoid determination. The geoid is approximated by the reference ellipsoid (GRS80/WGS84) with deviations (geoid undulations) ranging from approximately −106 m to +85 m globally. Geoid models are essential for converting between ellipsoidal heights (from GNSS) and orthometric heights (used in engineering and geophysics). Modern geoid models (e.g., EGM2008, EGM2020, XGM2019) are derived from satellite gravity missions (GRACE, GOCE) and terrestrial gravimetry.",
       "source": "Physical geodesy; IERS Conventions"
     },
+    "geotekhnika": {
+      "title": "Geotechnics",
+      "definition": "An applied discipline at the intersection of geology, soil mechanics, and engineering, studying soil and rock properties for the design and construction of foundations, underground structures, embankments, excavations, dams, and tunnels. Geotechnical data include physical and mechanical characteristics of soils (strength, compressibility, permeability), drilling, sounding, and laboratory test results.",
+      "source": "International Society for Soil Mechanics and Geotechnical Engineering (ISSMGE)"
+    },
     "global-positioning-system": {
       "title": "Global Positioning System (GPS)",
       "definition": "A United States satellite-based navigation system that provides positioning, navigation, and timing services globally. In geodesy and geodynamics, GPS is a fundamental geodetic technique for: (1) realizing the International Terrestrial Reference Frame (ITRF) through global network solutions; (2) measuring Earth Orientation Parameters (EOP) including polar motion and Length of Day; (3) monitoring crustal deformation, plate tectonics, and post-seismic displacements; (4) estimating atmospheric water vapor (precipitable water) through tropospheric delay modeling; and (5) detecting geocenter motion and loading deformations. GPS satellites broadcast on L-band frequencies (L1: 1575.42 MHz, L2: 1227.60 MHz, L5: 1176.45 MHz) with the GPS time scale steered to UTC(USNO).",
       "source": "Fundamental geodesy; IERS Techniques"
+    },
+    "glonass": {
+      "title": "GLONASS (Global Navigation Satellite System)",
+      "definition": "The Russian global navigation satellite system providing positioning, navigation, and timing services worldwide. In geodesy and geodynamics, GLONASS is used together with GPS, Galileo, and BeiDou to improve the accuracy, reliability, and availability of GNSS measurements, including the estimation of station displacements and monitoring of crustal movements. The full constellation consists of 24 satellites in three orbital planes at an altitude of ~19,100 km and an inclination of 64.8°.",
+      "source": "Roscosmos; IAG"
+    },
+    "gnss": {
+      "title": "GNSS (Global Navigation Satellite System)",
+      "definition": "A global navigation satellite system. Includes GPS (USA), GLONASS (Russia), Galileo (EU) and BeiDou (China). In railway applications, GNSS is used for train positioning, traffic management, logistics and safety improvement. The characteristics of standard GNSS (accuracy, availability, integrity, continuity) often do not meet the requirements of aviation and railways, necessitating the use of augmentation systems (SBAS, GBAS, ABAS).",
+      "source": "ICAO GNSS Manual"
+    },
+    "gnss-priemnik": {
+      "title": "GNSS receiver",
+      "definition": "A device for receiving and processing signals from global navigation satellite systems (GPS, GLONASS, Galileo, BeiDou). Consists of an antenna, radio frequency front end, processor, and software for computing coordinates, velocity, and time. Geodetic GNSS receivers operate in dual-/multi-frequency mode, support phase measurements, and provide centimeter/millimeter accuracy.",
+      "source": "Fundamental geodesy; IAG"
     },
     "greenwich-mean-sidereal-time": {
       "title": "Greenwich Mean Sidereal Time (GMST)",
@@ -164,10 +231,40 @@
       "title": "Greenwich Sidereal Time (GST)",
       "definition": "The hour angle of the true vernal equinox at the Greenwich meridian, accounting for both precession and nutation. GST (also called Greenwich Apparent Sidereal Time, GAST) equals GMST plus the equation of the equinoxes. In modern geodetic practice, the Earth Rotation Angle (ERA) in the CIO-based framework provides an alternative to GST. Both systems yield consistent results when used appropriately: ERA-based transformation is simpler and more rigorous in a relativistic context, while GST remains widely used in classical astrometry and many software implementations. The difference between GAST and ERA is the Equation of the Origins.",
       "source": "Fundamental astronomy; IERS Conventions; Heidelberg University"
+    },
+    "gyrocompass": {
+      "title": "Gyrocompass",
+      "definition": "A navigation instrument determining the direction of true (geographic) north using a gyroscope, independent of the Earth's magnetic field. Unlike a magnetic compass, the gyrocompass points to true north, is immune to magnetic anomalies, and is used on marine vessels, submersibles, and some geodetic instruments for orientation.",
+      "source": "Marine navigation; inertial technologies"
     }
   },
   "h": {},
   "i": {
+    "ice": {
+      "title": "ICE (Intercity-Express)",
+      "definition": "A high-speed train of Deutsche Bahn, reaching speeds of up to 405 km/h. In a geodetic context, ICE trials are used to verify high-precision positioning methods (GNSS, RTK, PPK, PPP) and monitor railway track deformations under dynamic loads. Data from EPN and other GNSS networks provide sub-centimeter accuracy for determining train trajectory, speed, and acceleration, as well as calibrating onboard odometric and inertial systems.",
+      "source": "Deutsche Bahn; railway geodesy"
+    },
+    "iers": {
+      "title": "IERS (International Earth Rotation and Reference Systems Service)",
+      "definition": "The international organization maintaining celestial (ICRS/ICRF) and terrestrial (ITRS/ITRF) reference systems, as well as determining Earth Orientation Parameters (EOP): precession, nutation, UT1, polar motion. Established in 1987. IERS coordinates four space geodetic techniques (VLBI, SLR, GPS, DORIS).",
+      "source": "IERS"
+    },
+    "imu": {
+      "title": "IMU (Inertial Measurement Unit)",
+      "definition": "An inertial measurement unit — a device that measures angular rates and linear accelerations using gyroscopes and accelerometers. In the CLUG and CLUG 2.0 projects, the IMU is part of a multi-sensor localization system (LOC-OB), used for dead reckoning during short-term GNSS signal loss (e.g., in tunnels).",
+      "source": "CLUG 2.0 abbreviation list"
+    },
+    "ins": {
+      "title": "INS (Inertial Navigation System)",
+      "definition": "An electro-mechanical device that determines the position, velocity, and orientation of a moving object without external references. In geodetic applications, INS is integrated with GNSS to compensate for signal loss in tunnels, urban canyons, and other poor satellite visibility conditions. INS measures angular rates (gyroscopes) and linear accelerations (accelerometers), integrating them to calculate current position. The disadvantage is error accumulation over time (drift), which is eliminated by periodic GNSS correction.",
+      "source": "IAG; inertial navigation"
+    },
+    "insar": {
+      "title": "InSAR (Interferometric Synthetic Aperture Radar)",
+      "definition": "A satellite radar interferometry method that measures deformations of the Earth's surface with centimeter to millimeter accuracy over large areas. In geodesy and geodynamics, InSAR is used for mapping surface displacement fields caused by earthquakes, volcanic activity, ground subsidence, landslides, and glacier motion. The method is based on analyzing the phase difference between two or more radar images of the same area acquired at different times. The outputs are coherence maps and interferograms showing displacement along the satellite's line of sight.",
+      "source": "Fundamental geodesy; Remote sensing"
+    },
     "international-astronomical-union": {
       "title": "International Astronomical Union (IAU)",
       "definition": "The internationally recognized authority for establishing astronomical and astrometric standards, including celestial reference systems, time scales, precession-nutation models, and fundamental constants. For geodesy and geodynamics, key IAU resolutions affecting Earth orientation and reference frames include: 1976 (astronomical constants, TDT), 1991 (TCB, TCG, ICRS concept), 2000 (CIP, CEO, CIO, Earth Rotation Angle), and 2006 (TDB redefinition, precession-nutation model P03). The IAU collaborates with the IUGG (through the IERS) to maintain consistency between celestial and terrestrial reference systems.",
@@ -197,14 +294,37 @@
       "title": "International Terrestrial Reference System (ITRS)",
       "definition": "A geocentric terrestrial reference system co-rotating with the Earth, defined by the International Union of Geodesy and Geophysics (IUGG) and maintained by the IERS. The ITRS is defined by: (1) origin at the Earth's center of mass (geocenter); (2) unit of length as the meter (SI); (3) orientation defined by the Bureau International de l'Heure (BIH) at epoch 1984.0; and (4) orientation time evolution defined by the Tisserand condition (no net rotation relative to the Earth's crust). The ITRS is the standard reference system for all geodetic applications requiring consistency with global reference frames, and is realized through the International Terrestrial Reference Frame (ITRF).",
       "source": "IUGG; IERS Conventions"
+    },
+    "iot": {
+      "title": "IoT (Internet of Things)",
+      "definition": "The network of physical objects (devices, sensors, vehicles) embedded with electronics, software, and connectivity to exchange data with each other and external environments. In geodesy and navigation, IoT devices (trackers, smart city sensors, agricultural machinery) are massively integrated with GNSS receivers for real-time monitoring, geofencing, and process automation.",
+      "source": "International Telecommunication Union (ITU); IAG"
     }
   },
   "j": {},
   "k": {},
-  "l": {},
-  "m": {},
+  "l": {
+    "lidar": {
+      "title": "LiDAR (Light Detection and Ranging)",
+      "definition": "A remote sensing technology that measures distance to objects by illuminating them with a laser pulse and registering the reflected signal. In geodesy, LiDAR is used for obtaining high-precision digital elevation models (DEMs) and digital terrain models (DTMs), surveying roads, power lines, forests, buildings, and coastlines. Types include terrestrial, airborne (UAV or aircraft), and mobile LiDAR.",
+      "source": "Fundamental geodesy; remote sensing"
+    }
+  },
+  "m": {
+    "most": {
+      "title": "MOST (Method of Splitting Tsunami)",
+      "definition": "Tsunami modeling software developed for predicting the propagation of tsunami waves from the source to the coast. In geodetic applications, MOST is integrated with GNSS and DART buoy data for model calibration and forecast accuracy improvement. The MOST model describes three stages of tsunami development: generation (seafloor displacement computed from GNSS and seismograph data), open-ocean propagation, and coastal inundation. The modeling outputs include wave arrival time and height at various coastal locations.",
+      "source": "Tsunami modeling; Operational oceanography"
+    }
+  },
   "n": {},
-  "o": {},
+  "o": {
+    "odometry": {
+      "title": "Odometry",
+      "definition": "A method of measuring distance traveled and speed of a moving object based on wheel rotation or other moving parts. In geodetic and navigation applications, odometry is used together with GNSS and INS in multi-sensor localization systems to provide continuous positioning during GNSS signal loss. Odometric data (number of wheel revolutions multiplied by wheel circumference) are subject to errors due to slippage, tire wear, and pressure changes, requiring regular GNSS calibration.",
+      "source": "Transportation geodesy; robotics"
+    }
+  },
   "p": {
     "permanent-tide": {
       "title": "Permanent tide",
@@ -221,6 +341,31 @@
       "definition": "In Earth orientation determination, the parameters defining the instantaneous orientation of the Earth's rotation pole relative to the celestial reference frame (celestial pole offsets dX, dY) and relative to the terrestrial reference frame (polar motion coordinates xp, yp). In the IAU 2000/2006 framework, the precession-nutation model gives the motion of the Celestial Intermediate Pole (CIP) in the GCRS as a function of time, while celestial pole offsets (dX, dY) from VLBI account for unmodeled variations including Free Core Nutation (FCN). Polar motion (xp, yp) describes the motion of the CIP relative to the ITRF. Together, these pole angles enable the complete transformation between the GCRS and ITRS.",
       "source": "IAU precession-nutation models; IERS"
     },
+    "pozitsionirovanie": {
+      "title": "Positioning",
+      "definition": "The process of determining the spatial position of an object (coordinates, height, orientation) relative to an adopted reference system. In geodesy and navigation, a distinction is made between absolute positioning (in a global coordinate system, e.g., PPP) and relative positioning (relative to a base station, e.g., RTK). Positioning can be performed in real time (RTK, PPP-RTK) or with post-processing (PPK, static).",
+      "source": "Fundamental geodesy; IAG"
+    },
+    "ppp": {
+      "title": "PPP (Precise Point Positioning)",
+      "definition": "A high-precision absolute positioning technology achieving centimeter or even millimeter-level accuracy using a single GNSS receiver. Unlike RTK, it does not require a nearby base station; instead, it uses global CORS networks and precise satellite orbit and clock models. Distinctions are made between classic PPP (slow convergence, 10-30 minutes) and PPP-RTK (fast, up to several minutes or seconds). Results are provided in the ITRF system.",
+      "source": "IGS technical documentation"
+    },
+    "ppp-rtk": {
+      "title": "PPP-RTK (PPP Real-Time Kinematic)",
+      "definition": "A hybrid technology combining the global coverage of PPP with the fast convergence of RTK. Unlike classic PPP, PPP-RTK uses not only orbits and clocks but also atmospheric corrections (ionosphere, troposphere) and phase ambiguities (FCB/UCB), transmitted via the SSR protocol. This makes it possible to achieve centimeter accuracy within minutes or even seconds. Modern commercial services (TerraStar, RTX, Marinestar G2+) and government services (HAS, MADOCA) are based on PPP-RTK.",
+      "source": "RTCM technical documentation"
+    },
+    "ppk": {
+      "title": "PPK (Post-Processed Kinematic)",
+      "definition": "A high-precision positioning method where data from a roving GNSS receiver and a base station are processed after measurement completion rather than in real time. Unlike RTK, PPK does not require continuous radio communication between receivers, making it preferable for surveys in remote areas, drone-based mapping, and geodetic applications where maximum accuracy is critical. Processing includes post-processing of phase ambiguities and the use of precise ephemerides.",
+      "source": "Fundamental geodesy; IAG"
+    },
+    "pps": {
+      "title": "PPS (Pulse Per Second)",
+      "definition": "A timing synchronization signal with a frequency of one pulse per second, generated by high-precision clocks (atomic clocks, GNSS receivers). Used for synchronizing timestamps of data from various sensors in data acquisition systems (IMU, gyrocompasses, echo sounders) with submicrosecond accuracy. Critically important for marine Dynamic Positioning (DP) systems.",
+      "source": "IERS; marine geodesy"
+    },
     "precession-nutation": {
       "title": "Precession-nutation",
       "definition": "The combined motion of the Earth's rotation axis in space due to gravitational torques from the Sun, Moon, and planets. In geodesy and Earth orientation determination, precession refers to the long-term secular motion (approximately 5029 arcseconds per century, period ~26,000 years), while nutation refers to superimposed periodic oscillations (amplitudes up to about 17 arcseconds, primarily at periods related to the lunar orbit). The IAU 2006 precession-nutation model (P03 precession + M2006 nutation) is the current international standard, implemented in VLBI, GNSS, and SLR analysis software. The model provides the position of the Celestial Intermediate Pole (CIP) in the GCRS as a function of time, with celestial pole offsets provided by the IERS to account for unmodeled variations such as Free Core Nutation (FCN).",
@@ -233,18 +378,28 @@
       "title": "Regularized UT1 (UT1R)",
       "definition": "A smoothed version of Universal Time (UT1) from which high-frequency tidal and other periodic variations have been removed. In geodetic applications, UT1R is used in certain precise positioning and orbit determination contexts where the irregular high-frequency variations in Earth rotation due to oceanic tides, atmospheric angular momentum, and other short-term effects are not desired. The regularized series is typically produced by applying a low-pass filter to the observed UT1 series (from VLBI) to remove diurnal and sub-diurnal variations.",
       "source": "IERS Conventions; Earth rotation studies"
+    },
+    "dzz": {
+      "title": "Remote Sensing (RS)",
+      "definition": "The collection of data about the Earth's surface and objects on it without direct contact, using satellites, aircraft, or UAVs. In geodesy and geodynamics, it is used to detect landscape displacements, landslides, infrastructure damage, map crustal deformations, and monitor environmental changes. Includes passive methods (optical, thermal imaging) and active methods (radar imaging, lidar).",
+      "source": "International Association of Geodesy (IAG); fundamental geodesy"
     }
   },
   "s": {
-    "site-displacements": {
-      "title": "Site displacements",
-      "definition": "Time-varying displacements of geodetic stations (VLBI, SLR, GNSS, DORIS) relative to their mean positions due to various geophysical effects. In the IERS Conventions 2010, the following site displacement models are specified for precise positioning and reference frame realization: (1) solid Earth tides (displacements up to ~50 cm); (2) ocean tidal loading (up to ~10 cm); (3) atmospheric pressure loading (up to ~2 cm); (4) pole tide (displacement due to polar motion); (5) post-glacial rebound (secular motion, up to ~1 cm/year); (6) non-tidal ocean loading; and (7) hydrological loading. Proper modeling of site displacements is essential for achieving millimeter-level reference frame accuracy in global geodesy.",
-      "source": "IERS Conventions 2010"
-    },
     "slr": {
       "title": "Satellite Laser Ranging (SLR)",
       "definition": "A geodetic technique that measures the round-trip travel time of laser pulses from ground stations to satellites equipped with retroreflectors (such as LAGEOS-1/2, LARES, Etalon-1/2, GPS, GLONASS, Galileo, and geodetic LEO missions). In geodesy and geodynamics, SLR provides precise measurements of: (1) station positions and velocities for ITRF realization; (2) Earth Orientation Parameters (EOP), particularly polar motion and UT1; (3) geocenter motion (the only technique sensitive to all three components of geocenter variation); (4) Earth's low-degree gravity field coefficients (C₂₀, C₃₀, C₄₀); (5) post-glacial rebound; and (6) tidal parameters. SLR is unique among space geodetic techniques in its direct sensitivity to the geocenter and its ability to operate without atmospheric delay models (except for refraction correction).",
       "source": "IERS techniques; ILRS"
+    },
+    "sbas": {
+      "title": "SBAS (Satellite-Based Augmentation System)",
+      "definition": "A wide-area satellite augmentation system for GNSS aviation applications. SBAS uses a network of ground monitoring stations and geostationary satellites to transmit space-based correction signals, improving accuracy, integrity, availability, and continuity of navigation. National SBAS include: WAAS (USA), EGNOS (Europe), BDSBAS (China), GAGAN (India), MSAS (Japan), SDCM (Russia), and others. In the railway sector, SBAS is used to reduce dependence on track infrastructure and improve safety.",
+      "source": "ICAO GNSS Manual"
+    },
+    "site-displacements": {
+      "title": "Site displacements",
+      "definition": "Time-varying displacements of geodetic stations (VLBI, SLR, GNSS, DORIS) relative to their mean positions due to various geophysical effects. In the IERS Conventions 2010, the following site displacement models are specified for precise positioning and reference frame realization: (1) solid Earth tides (displacements up to ~50 cm); (2) ocean tidal loading (up to ~10 cm); (3) atmospheric pressure loading (up to ~2 cm); (4) pole tide (displacement due to polar motion); (5) post-glacial rebound (secular motion, up to ~1 cm/year); (6) non-tidal ocean loading; and (7) hydrological loading. Proper modeling of site displacements is essential for achieving millimeter-level reference frame accuracy in global geodesy.",
+      "source": "IERS Conventions 2010"
     },
     "stellar-angle": {
       "title": "Stellar angle",
@@ -302,6 +457,11 @@
       "title": "Terrestrial Time (TT)",
       "definition": "A coordinate time scale defined at the geocenter, used as the time standard for Earth-based observations, geocentric ephemerides, and as the basis for GNSS system times. TT is related to International Atomic Time (TAI) by TT = TAI + 32.184 s. TT is also related to Geocentric Coordinate Time (TCG) by TT = TCG − L_G × (JD_TCG − T_0) × 86400, where L_G = 6.969290134×10⁻¹⁰. TT is close to proper time on the geoid and is the appropriate time scale for most Earth-based geodetic applications. TT was formerly known as Terrestrial Dynamical Time (TDT). In relativistic geodesy, TT is a re-scaling of TCG that removes secular drift, making it more practical for Earth-surface clock comparisons.",
       "source": "IAU 1991 Resolution; IERS Conventions"
+    },
+    "topografiya": {
+      "title": "Topography",
+      "definition": "The scientific discipline studying the Earth's surface (relief, natural and man-made objects) and methods of its representation on topographic maps and plans. In geodesy, topography includes data collection on terrain shape and characteristics using ground surveys, aerial photography, satellite imagery, and LiDAR.",
+      "source": "International Association of Geodesy (IAG)"
     }
   },
   "u": {
@@ -309,9 +469,20 @@
       "title": "Universal Time (UT1)",
       "definition": "A time scale determined by the actual rotation of the Earth, representing the true spin angle of the Earth about its axis. UT1 is computed from UT0 (raw rotational time at a particular observatory) by correcting for the effect of polar motion on the observer's longitude. In geodesy and Earth orientation determination, UT1 is the Earth Orientation Parameter (EOP) that quantifies the irregular rotation of the Earth, with UT1−UTC distributed by the IERS. The Earth Rotation Angle (ERA) is a linear function of UT1: ERA = 2π · UT1/86400 seconds of time. UT1 is essential for: (1) transforming celestial coordinates to terrestrial coordinates; (2) celestial navigation; (3) pointing radio telescopes and optical telescopes; (4) satellite orbit determination; and (5) geodetic VLBI analysis. Unlike atomic time (TAI, UTC), UT1 varies due to tidal friction, atmospheric angular momentum variations, and core-mantle coupling, with variations on timescales from days to millennia.",
       "source": "IERS Glossary; IERS Conventions"
+    },
+    "utm": {
+      "title": "UTM (Universal Transverse Mercator)",
+      "definition": "A global map projection for representing the Earth's surface on a plane, used in topographic maps and navigation systems. The Earth's surface is divided into 60 zones of 6 degrees longitude. Scale factor at the central meridian (k0 = 0.9996). Length distortion at zone edges reaches 0.1%. UTM coordinates: northing and easting.",
+      "source": "Cartography; IAG"
     }
   },
-  "v": {},
+  "v": {
+    "vr": {
+      "title": "VR (Virtual Reality)",
+      "definition": "A technology creating an artificial three-dimensional space with which the user interacts using special devices (headsets, glasses, controllers). In geodetic and engineering contexts, VR is used for visualizing digital terrain models, building, road, and bridge designs, and conducting virtual site tours before construction.",
+      "source": "Engineering geodesy; BIM"
+    }
+  },
   "w": {},
   "x": {},
   "y": {},
