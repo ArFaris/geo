@@ -38,7 +38,7 @@ type HeaderProps = {
     user: User | null;
 }
 
-const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale, user}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({image='/logo3.png', links=navKeys, locale, user}: HeaderProps) => {
     const { isOpen, close, open } = useBurgerMenu();
     const [isSecondLevelVisible, setIsSecondLevelVisible] = useState(true);
     const lastScrollY = useRef(0);
@@ -87,17 +87,23 @@ const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale
                     <div className={s.icons}>
                         <SearchIcon onClick={() => router.push('/search')}/>
                         <span className={s.switch}><LanguageSwitcher locale={locale} /></span>
+                        {/* <img src={image} alt='Логотип' width='80px' className={s.logo}/> */}
                     </div>
 
-                    <img src={image} alt='Логотип' width='130px' className={s.logo}/>
+                    <div className={s.right}>
+                        <div className={s.title}>
+                            <Text view='subtitle' weight='bold' color='secondary'>{locale === 'ru' ? 'Открытая Частная Академия Геодинамики' : 'Open Private Academy of Geodynamics'}</Text>
+                            <Text view='subtitle' weight='bold' color='secondary'>{locale === 'ru' ? 'ОЧАГ ГЕО-D7' : 'Hearth GEO-D7'}</Text>
+                        </div>
 
-                    {!user && 
-                        <div className={cn('buttons', s.headerButtons)}>
-                            <Button view='strong' onClick={() => handleNavigate('/registration')}>{t('buttons.register')}</Button>
-                            <Button view='strong' onClick={() => handleNavigate('/login')}>{t('buttons.login')}</Button>
-                        </div>}
+                        {!user && 
+                            <div className={cn('buttons', s.headerButtons)}>
+                                <Button view='strong' onClick={() => handleNavigate('/registration')}>{t('buttons.register')}</Button>
+                                <Button view='strong' onClick={() => handleNavigate('/login')}>{t('buttons.login')}</Button>
+                            </div>}
 
-                    {user && <UserIcon className={s.user} onClick={() => handleNavigate('/profile')}/>}
+                        {user && <UserIcon className={s.user} onClick={() => handleNavigate('/profile')}/>}
+                    </div>
 
                     <MenuIcon onClick={open} className={s.menu}/>
                 </div>

@@ -199,6 +199,50 @@ input {
     height: 1px;
 }
 
+.killer {
+    position: fixed;
+
+    &__left {
+        transform: rotate(180deg);
+        animation: killerLeft 3s forwards;
+    }
+
+    &__right {
+        animation: killer 3s forwards;
+    }
+}
+
+@keyframes killer {
+    0% {
+        bottom: auto;
+        left: auto;
+        top: auto;
+        right: -20px;
+    }
+    100% {
+        top: 250px;
+        left: auto;
+        bottom: auto;
+        right: 90px;
+    }
+}
+
+@keyframes killerLeft {
+    0% {
+        bottom: auto;
+        right: auto;
+        top: auto;
+        left: -20px;
+    }
+    100% {
+        bottom: auto;
+        right: auto;
+        top: auto;
+        left: 20px;
+    }
+}
+
+
 @media(max-width: 1280px) {
   .page {
     padding-inline: $padd-40;
@@ -219,6 +263,14 @@ input {
       &__wrapper {
           bottom: 0;
       }
+  }
+
+  .killer {
+    top: 110px;
+    right: 0;
+    z-index: -1;
+    width: 130px;
+    animation: none;
   }
 }
 

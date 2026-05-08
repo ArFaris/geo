@@ -3,7 +3,6 @@ import { SITE_CONFIG } from './metadata/home.metadata';
 import Header from "@/components/shared/Header";
 import '@/styles/global.scss';
 import { getCurrentUser } from '@/lib/auth/server';
-import LoadingScreen from '@/components/ui/LoadingScreen';
 
 export const metadata = SITE_CONFIG;
 
