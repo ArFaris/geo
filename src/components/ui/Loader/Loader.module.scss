@@ -39,6 +39,11 @@
     color: $primary;
 }
 
+.killer {
+    position: fixed;
+    z-index: 2000;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

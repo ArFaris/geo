@@ -53,6 +53,19 @@
     max-height: 24px;
 }
 
+.download {
+    max-width: fit-content;
+}
+
+.fullScreen {
+    background: none;
+    border: 1px solid $primary;
+
+    &:hover {
+        background-color: #dad2ca80;
+    }
+}
+
 @media(max-width: 1024px) {
     .article {
         flex-direction: column-reverse;
@@ -68,6 +81,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+    }
+
+    .download, .fullScreen {
+        min-width: 100%;
+    }
+
+    .links {
+        &__btns {
+            flex-direction: column;
+            width: 100%;
         }
     }
 }

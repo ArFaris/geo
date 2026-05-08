@@ -7,15 +7,23 @@ import s from './PdfViewer.module.scss';
 import Text from '@/components/ui/Text';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import Button from '@/components/ui/Button';
+import cn from 'classnames';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url
 ).toString();
 
-const PdfViewer = ({ pdfPath, locale }: { pdfPath: string | null, locale: 'en' | 'ru'}) => {
+type PdfViewerProps = {
+    pdfPath: string | null;
+    locale: 'en' | 'ru';
+    isFullScreen: boolean;
+    setIsFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const PdfViewer = ({ pdfPath, locale, isFullScreen, setIsFullScreen }: PdfViewerProps) => {
     const [numPages, setNumPages] = useState<number>(0);
-    const [scale, setScale] = useState(1.2);
+    const [scale, setScale] = useState(isFullScreen ? 1.6 : 1.2);
     const [proxiedUrl, setProxiedUrl] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -33,12 +41,12 @@ const PdfViewer = ({ pdfPath, locale }: { pdfPath: string | null, locale: 'en' |
 
     const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 3));
     const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.5));
-    const resetZoom = () => setScale(1.2);
+    const resetZoom = () => setScale(isFullScreen ? 1.6 : 1.2);
 
     return (
         <section className={s.container}>
             {numPages > 0 && (
-                <div className={s.controls}>
+                <div className={cn(s.controls, isFullScreen && s.controls__full)}>
                     <Button view='light' onClick={zoomOut} className={s.controlBtn} title="Уменьшить">
                         −
                     </Button>
@@ -49,10 +57,16 @@ const PdfViewer = ({ pdfPath, locale }: { pdfPath: string | null, locale: 'en' |
                     <Button view='light' onClick={resetZoom} className={s.controlBtn} title="Сбросить масштаб">
                         ↺
                     </Button>
+                    {isFullScreen &&
+                        <Button view='light' onClick={() => setIsFullScreen(false)} className={s.controlBtn} title="Закрыть расширенный PDF">
+                            ✕
+                        </Button>}
                 </div>
             )}
 
-            <div className={s.wrapper}>
+            {isFullScreen && <div className='overlay'></div>}
+
+            <div className={cn(s.wrapper, isFullScreen && s.wrapper__full)}>
                 {proxiedUrl && (
                     <Document
                         file={proxiedUrl}

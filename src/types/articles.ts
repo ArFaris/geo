@@ -27,3 +27,11 @@ export type ArticleSearchResult = {
   part: string | null;
   category: string;
 }
+
+export type ArticleCategory =
+    | 'news'
+    | 'reviews'
+    | 'analytics'
+    | 'articles';
+
+export type GroupedArticles = Record<ArticleCategory, Articles[]>;

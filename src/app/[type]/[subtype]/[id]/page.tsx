@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import { getArticle } from '@/lib/services/articles';
-import { getPdfUrl } from '@/lib/services/pdf';
 import { createServerT, getLocale } from '@/lib/i18n/server';
 import ArticleClient from './ArticleClient';
 import { notFound } from 'next/navigation';
+import { getCurrentUser } from '@/lib/auth/server';
 
 type PageProps = {
     params: Promise<{ type: string; id: string }>;
@@ -54,6 +54,7 @@ export default async function ArticlePage({ params }: PageProps) {
     const locale = await getLocale();
     
     const article = await getArticle(id);
+    const user = await getCurrentUser();
     
     if (!article) {
         notFound();
@@ -64,6 +65,7 @@ export default async function ArticlePage({ params }: PageProps) {
             article={article} 
             pdfPath={article.pdfPath}
             locale={locale} 
+            user={user}
         />
     );
 }

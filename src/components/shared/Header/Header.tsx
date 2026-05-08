@@ -21,10 +21,10 @@ export type Link = {
 
 const navKeys: Link[] = [
   { key: 'nav.home', to: '/' },
-  { key: 'nav.news', to: '/content/news' },
-  { key: 'nav.reviews', to: '/content/reviews' },
-  { key: 'nav.analytics', to: '/content/analytics' },
-  { key: 'nav.articles', to: '/content/articles/vestnik' },
+  { key: 'nav.news', to: '/news/all' },
+  { key: 'nav.reviews', to: '/reviews/all' },
+  { key: 'nav.analytics', to: '/analytics/all' },
+  { key: 'nav.articles', to: '/articles/vestnik' },
   { key: 'nav.partners', to: '/partners' },
   { key: 'nav.sources', to: '/sources' },
   { key: 'nav.shop', to: '/shop' },
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale
                         <span className={s.switch}><LanguageSwitcher locale={locale} /></span>
                     </div>
 
-                    <img src={image} alt='Логотип' width='130px' onClick={() => handleNavigate('/')} className={s.logo}/>
+                    <img src={image} alt='Логотип' width='130px' className={s.logo}/>
 
                     {!user && 
                         <div className={cn('buttons', s.headerButtons)}>

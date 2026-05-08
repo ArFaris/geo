@@ -4,7 +4,7 @@ import { createServerT, getLocale } from '@/lib/i18n/server';
 import { Metadata } from 'next';
 
 type PageProps = {
-    params: Promise<{ type: string }>;
+    params: Promise<{ type: string, subtype: string }>;
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -88,10 +88,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ArticlesPage({ params }: PageProps) {
-    const { type } = await params;
+    console.log('in')
+    const { type, subtype } = await params;
     const locale = await getLocale();
+    const subcategory = subtype === 'all' ? undefined : subtype;
+    console.log(subcategory)
     
-    const initialArticles = await getArticlesByCategory({ category: type });
+    const initialArticles = await getArticlesByCategory({ category: type, subcategory: subcategory });
     
-    return <ArticlesClient initialArticles={initialArticles} category={type} locale={locale} />;
+    return <ArticlesClient initialArticles={initialArticles} category={type} subcategory={subcategory} locale={locale} />;
 }

@@ -4,6 +4,7 @@ import s from './LinksWrapper.module.scss';
 import Text from "@/components/ui/Text";
 import '@/styles/global.scss';
 import { createServerT } from "@/lib/i18n/server";
+import cn from 'classnames';
 
 type LinksWrapperProps = {
     title: string;
@@ -21,7 +22,7 @@ const LinksWrapper: React.FC<LinksWrapperProps> = async ({ title, locale, links 
             <div className={s.main}>
                 <Text weight='bold' view='title-small' className={s.title}>{t(`title.${title}`)}</Text>
 
-                <div className={s.links}>
+                <div className={cn(s.links, title === 'partners' && s.partners)}>
                     {
                         links.map(link => 
                             <div className={s.link}>

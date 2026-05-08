@@ -1,31 +1,5 @@
 @use '@/styles/variables.scss' as *;
 
-.links {
-    display: flex;
-    flex-direction: column;
-    gap: $padd-40;
-    margin-block: $padd-80;
-    align-items: center;
-}
-
-.link {
-    max-width: 800px;
-    width: 100%;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-    background-color: $accent;
-    padding-block: $padd-24;
-    text-align: center;
-    transition: $transition;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-
-    @media(hover: hover) {
-        &:hover {
-            background-color: #635343;
-        }
-    }
-}
-
 .types {
     display: flex;
     flex-wrap: wrap;
@@ -43,12 +17,27 @@
     gap: 2px;
 }
 
-@media(max-width: 1024px) {
-    .links {
-        padding-inline: 20px;
-        width: 100%;
-    }
+.killer {
+    position: fixed;
+    animation: killer 3s forwards;
+}
 
+@keyframes killer {
+    0% {
+        bottom: 0;
+        left: 600px;
+        top: auto;
+        right: auto;
+    }
+    100% {
+        top: 300px;
+        left: 200px;
+        bottom: auto;
+        right: auto;
+    }
+}
+
+@media(max-width: 1024px) {
     .types {
         padding-inline: 20px;
     }

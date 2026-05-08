@@ -12,16 +12,20 @@ import '@/styles/global.scss';
 import { useEffect, useRef, useState } from 'react';
 import { incrementArticleViewsAction } from '@/app/actions/articles';
 import { pluralizeViews } from '@/lib/utils/pluralize';
+import { User } from '@supabase/supabase-js';
+import Button from '@/components/ui/Button';
 
 type ArticleClientProps = {
     article: Article;
     pdfPath: string | null;
     locale: 'ru' | 'en';
+    user: User | null;
 };
 
-const ArticleClient = ({ article, pdfPath, locale }: ArticleClientProps) => {
+const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) => {
     const t = createClientT(locale);
     const [copied, setCopied] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(false);
     const hasRecordedView = useRef(false);
 
     useEffect(() => {
@@ -42,7 +46,7 @@ const ArticleClient = ({ article, pdfPath, locale }: ArticleClientProps) => {
     };
     
     const handleEmail = () => {
-        const email = 'fariseeva.a.d@yandex.ru';
+        const email = 'vdo-vladimir@yandex.ru';
         const subject = encodeURIComponent(`Вопрос по статье: ${article.name}`);
         const body = encodeURIComponent(
             `Здравствуйте!\n\nПрочитал(а) вашу статью "${article.name}" и хотел(а) бы задать вопрос:\n\n`
@@ -51,15 +55,45 @@ const ArticleClient = ({ article, pdfPath, locale }: ArticleClientProps) => {
     };
     
     const handleMaks = () => {
-        const authorChannelUrl = 'https://maks.ru';
+        const authorChannelUrl = 'https://t.me/VVS19582025';
         window.open(authorChannelUrl, '_blank', 'noopener,noreferrer');
+    };
+
+    const handleDownload = async () => {
+        if (!pdfPath) return;
+        
+        try {
+            const downloadUrl = `/api/pdf?path=${encodeURIComponent(pdfPath)}&download=true`;
+            
+            const response = await fetch(downloadUrl);
+            
+            if (!response.ok) {
+                throw new Error('Download failed');
+            }
+            
+            const blob = await response.blob();
+            const fileName = `${article.name}.pdf`;
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            
+            document.body.appendChild(link);
+            link.click();
+            
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            
+        } catch (error) {
+            console.error('Download error:', error);
+        }
     };
 
     const views = pluralizeViews(article.views, locale);
 
     return (
         <section className={cn('page', s.article)}>
-            <PdfViewer pdfPath={pdfPath} locale={locale} />
+            <PdfViewer pdfPath={pdfPath} locale={locale} isFullScreen={isFullScreen} setIsFullScreen={setIsFullScreen} />
             
             <div className={s.main}>
                 <div>
@@ -82,6 +116,13 @@ const ArticleClient = ({ article, pdfPath, locale }: ArticleClientProps) => {
                     <EmailIcon onClick={handleEmail}/>
                     <MaksIcon onClick={handleMaks}/>
                 </div>
+
+                <div className={cn(s.links, s.links__btns)}>
+                    {user && <Button view='dark' onClick={handleDownload} className={s.download}>{t('buttons.download')}</Button>}
+                    <Button onClick={() => setIsFullScreen(true)} view='light' className={s.fullScreen}>{t('other.fullScreen')}</Button>
+                </div>
+
+                {!user && <Text>{locale === 'ru' ? 'Скачивание PDF доступно после регистрации.' : 'PDF download is available after registration.'}</Text>}
             </div>
         </section>
     );

@@ -1,0 +1,97 @@
+@use '@/styles/variables.scss' as *;
+
+.article {
+    display: flex;
+    align-items: center;
+    gap: $padd-40;
+}
+
+.main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $padd-32;
+}
+
+.category {
+    display: inline-flex;
+    border: 1px solid $primary;
+    padding: 6px $padd-20;
+    margin-bottom: $padd-20;
+    margin-top: 124px;
+}
+
+.group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: $padd-20;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $primary;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.copy {
+    position: relative;
+    max-height: 24px;
+}
+
+.download {
+    max-width: fit-content;
+}
+
+.fullScreen {
+    background: none;
+    border: 1px solid $primary;
+
+    &:hover {
+        background-color: #dad2ca80;
+    }
+}
+
+@media(max-width: 1024px) {
+    .article {
+        flex-direction: column-reverse;
+        margin-top: $padd-20;
+    }
+
+    .main {
+        height: auto;
+        align-items: center;
+        text-align: center;
+
+        > div:nth-child(2) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .download, .fullScreen {
+        min-width: 100%;
+    }
+
+    .links {
+        &__btns {
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+}

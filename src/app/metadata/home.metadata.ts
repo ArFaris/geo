@@ -62,8 +62,7 @@ export const SITE_CONFIG: Metadata = {
         'geo.placename': 'Moscow',
         'geo.position': '55.7558;37.6176',
         'ICBM': '55.7558, 37.6176',
-        'telegram:channel': 'https://t.me/geod7',
-        'maks:profile': 'https://maks.ru/geod7',
+        'telegram:channel': 'https://t.me/VVS19582025',
         'profile:username': 'geod7',
     },
 

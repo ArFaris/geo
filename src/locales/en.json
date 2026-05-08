@@ -25,8 +25,19 @@
     "part": "Part"
   },
   "subtitles": {
-    "vestnik": "The Surveyor's Bulletin",
-    "other": "Other articles"
+    "articles": {
+      "vestnik": "Mine Surveying Bulletin",
+      "other": "Other Articles"
+    },
+    "navigation": {
+      "sea": "Marine Navigation",
+      "aero": "Air Navigation",
+      "land": "Land Navigation"
+    },
+    "positioning": {
+      "relative": "High-precision Relative Positioning",
+      "absolute": "High-precision Absolute Positioning"
+    }
   },
   "profile": {
     "name": "Username",
@@ -65,9 +76,11 @@
     "positioning": "Positioning",
     "synchronization": "Synchronization",
     "miscellaneous": "Miscellaneous",
+    "mathematical-processing": "Mathematical Processing of Observation Results",
     "search": "Search"
   },
   "other": {
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "fullScreen": "Open PDF to full screen"
   }
 }
