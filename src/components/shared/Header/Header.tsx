@@ -85,14 +85,15 @@ const Header: React.FC<HeaderProps> = ({image='/logo3.png', links=navKeys, local
             <div className={s.header}>
                 <div className={s.header__main}>
                     <div className={s.icons}>
-                        <SearchIcon onClick={() => router.push('/search')}/>
+                        <SearchIcon onClick={() => router.push('/search')} className={s.search}/>
+                        <img src={'/logo3.png'} alt='Логотип' width='80px' className={s.logo__phone}/>
                         <span className={s.switch}><LanguageSwitcher locale={locale} /></span>
                     </div>
 
                     <div className={s.title__wrapper}>
                         <img src={'/logo2.svg'} alt='Логотип' width='100px' className={s.title}/>
                         <div className={s.subtitle__wrapper}>
-                            {/* <img src={'/logo3.png'} alt='Логотип' width='80px' className={s.logo}/> */}
+                            <img src={'/logo3.png'} alt='Логотип' width='80px' className={s.logo}/>
                             <Text className={s.subtitle} color='secondary'>{locale === 'ru' ? 'Открытая Частная Академия Геодинамики (ОЧАГ)' : 'Open Private Academy of Geodynamics (Hearth)'}</Text>
                         </div>
                     </div>

@@ -16,6 +16,14 @@
     overflow-x: hidden;
 }
 
+.search {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+}
+
 @keyframes slideIn {
     0% {
         opacity: 0;

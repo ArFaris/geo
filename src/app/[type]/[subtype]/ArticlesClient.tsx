@@ -115,7 +115,7 @@ const ArticlesClient = ({ initialArticles, section, subsection, category, subcat
                     {articles.length > 0 && articles.map(item => (
                         <article key={item.slug} 
                                  id={item.slug}
-                                 onClick={() => router.push(`${item.category}${subcategory ? `/${subcategory}` : ''}/${item.slug}`)}
+                                 onClick={() => router.push(`/${category}/${subcategory || 'all'}/${item.slug}`)}
                                  className={s.article}>
                             {item.part && <span className={s.article__part}><Text color='primary'>{`${t('common.part')} ${item.part}`}</Text></span>}
                             <Text color='primary'>{locale === 'ru' ? `${item.name}` : `${item.name_en}`}</Text>

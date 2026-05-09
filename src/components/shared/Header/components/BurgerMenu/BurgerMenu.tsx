@@ -11,6 +11,7 @@ import { User } from '@supabase/supabase-js';
 import '@/styles/global.scss';
 import type { Link } from '../../Header';
 import s from './BurgerMenu.module.scss';
+import SearchIcon from '@/components/ui/icons/SearchIcon';
 
 type BurgerMenuProps = {
     isOpen: boolean;
@@ -78,7 +79,10 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
     return createPortal(
         <div className={cn(s.menu, className, isOpen ? s.open : s.close)}>
             <CloseIcon className={s.icon} color="accent" onClick={onClose} />
-            <LanguageSwitcher locale={locale} />
+            <div className={s.search}>
+                <LanguageSwitcher locale={locale} />
+                <SearchIcon onClick={() => router.push('/search')}/>
+            </div>
             <nav className={s.links}>
                 {links.map((link) => (
                     <div

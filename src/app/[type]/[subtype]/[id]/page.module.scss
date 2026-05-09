@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     gap: $padd-40;
-    margin-top: 56px;
+    margin-top: 28px;
 }
 
 .main {
@@ -70,7 +70,7 @@
 @media(max-width: 1024px) {
     .article {
         flex-direction: column-reverse;
-        margin-top: $padd-20;
+        margin-top: $padd-80;
     }
 
     .main {
