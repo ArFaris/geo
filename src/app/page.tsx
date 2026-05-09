@@ -9,7 +9,7 @@ import '@/styles/global.scss';
 
 export const metadata = SITE_CONFIG;
 
-const types = ["coordinates", "time", "geodynamics", "geodesy", "navigation", "positioning", "synchronization", "miscellaneous", "mathematical-processing"]
+const types = ["coordinates", "time", "geodynamics", "geodesy", "navigation", "positioning", "synchronization", "miscellaneous"]
 
 const HomePage = async () => {
     const t = await createServerT();
