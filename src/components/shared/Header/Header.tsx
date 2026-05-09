@@ -87,23 +87,23 @@ const Header: React.FC<HeaderProps> = ({image='/logo3.png', links=navKeys, local
                     <div className={s.icons}>
                         <SearchIcon onClick={() => router.push('/search')}/>
                         <span className={s.switch}><LanguageSwitcher locale={locale} /></span>
-                        {/* <img src={image} alt='Логотип' width='80px' className={s.logo}/> */}
                     </div>
 
-                    <div className={s.right}>
-                        <div className={s.title}>
-                            <Text view='subtitle' weight='bold' color='secondary'>{locale === 'ru' ? 'Открытая Частная Академия Геодинамики' : 'Open Private Academy of Geodynamics'}</Text>
-                            <Text view='subtitle' weight='bold' color='secondary'>{locale === 'ru' ? 'ОЧАГ ГЕО-D7' : 'Hearth GEO-D7'}</Text>
+                    <div className={s.title__wrapper}>
+                        <img src={'/logo2.svg'} alt='Логотип' width='100px' className={s.title}/>
+                        <div className={s.subtitle__wrapper}>
+                            {/* <img src={'/logo3.png'} alt='Логотип' width='80px' className={s.logo}/> */}
+                            <Text className={s.subtitle} color='secondary'>{locale === 'ru' ? 'Открытая Частная Академия Геодинамики (ОЧАГ)' : 'Open Private Academy of Geodynamics (Hearth)'}</Text>
                         </div>
-
-                        {!user && 
-                            <div className={cn('buttons', s.headerButtons)}>
-                                <Button view='strong' onClick={() => handleNavigate('/registration')}>{t('buttons.register')}</Button>
-                                <Button view='strong' onClick={() => handleNavigate('/login')}>{t('buttons.login')}</Button>
-                            </div>}
-
-                        {user && <UserIcon className={s.user} onClick={() => handleNavigate('/profile')}/>}
                     </div>
+
+                    {!user && 
+                        <div className={cn('buttons', s.headerButtons)}>
+                            <Button view='strong' onClick={() => handleNavigate('/registration')}>{t('buttons.register')}</Button>
+                            <Button view='strong' onClick={() => handleNavigate('/login')}>{t('buttons.login')}</Button>
+                        </div>}
+
+                    {user && <UserIcon className={s.user} onClick={() => handleNavigate('/profile')}/>}
 
                     <MenuIcon onClick={open} className={s.menu}/>
                 </div>

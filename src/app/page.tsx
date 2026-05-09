@@ -19,8 +19,7 @@ const HomePage = async () => {
         <section>
             <div className={'earth__wrapper'}><EarthIcon className={'earth'}/></div>
             <Title title={'home'} className={s.home} locale={locale} />
-            <img src={'/killer.png'} className={'killer killer__right'} width='300px'/>
-
+            
             <div className={s.types}>
                 {
                     types.map(type => (
