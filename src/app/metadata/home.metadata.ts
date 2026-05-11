@@ -64,14 +64,5 @@ export const SITE_CONFIG: Metadata = {
         'ICBM': '55.7558, 37.6176',
         'telegram:channel': 'https://t.me/VVS19582025',
         'profile:username': 'geod7',
-    },
-
-    icons: {
-        icon: [
-        {
-            url: '/favicon.png',
-            type: 'image/png',
-        },
-        ],
-    },
+    }
 };
