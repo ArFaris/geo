@@ -6,12 +6,13 @@ import Text from '@/components/ui/Text';
 import Button from '@/components/ui/Button';
 import SearchIcon from '@/components/ui/icons/SearchIcon';
 import MenuIcon from '@/components/ui/icons/MenuIcon';
-import UserIcon from '@/components/ui/icons/UserIcon';import LanguageSwitcher from '@/components/shared/LanguageSwitcher';
+import UserIcon from '@/components/ui/icons/UserIcon';
+import LanguageSwitcher from '@/components/shared/LanguageSwitcher';
 import BurgerMenu from './components/BurgerMenu';
 import useBurgerMenu from '@/hooks/useBurgerMenu';
 import s from './Header.module.scss';
 import { User } from '@supabase/supabase-js';
-import { createClientT } from '@/lib/i18n/client';
+import { createClient } from '@/lib/supabase/client';
 import '@/styles/global.scss';
 
 export type Link = {
@@ -34,17 +35,36 @@ const navKeys: Link[] = [
 type HeaderProps = {
     image?: string,
     links?: Link[],
-    locale: 'ru' | 'en';
-    user: User | null;
 }
 
-const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale, user}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys }: HeaderProps) => {
     const { isOpen, close, open } = useBurgerMenu();
     const [isSecondLevelVisible, setIsSecondLevelVisible] = useState(true);
+    const [user, setUser] = useState<User | null>(null);
+    const [locale, setLocale] = useState<'ru' | 'en'>('ru');
+    const [loading, setLoading] = useState(true);
     const lastScrollY = useRef(0);
-    const frameId = useRef<number>(0);
+    const frameId = useRef(0);
     const router = useRouter();
-    const t = createClientT(locale);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const supabase = createClient();
+                const { data: { user } } = await supabase.auth.getUser();
+                setUser(user || null);
+
+                const match = document.cookie.match(/locale=([^;]+)/);
+                setLocale(match ? (match[1] as 'ru' | 'en') : 'ru');
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        
+        fetchData();
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -80,28 +100,50 @@ const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale
         router.push(to);
     };
 
+    if (loading) {
+        return (
+            <div className={s.header}>
+                <div className={s.header__main}>
+                    <div className={s.icons}>
+                        <SearchIcon onClick={() => router.push('/search')} className={s.search}/>
+                        <img src={image} alt='Логотип' width='80px' className={s.logo__phone}/>
+                        <span className={s.switch}><LanguageSwitcher locale="ru" /></span>
+                    </div>
+                    <div className={s.title__wrapper}>
+                        <img src={'/title.svg'} alt='Логотип' width='100px' className={s.title}/>
+                        <div className={s.subtitle__wrapper}>
+                            <img src={image} alt='Логотип' width='80px' className={s.logo}/>
+                            <Text className={s.subtitle} color='secondary'>Open Private Academy of Geodynamics (Hearth)</Text>
+                        </div>
+                    </div>
+                    <MenuIcon onClick={open} className={s.menu}/>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <>
             <div className={s.header}>
                 <div className={s.header__main}>
                     <div className={s.icons}>
                         <SearchIcon onClick={() => router.push('/search')} className={s.search}/>
-                        <img src={'/logo.png'} alt='Логотип' width='80px' className={s.logo__phone}/>
+                        <img src={image} alt='Логотип' width='80px' className={s.logo__phone}/>
                         <span className={s.switch}><LanguageSwitcher locale={locale} /></span>
                     </div>
 
                     <div className={s.title__wrapper}>
                         <img src={'/title.svg'} alt='Логотип' width='100px' className={s.title}/>
                         <div className={s.subtitle__wrapper}>
-                            <img src={'/logo.png'} alt='Логотип' width='80px' className={s.logo}/>
+                            <img src={image} alt='Логотип' width='80px' className={s.logo}/>
                             <Text className={s.subtitle} color='secondary'>{locale === 'ru' ? 'Открытая Частная Академия Геодинамики (ОЧАГ)' : 'Open Private Academy of Geodynamics (Hearth)'}</Text>
                         </div>
                     </div>
 
                     {!user && 
                         <div className={cn('buttons', s.headerButtons)}>
-                            <Button view='strong' onClick={() => handleNavigate('/registration')}>{t('buttons.register')}</Button>
-                            <Button view='strong' onClick={() => handleNavigate('/login')}>{t('buttons.login')}</Button>
+                            <Button view='strong' onClick={() => handleNavigate('/registration')}>Register</Button>
+                            <Button view='strong' onClick={() => handleNavigate('/login')}>Login</Button>
                         </div>}
 
                     {user && <UserIcon className={s.user} onClick={() => handleNavigate('/profile')}/>}
@@ -116,7 +158,7 @@ const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale
                         links.map(link =>
                         <div key={link.to} className={cn('borderEffect', 'borderEffect__light')} onClick={() => handleNavigate(link.to)}>
                             <Text color='primary' view="p-16">
-                            {t(link.key)}
+                            {locale === 'ru' ? link.key : link.key}
                         </Text></div>)
                     }
                 </div>
@@ -126,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({image='/logo.png', links=navKeys, locale
                         isOpen={isOpen}
                         links={links}
                         onLinkClick={(link) => handleNavigate(link.to)}
-                        t={t}
+                        t={(key: string) => key}
                         locale={locale}
                         user={user} />
         </>
