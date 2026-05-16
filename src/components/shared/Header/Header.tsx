@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import cn from 'classnames';
 import Text from '@/components/ui/Text';
@@ -12,8 +12,8 @@ import BurgerMenu from './components/BurgerMenu';
 import useBurgerMenu from '@/hooks/useBurgerMenu';
 import s from './Header.module.scss';
 import { User } from '@supabase/supabase-js';
+import { createClientT } from '@/lib/i18n/client';
 import { createClient } from '@/lib/supabase/client';
-import '@/styles/global.scss';
 
 export type Link = {
     key: string,
@@ -35,35 +35,46 @@ const navKeys: Link[] = [
 type HeaderProps = {
     image?: string,
     links?: Link[],
+    locale: 'ru' | 'en',
 }
 
-const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys, locale }: HeaderProps) => {
     const { isOpen, close, open } = useBurgerMenu();
     const [isSecondLevelVisible, setIsSecondLevelVisible] = useState(true);
     const [user, setUser] = useState<User | null>(null);
-    const [locale, setLocale] = useState<'ru' | 'en'>('ru');
     const [loading, setLoading] = useState(true);
     const lastScrollY = useRef(0);
     const frameId = useRef(0);
     const router = useRouter();
+    const t = createClientT(locale);
+
+    const marqueeText = locale === 'ru' 
+        ? 'Открытая Частная Академия Геодинамики (ОЧАГ)'
+        : 'Open Private Academy of Geodynamics (Hearth)';
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const supabase = createClient();
-                const { data: { user } } = await supabase.auth.getUser();
-                setUser(user || null);
+        const supabase = createClient();
 
-                const match = document.cookie.match(/locale=([^;]+)/);
-                setLocale(match ? (match[1] as 'ru' | 'en') : 'ru');
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            } finally {
-                setLoading(false);
-            }
+        const loadUser = async () => {
+            const {
+                data: { user },
+            } = await supabase.auth.getUser();
+
+            setUser(user ?? null);
+            setLoading(false);
         };
-        
-        fetchData();
+
+        loadUser();
+
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
     }, []);
 
     useEffect(() => {
@@ -142,8 +153,8 @@ const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys }:
 
                     {!user && 
                         <div className={cn('buttons', s.headerButtons)}>
-                            <Button view='strong' onClick={() => handleNavigate('/registration')}>Register</Button>
-                            <Button view='strong' onClick={() => handleNavigate('/login')}>Login</Button>
+                            <Button view='strong' onClick={() => handleNavigate('/registration')}>{t(`buttons.register`)}</Button>
+                            <Button view='strong' onClick={() => handleNavigate('/login')}>{t(`buttons.login`)}</Button>
                         </div>}
 
                     {user && <UserIcon className={s.user} onClick={() => handleNavigate('/profile')}/>}
@@ -158,9 +169,20 @@ const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys }:
                         links.map(link =>
                         <div key={link.to} className={cn('borderEffect', 'borderEffect__light')} onClick={() => handleNavigate(link.to)}>
                             <Text color='primary' view="p-16">
-                            {locale === 'ru' ? link.key : link.key}
+                            {t(link.key)}
                         </Text></div>)
                     }
+                </div>
+            </div>
+
+            <div className={s.marqueeContainer}>
+                <div className={s.marquee}>
+                    <div className={s.marqueeContent}>
+                        {marqueeText}
+                    </div>
+                    <div className={s.marqueeContent}>
+                        {marqueeText}
+                    </div>
                 </div>
             </div>
 
@@ -168,7 +190,7 @@ const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys }:
                         isOpen={isOpen}
                         links={links}
                         onLinkClick={(link) => handleNavigate(link.to)}
-                        t={(key: string) => key}
+                        t={t}
                         locale={locale}
                         user={user} />
         </>

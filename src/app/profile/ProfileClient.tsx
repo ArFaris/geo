@@ -28,7 +28,6 @@ const ProfilePage = ({ user, locale }: ProfileClientProps) => {
             setLoading(true);
             await signOutUser();
             router.push('/login');
-            router.refresh();
         } catch (error) {
             console.error(error);
         } finally {

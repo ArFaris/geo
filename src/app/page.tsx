@@ -5,11 +5,10 @@ import Text from '@/components/ui/Text';
 import Link from 'next/link';
 import s from './page.module.scss';
 import { SITE_CONFIG } from './metadata/home.metadata';
-import '@/styles/global.scss';
 
 export const metadata = SITE_CONFIG;
 
-const types = ["coordinates", "time", "geodynamics", "geodesy", "navigation", "positioning", "synchronization", "miscellaneous"]
+const types = ["coordinates", "time", "geodynamics", "geodesy", "navigation", "positioning", "synchronization", "mathematical-processing", "miscellaneous"]
 
 const HomePage = async () => {
     const t = await createServerT();
