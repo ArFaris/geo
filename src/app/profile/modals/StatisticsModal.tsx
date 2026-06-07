@@ -13,6 +13,7 @@ type StatItem = {
     id: string;
     title: string;
     views: number;
+    downloads_count: number;
 };
 
 export default function StatisticsModal({ onClose, locale }: StatisticsModalProps) {
@@ -34,7 +35,6 @@ export default function StatisticsModal({ onClose, locale }: StatisticsModalProp
         return () => window.removeEventListener('keydown', handleEsc);
     }, [onClose]);
 
-    // Блокируем скролл тела при открытии модалки
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         return () => {
@@ -70,15 +70,17 @@ export default function StatisticsModal({ onClose, locale }: StatisticsModalProp
                         <table className={s.table}>
                             <thead>
                                 <tr>
-                                    <th>{t('Статья', 'Article')}</th>
-                                    <th>{t('Просмотры', 'Views')}</th>
+                                    <th className={s.thLeft}>{t('Статья', 'Article')}</th>
+                                    <th className={s.thCenter}>{t('Просмотры', 'Views')}</th>
+                                    <th className={s.thCenter}>{t('Скачивания', 'Downloads')}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {stats.map(stat => (
                                     <tr key={stat.id}>
                                         <td>{stat.title}</td>
-                                        <td>{stat.views ?? 0}</td>
+                                        <td className={s.tdCenter}>{stat.views ?? 0}</td>
+                                        <td className={s.tdCenter}>{stat.downloads_count ?? 0}</td>
                                     </tr>
                                 ))}
                             </tbody>

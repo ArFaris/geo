@@ -52,6 +52,18 @@ export async function incrementArticleViewsAction(articleId: string) {
     });
 }
 
+export async function incrementArticleDownloadsAction(articleId: string) {
+    const supabase = await createClient();
+    
+    const { error } = await supabase.rpc('increment_downloads', {
+        article_id: articleId,
+    });
+
+    if (error) {
+        console.error('Ошибка обновления скачиваний:', error);
+    }
+}
+
 // ============================================================================
 // CRUD ДЛЯ СТАТЕЙ
 // ============================================================================
@@ -369,7 +381,7 @@ export async function getStatistics() {
 
     const { data, error } = await supabase
         .from('articles')
-        .select('id, title, views')
+        .select('id, title, views, downloads_count')
         .order('views', { ascending: false });
 
     if (error) {

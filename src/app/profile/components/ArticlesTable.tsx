@@ -24,6 +24,7 @@ const convertToArticleForTable = (item: any): ArticleForTable => ({
     part: item.part || null,
     readingTime: item.reading_time || null,
     views: item.views || 0,
+    downloads_count: item.downloads_count || 0,
     category: item.category,
     subcategory: item.subcategory || null,
 });
@@ -104,6 +105,7 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
                             <th>{getLocalizedText('Часть', 'Part')}</th>
                             <th>{getLocalizedText('Время чтения', 'Reading time')}</th>
                             <th>{getLocalizedText('Просмотры', 'Views')}</th>
+                            <th>{getLocalizedText('Скачивания', 'Downloads')}</th>
                             <th>{getLocalizedText('Действия', 'Actions')}</th>
                         </tr>
                     </thead>
@@ -117,6 +119,7 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
                                 <td>{article.part || '—'}</td>
                                 <td>{article.readingTime || '—'}</td>
                                 <td>{article.views}</td>
+                                <td>{article.downloads_count || 0}</td>
                                 <td className={s.btns}>
                                     <Button 
                                         className={cn(s.btn, s.btn__edit)} 

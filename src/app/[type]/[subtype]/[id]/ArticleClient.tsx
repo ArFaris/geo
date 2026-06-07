@@ -10,7 +10,7 @@ import { Article } from '@/types/articles';
 import { createClientT } from '@/lib/i18n/client';
 import '@/styles/global.scss';
 import { useEffect, useRef, useState } from 'react';
-import { incrementArticleViewsAction } from '@/app/actions/articles';
+import { incrementArticleViewsAction, incrementArticleDownloadsAction } from '@/app/actions/articles';
 import { pluralizeViews } from '@/lib/utils/pluralize';
 import { User } from '@supabase/supabase-js';
 import Button from '@/components/ui/Button';
@@ -27,6 +27,7 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
     const [copied, setCopied] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const hasRecordedView = useRef(false);
+    const [isDownloading, setIsDownloading] = useState(false);
 
     useEffect(() => {
         if (hasRecordedView.current) return;
@@ -60,9 +61,14 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
     };
 
     const handleDownload = async () => {
-        if (!pdfPath) return;
+        if (!pdfPath || isDownloading) return;
+        
+        setIsDownloading(true);
         
         try {
+            // Увеличиваем счётчик скачиваний
+            await incrementArticleDownloadsAction(article.slug);
+            
             const downloadUrl = `/api/pdf?path=${encodeURIComponent(pdfPath)}&download=true`;
             
             const response = await fetch(downloadUrl);
@@ -86,6 +92,8 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
             
         } catch (error) {
             console.error('Download error:', error);
+        } finally {
+            setIsDownloading(false);
         }
     };
 
@@ -118,8 +126,19 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
                 </div>
 
                 <div className={cn(s.links, s.links__btns)}>
-                    {user && <Button view='dark' onClick={handleDownload} className={s.download}>{t('buttons.download')}</Button>}
-                    <Button onClick={() => setIsFullScreen(true)} view='light' className={s.fullScreen}>{t('other.fullScreen')}</Button>
+                    {user && (
+                        <Button 
+                            view='dark' 
+                            onClick={handleDownload} 
+                            className={s.download}
+                            loading={isDownloading}
+                        >
+                            {t('buttons.download')}
+                        </Button>
+                    )}
+                    <Button onClick={() => setIsFullScreen(true)} view='light' className={s.fullScreen}>
+                        {t('other.fullScreen')}
+                    </Button>
                 </div>
 
                 {!user && <Text>{locale === 'ru' ? 'Скачивание PDF доступно после регистрации.' : 'PDF download is available after registration.'}</Text>}

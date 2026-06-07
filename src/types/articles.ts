@@ -43,6 +43,7 @@ export type ArticleForTable = {
     part: string | null;
     readingTime: string | null;
     views: number;
+    downloads_count: number,
     category: string;
     subcategory: string | null;
 };
