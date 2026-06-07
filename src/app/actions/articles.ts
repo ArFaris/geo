@@ -347,7 +347,7 @@ export async function getArticles(page: number = 1, limit: number = 100) {
 
     const { data, error } = await supabase
         .from('articles')
-        .select('id, title, title_en, category, subcategory, part, reading_time, views, created_at, pdf_path')
+        .select('id, title, title_en, category, subcategory, part, reading_time, views, downloads_count, created_at, pdf_path')
         .order('created_at', { ascending: false })
         .range(from, to);
 

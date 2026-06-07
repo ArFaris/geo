@@ -118,13 +118,6 @@
     color: #6b7280;
 }
 
-.btns {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-width: 120px;
-}
-
 .btn {
    min-width: 100%;
    max-height: 30px; 
@@ -134,6 +127,7 @@
 
     &__edit {
        background-color: rgba(209, 186, 164, 0.54);
+       margin-bottom: 10px;
     }
 
     @media(hover: hover) {

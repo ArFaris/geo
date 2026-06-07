@@ -29,8 +29,19 @@
 .admin__panel {
     display: flex;
     flex-direction: column;
-    margin-top: 80px;
+    margin-block: 80px;
     gap: $padd-40;
+}
+
+.admin__article {
+    background-color: $accent;
+    margin-inline: auto;
+
+    @media(hover: hover) {
+        &:hover {
+            background-color: #635343;
+        }
+    }
 }
 
 @media(max-width: 1024px) {

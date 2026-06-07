@@ -120,7 +120,7 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
                                 <td>{article.readingTime || '—'}</td>
                                 <td>{article.views}</td>
                                 <td>{article.downloads_count || 0}</td>
-                                <td className={s.btns}>
+                                <td>
                                     <Button 
                                         className={cn(s.btn, s.btn__edit)} 
                                         view="light" 
