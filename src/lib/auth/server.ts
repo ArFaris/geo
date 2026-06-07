@@ -17,3 +17,8 @@ export async function isAuthenticated(): Promise<boolean> {
     const user = await getCurrentUser();
     return user !== null;
 }
+
+export async function getUserRole(user: User): Promise<'admin' | 'user'> {
+    const role = user.user_metadata?.role || user.app_metadata?.role;
+    return role === 'admin' ? 'admin' : 'user';
+}

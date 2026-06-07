@@ -68,11 +68,6 @@
 }
 
 @media(max-width: 1024px) {
-    .article {
-        flex-direction: column-reverse;
-        margin-top: $padd-80;
-    }
-
     .main {
         height: auto;
         align-items: center;

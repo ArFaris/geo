@@ -35,3 +35,14 @@ export type ArticleCategory =
     | 'articles';
 
 export type GroupedArticles = Record<ArticleCategory, Articles[]>;
+
+export type ArticleForTable = {
+    id: string;
+    name: string;
+    name_en: string;
+    part: string | null;
+    readingTime: string | null;
+    views: number;
+    category: string;
+    subcategory: string | null;
+};

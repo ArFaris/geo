@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSignedPdfUrl } from '@/lib/services/yandexStorage';
+import { createClient } from '@/lib/supabase/server';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -8,6 +9,13 @@ export async function GET(request: NextRequest) {
   
   if (!path) {
     return NextResponse.json({ error: 'Path required' }, { status: 400 });
+  }
+
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {

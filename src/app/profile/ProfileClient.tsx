@@ -10,16 +10,21 @@ import { signOutUser } from '@/lib/services/auth';
 import s from './page.module.scss';
 import '@/styles/global.scss';
 import { createClientT } from '@/lib/i18n/client';
+import AdminPanel from './AdminPanel';
+import cn from 'classnames';
 
 type ProfileClientProps = {
     user: User;
     locale: 'ru' | 'en';
+    role: 'user' | 'admin';
 };
 
-const ProfilePage = ({ user, locale }: ProfileClientProps) => {
+const ProfilePage = ({ user, locale, role }: ProfileClientProps) => {
     const router = useRouter();
     const t = createClientT(locale);
     const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState<'profile' | 'admin'>('profile');
+    const isAdmin = role === 'admin';
 
     const handleSignOutUser = async () => {
         if (loading) return;
@@ -42,19 +47,42 @@ const ProfilePage = ({ user, locale }: ProfileClientProps) => {
             <section className={'page'}>
                 <Title title={'profile'} locale={locale}/>
 
-                <div className={s.fields}>
-                    <div>
-                        <Text view='subtitle' weight='medium'>{t('profile.name')}</Text>
-                        <Text className={s.field}>{user?.user_metadata?.name ?? '—'}</Text>
+                {isAdmin && (
+                    <div className='subcategories'>
+                        <Text view='p-16'
+                            className={cn('borderEffect', 'subcategory', activeTab === 'profile' && 'subcategory__active')} 
+                            onClick={() => setActiveTab('profile')}
+                        >
+                            {t('profile.settings')}
+                        </Text>
+                            <Text view='p-16'
+                            className={cn('borderEffect', 'subcategory', activeTab === 'admin' && 'subcategory__active')} 
+                            onClick={() => setActiveTab('admin')}
+                        >
+                            {t('profile.admin')}
+                        </Text>
                     </div>
+                )}
 
-                    <div>
-                        <Text view='subtitle' weight='medium'>{t('profile.email')}</Text>
-                        <Text className={s.field}>{user?.email ?? '-'}</Text>
+                {activeTab === 'profile' && (
+                    <div className={s.fields}>
+                        <div>
+                            <Text view='subtitle' weight='medium'>{t('profile.name')}</Text>
+                            <Text className={s.field}>{user?.user_metadata?.name ?? '—'}</Text>
+                        </div>
+
+                        <div>
+                            <Text view='subtitle' weight='medium'>{t('profile.email')}</Text>
+                            <Text className={s.field}>{user?.email ?? '-'}</Text>
+                        </div>
+
+                        <Button className={s.btn} loading={loading} view='strong' onClick={handleSignOutUser}>{t('profile.out')}</Button>
                     </div>
+                )}
 
-                    <Button className={s.btn} loading={loading} view='strong' onClick={handleSignOutUser}>{t('profile.out')}</Button>
-                </div>
+                {activeTab === 'admin' && isAdmin && (
+                    <AdminPanel user={user} locale={locale} />
+                )}
             </section>
         </>
     );

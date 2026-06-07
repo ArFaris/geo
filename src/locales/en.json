@@ -44,7 +44,9 @@
     "email": "Email",
     "out": "Log out of profile",
     "delete": "Delete profile",
-    "change": "Edit details"
+    "change": "Edit details",
+    "settings": "Profile settings",
+    "admin": "Admin-panel"
   },
   "form": {
     "register": "Sign up",

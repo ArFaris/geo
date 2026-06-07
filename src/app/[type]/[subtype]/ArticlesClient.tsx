@@ -87,25 +87,25 @@ const ArticlesClient = ({ initialArticles, section, subsection, category, subcat
             <Input placeholder={locale === 'ru' ? 'Введите текст' : 'Enter text'} value={searchQuery} onChange={(e) => debouncedSetSearch(e)} className={cn('search', isSearch && s.searchPage)} theme='light' afterSlot={<SearchIcon onClick={handleSearch} className={'search__icon'}/>}/>
 
             <div>
-                <div className={s.subcategories}>
+                <div className={'subcategories'}>
                     {
                         subsections && subsections.map(currSubsection => 
                             <Text view='p-16'
-                                className={cn('borderEffect', s.subcategory, currSubsection === subsection && s.subcategory__active)} 
+                                className={cn('borderEffect', 'subcategory', currSubsection === subsection && 'subcategory__active')} 
                                 onClick={() => router.push(`/sections/${section}/${category}/${subcategory}/${currSubsection}`)}>
                                     {t(`subtitles.${section}.${currSubsection}`)}
                             </Text>          
                         )
                     }
                 </div>
-                {subcategories && <div className={s.subcategories}>
+                {subcategories && <div className={'subcategories'}>
                     <Text view='p-16'
-                        className={cn('borderEffect', s.subcategory, subcategory === 'vestnik' && s.subcategory__active)} 
+                        className={cn('borderEffect', 'subcategory', subcategory === 'vestnik' && 'subcategory__active')} 
                         onClick={() => router.push(section ? `/sections/${section}/articles/vestnik/${subsection}` : '/articles/vestnik')}>
                             {t('subtitles.articles.vestnik')}
                     </Text>
                     <Text view='p-16' 
-                        className={cn('borderEffect', s.subcategory, subcategory === 'other' ? s.subcategory__active : '')} 
+                        className={cn('borderEffect', 'subcategory', subcategory === 'other' ? 'subcategory__active' : '')} 
                         onClick={() => router.push(section ? `/sections/${section}/articles/other/${subsection}` : '/articles/other')}>
                             {t('subtitles.articles.other')}
                     </Text>
@@ -116,8 +116,8 @@ const ArticlesClient = ({ initialArticles, section, subsection, category, subcat
                         <article key={item.slug} 
                                  id={item.slug}
                                  onClick={() => router.push(`/${category}/${subcategory || 'all'}/${item.slug}`)}
-                                 className={s.article}>
-                            {item.part && <span className={s.article__part}><Text color='primary'>{`${t('common.part')} ${item.part}`}</Text></span>}
+                                 className={'article'}>
+                            {item.part && <span className={'article__part'}><Text color='primary'>{`${t('common.part')} ${item.part}`}</Text></span>}
                             <Text color='primary'>{locale === 'ru' ? `${item.name}` : `${item.name_en}`}</Text>
                         </article>
                     ))}

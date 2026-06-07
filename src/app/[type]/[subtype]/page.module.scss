@@ -9,61 +9,6 @@
     gap: $padd-40;
 }
 
-.article {
-    border: 3px solid $accent;
-    background-color: rgb(218, 210, 202, 0.5);
-    padding: $padd-20;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    cursor: pointer;
-    transition: $transition;
-
-    @media(hover: hover) {
-        &:hover {
-            background-color: rgba(209, 186, 164, 0.54);
-        }
-    }
-
-    &:active {
-        background-color: rgba(167, 150, 135, 0.54);
-    }
-
-    &__part {
-        height: 24px;
-        background-color: $secondary;
-        border: 1px solid $dark;
-        margin-bottom: $padd-16;
-        width: fit-content;
-        padding-inline: $padd-20;
-    }
-}
-
-.subcategories {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: $padd-32;
-    margin-top: 56px;
-}
-
-.subcategory {
-    &:hover:not(&__active) {
-        color: $button-strong-hover;
-        &::before,
-        &::after {
-            width: 0;
-        }
-    }
-
-    &__active {
-        &::before,
-        &::after {
-            width: 100%;
-        }
-    }
-}
-
 .earh {
     position: fixed;
     top: 0;

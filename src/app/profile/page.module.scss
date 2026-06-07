@@ -26,6 +26,13 @@
     border: 3px solid $secondary;
 }
 
+.admin__panel {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    gap: $padd-40;
+}
+
 @media(max-width: 1024px) {
     .fields {   
         max-width: 100%;
