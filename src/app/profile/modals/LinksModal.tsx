@@ -1,17 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { User } from '@supabase/supabase-js';
-import ArticlesTable from '../components/ArticlesTable/ArticlesTable';
+import LinksTable from '../components/LinksTable/LinksTable';
 import Text from '@/components/ui/Text';
 import s from './modal.module.scss';
 
-type ArticlesTableModalProps = {
+type LinksModalProps = {
+    title: 'sources' | 'partners';
     onClose: () => void;
     locale: 'ru' | 'en';
-    user: User;
 };
 
-export default function ArticlesTableModal({ onClose, locale, user }: ArticlesTableModalProps) {
+export default function LinksModal({ title, onClose, locale }: LinksModalProps) {
     const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     useEffect(() => {
@@ -34,22 +33,25 @@ export default function ArticlesTableModal({ onClose, locale, user }: ArticlesTa
     };
 
     const t = (ru: string, en: string) => locale === 'ru' ? ru : en;
+    const modalTitle = title === 'sources' 
+        ? t('Полезные ссылки', 'Sources')
+        : t('Информационные партнеры', 'Partners');
 
     return (
         <div className={s.overlay} onClick={onClose}>
-            <div className={`${s.large} ${s.modalTable}`} onClick={e => e.stopPropagation()}>
+            <div className={`${s.modalTable} ${s.large}`} onClick={e => e.stopPropagation()}>
                 <div className={s.header}>
                     <Text view="title-small" weight="bold">
-                        {t('Редактирование статей', 'Edit articles')}
+                        {modalTitle}
                     </Text>
                     <button className={s.close} onClick={onClose}>✕</button>
                 </div>
                 <div className={s.content}>
-                    <ArticlesTable 
+                    <LinksTable 
+                        title={title}
                         locale={locale} 
                         refreshTrigger={refreshTrigger} 
                         onRefresh={handleRefresh}
-                        onClose={onClose}
                     />
                 </div>
             </div>

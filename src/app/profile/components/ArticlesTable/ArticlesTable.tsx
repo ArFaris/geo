@@ -8,7 +8,7 @@ import { ArticleForTable } from '@/types/articles';
 import s from './articlesTable.module.scss';
 import cn from 'classnames';
 
-const ArticleFormModal = dynamic(() => import('../modals/ArticleFormModal'), { ssr: false });
+const ArticleFormModal = dynamic(() => import('../../modals/ArticleFormModal'), { ssr: false });
 
 type ArticlesTableProps = {
     locale: 'ru' | 'en';

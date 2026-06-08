@@ -29,6 +29,10 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
     const hasRecordedView = useRef(false);
     const [isDownloading, setIsDownloading] = useState(false);
 
+    // Определяем, является ли пользователь админом (только для UI)
+    const isAdmin = user?.user_metadata?.role === 'admin' || user?.app_metadata?.role === 'admin';
+
+    // Просмотр — сервер сам проверит админа
     useEffect(() => {
         if (hasRecordedView.current) return;
         hasRecordedView.current = true;
@@ -66,7 +70,7 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
         setIsDownloading(true);
         
         try {
-            // Увеличиваем счётчик скачиваний
+            // Сервер сам проверит, админ ли, и увеличит счётчик только для обычных пользователей
             await incrementArticleDownloadsAction(article.slug);
             
             const downloadUrl = `/api/pdf?path=${encodeURIComponent(pdfPath)}&download=true`;

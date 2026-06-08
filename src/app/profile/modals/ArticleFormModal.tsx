@@ -199,7 +199,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
             setLoading(false);
             onClose(true);
         } catch (error) {
-            console.error('Error saving article:', error);
             setLoading(false);
         }
     };

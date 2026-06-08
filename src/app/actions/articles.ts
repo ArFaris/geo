@@ -26,6 +26,15 @@ async function isAdmin(): Promise<boolean> {
 // ============================================================================
 
 export async function incrementArticleViewsAction(articleId: string) {
+    // Проверяем, не админ ли
+    const user = await getCurrentUser();
+    const isAdminUser = user?.user_metadata?.role === 'admin' || user?.app_metadata?.role === 'admin';
+    
+    if (isAdminUser) {
+        console.log('[incrementArticleViewsAction] Admin view ignored for:', articleId);
+        return;
+    }
+    
     const cookieStore = await cookies();
     const viewedKey = `viewed_${articleId}`;
 
@@ -50,9 +59,20 @@ export async function incrementArticleViewsAction(articleId: string) {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
     });
+    
+    console.log('[incrementArticleViewsAction] View counted for:', articleId);
 }
 
 export async function incrementArticleDownloadsAction(articleId: string) {
+    // Проверяем, не админ ли
+    const user = await getCurrentUser();
+    const isAdminUser = user?.user_metadata?.role === 'admin' || user?.app_metadata?.role === 'admin';
+    
+    if (isAdminUser) {
+        console.log('[incrementArticleDownloadsAction] Admin download ignored for:', articleId);
+        return;
+    }
+    
     const supabase = await createClient();
     
     const { error } = await supabase.rpc('increment_downloads', {
@@ -61,6 +81,8 @@ export async function incrementArticleDownloadsAction(articleId: string) {
 
     if (error) {
         console.error('Ошибка обновления скачиваний:', error);
+    } else {
+        console.log('[incrementArticleDownloadsAction] Download counted for:', articleId);
     }
 }
 
@@ -223,12 +245,18 @@ export async function createArticle(formData: FormData) {
 }
 
 export async function updateArticle(id: string, formData: FormData) {
+    console.log('=== UPDATE ARTICLE START ===');
+    console.log('[updateArticle] Article ID:', id);
+    
     if (!(await isAdmin())) {
+        console.error('[updateArticle] Unauthorized: admin access required');
         throw new Error('Unauthorized: admin access required');
     }
+    console.log('[updateArticle] Admin check passed');
 
     const supabase = await createClient();
 
+    // Получение данных из формы
     const title = formData.get('title') as string;
     const title_en = formData.get('title_en') as string || null;
     const category = formData.get('category') as string;
@@ -237,11 +265,34 @@ export async function updateArticle(id: string, formData: FormData) {
     const reading_time = formData.get('reading_time') as string || null;
     
     // МНОЖЕСТВЕННЫЕ секции (массив)
-    const selectedSectionIds = JSON.parse(formData.get('selected_section_ids') as string || '[]');
-    const selectedSubsections = JSON.parse(formData.get('selected_subsections') as string || '{}');
+    const selectedSectionIdsRaw = formData.get('selected_section_ids') as string || '[]';
+    const selectedSubsectionsRaw = formData.get('selected_subsections') as string || '{}';
+    
+    console.log('[updateArticle] Raw form data:', {
+        title,
+        title_en,
+        category,
+        subcategory,
+        part,
+        reading_time,
+        selectedSectionIdsRaw,
+        selectedSubsectionsRaw,
+    });
+    
+    let selectedSectionIds: string[] = [];
+    let selectedSubsections: Record<string, string> = {};
+    
+    try {
+        selectedSectionIds = JSON.parse(selectedSectionIdsRaw);
+        selectedSubsections = JSON.parse(selectedSubsectionsRaw);
+        console.log('[updateArticle] Parsed sections:', { selectedSectionIds, selectedSubsections });
+    } catch (parseError) {
+        console.error('[updateArticle] JSON parse error:', parseError);
+    }
 
-    // Обновляем метаданные
-    const { error } = await supabase
+    // 1. Обновляем метаданные
+    console.log('[updateArticle] Updating article metadata...');
+    const { error: updateError } = await supabase
         .from('articles')
         .update({ 
             title, 
@@ -253,33 +304,66 @@ export async function updateArticle(id: string, formData: FormData) {
         })
         .eq('id', id);
 
-    if (error) {
-        console.error('Ошибка обновления статьи:', error);
-        throw new Error('Failed to update article');
+    if (updateError) {
+        console.error('[updateArticle] Metadata update error:', updateError);
+        throw new Error(`Failed to update article: ${updateError.message}`);
     }
+    console.log('[updateArticle] Metadata updated successfully');
 
-    // Обновляем связи с секциями (удаляем старые, вставляем новые)
-    await supabase.from('article_sections').delete().eq('article_id', id);
+    // 2. Обновляем связи с секциями (удаляем старые, вставляем новые)
+    console.log('[updateArticle] Deleting old section links...');
+    const { error: deleteError } = await supabase
+        .from('article_sections')
+        .delete()
+        .eq('article_id', id);
+    
+    if (deleteError) {
+        console.error('[updateArticle] Delete sections error:', deleteError);
+    } else {
+        console.log('[updateArticle] Old sections deleted');
+    }
     
     if (selectedSectionIds.length > 0) {
+        console.log('[updateArticle] Attempting to insert sections for article:', id);
+        
+        // 🔥 ВОТ ЗДЕСЬ ОПРЕДЕЛЯЕМ sectionLinks
         const sectionLinks = selectedSectionIds.map((sectionId: string) => ({
             article_id: id,
             section_id: sectionId,
             subsection_id: selectedSubsections[sectionId] || null,
         }));
         
-        const { error: sectionError } = await supabase
+        console.log('[updateArticle] Section links to insert:', JSON.stringify(sectionLinks, null, 2));
+        
+        const { error: insertError, data: insertedData } = await supabase
             .from('article_sections')
-            .insert(sectionLinks);
-
-        if (sectionError) {
-            console.error('Ошибка добавления секций:', sectionError);
+            .insert(sectionLinks)
+            .select();
+        
+        if (insertError) {
+            console.error('[updateArticle] Insert sections error:', {
+                message: insertError.message,
+                code: insertError.code,
+                details: insertError.details
+            });
+        } else {
+            console.log('[updateArticle] Sections inserted successfully:', insertedData);
+            
+            // Сразу проверяем, что вставилось
+            const { data: verify } = await supabase
+                .from('article_sections')
+                .select('*')
+                .eq('article_id', id);
+            console.log('[updateArticle] Verification after insert:', verify);
         }
+    } else {
+        console.log('[updateArticle] No sections to add');
     }
 
-    // Обновляем PDF (если загружен новый)
+    // 3. Обновляем PDF (если загружен новый)
     const pdfFile = formData.get('pdf') as File;
     if (pdfFile && pdfFile.size > 0) {
+        console.log('[updateArticle] New PDF file detected, size:', pdfFile.size);
         const buffer = Buffer.from(await pdfFile.arrayBuffer());
         const fileName = `${id}.pdf`;
 
@@ -290,15 +374,31 @@ export async function updateArticle(id: string, formData: FormData) {
                 Body: buffer,
                 ContentType: 'application/pdf',
             }));
-            await supabase.from('articles').update({ pdf_path: fileName }).eq('id', id);
+            console.log('[updateArticle] PDF uploaded to Yandex Cloud');
+            
+            const { error: pdfUpdateError } = await supabase
+                .from('articles')
+                .update({ pdf_path: fileName })
+                .eq('id', id);
+            
+            if (pdfUpdateError) {
+                console.error('[updateArticle] PDF path update error:', pdfUpdateError);
+            } else {
+                console.log('[updateArticle] PDF path updated in database');
+            }
         } catch (s3Error) {
-            console.error('Ошибка обновления PDF:', s3Error);
+            console.error('[updateArticle] S3 upload error:', s3Error);
         }
+    } else {
+        console.log('[updateArticle] No new PDF file');
     }
 
     revalidatePath('/profile');
     revalidatePath('/articles');
     revalidatePath(`/articles/${id}`);
+    
+    console.log('=== UPDATE ARTICLE SUCCESS ===');
+    return { success: true };
 }
 
 export async function deleteArticle(id: string) {
@@ -393,6 +493,9 @@ export async function getStatistics() {
 }
 
 export async function getSectionsWithSubsections() {
+    const start = Date.now();
+    console.log('[getSectionsWithSubsections] START');
+    
     const supabase = await createClient();
 
     // Получаем все секции
@@ -405,6 +508,8 @@ export async function getSectionsWithSubsections() {
         console.error('Ошибка получения секций:', sectionsError);
         return [];
     }
+
+    console.log(`[getSectionsWithSubsections] Got ${sections?.length || 0} sections in ${Date.now() - start}ms`);
 
     if (!sections || sections.length === 0) {
         return [];
@@ -420,6 +525,8 @@ export async function getSectionsWithSubsections() {
         console.error('Ошибка получения подсекций:', subsectionsError);
         return [];
     }
+
+    console.log(`[getSectionsWithSubsections] Got ${allSubsections?.length || 0} subsections in ${Date.now() - start}ms`);
 
     // Группируем подсекции по section_id
     const subsectionsBySection: Record<string, Array<{ id: string; slug: string; title: string }>> = {};
@@ -442,6 +549,7 @@ export async function getSectionsWithSubsections() {
         subsections: subsectionsBySection[section.id] || [],
     }));
 
+    console.log(`[getSectionsWithSubsections] FINISH in ${Date.now() - start}ms`);
     return result;
 }
 
