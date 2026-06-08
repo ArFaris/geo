@@ -28,8 +28,8 @@ const navKeys: Link[] = [
   { key: 'nav.articles', to: '/articles/vestnik' },
   { key: 'nav.partners', to: '/partners' },
   { key: 'nav.sources', to: '/sources' },
-  { key: 'nav.shop', to: '/shop' },
-  { key: 'nav.about', to: '/about' }
+//   { key: 'nav.shop', to: '/shop' },
+//   { key: 'nav.about', to: '/about' }
 ];
 
 type HeaderProps = {
