@@ -27,37 +27,37 @@ export default function AdminPanel({ user, locale }: AdminPanelProps) {
 
     return (
         <section className={s.admin__panel}>
-                <article onClick={() => setShowStats(true)} className={cn('article', 'link', s.admin__article)}>
+                <article onClick={() => setShowStats(true)} className={cn('link', s.admin__article)}>
                     <Text color='secondary'>
                         {locale === 'ru' ? 'Посмотреть статистику' : 'View statistics'}
                     </Text>
                 </article>
 
-                <article onClick={() => setShowCreateForm(true)} className={cn('article', 'link', s.admin__article)}>
+                <article onClick={() => setShowCreateForm(true)} className={cn('link', s.admin__article)}>
                     <Text color='secondary'>
                         {locale === 'ru' ? 'Создать новую статью' : 'Create a new article'}
                     </Text>
                 </article>
 
-                <article onClick={() => setShowArticles(true)} className={cn('article', 'link', s.admin__article)}>
+                <article onClick={() => setShowArticles(true)} className={cn('link', s.admin__article)}>
                     <Text color='secondary'>
                         {locale === 'ru' ? 'Редактировать статьи' : 'Edit articles'}
                     </Text>
                 </article>
 
-                <article onClick={() => setShowUsers(true)} className={cn('article', 'link', s.admin__article)}>
+                <article onClick={() => setShowUsers(true)} className={cn('link', s.admin__article)}>
                     <Text color='secondary'>
                         {locale === 'ru' ? 'Пользователи' : 'Users'}
                     </Text>
                 </article>
 
-                <article onClick={() => setShowSources(true)} className={cn('article', 'link', s.admin__article)}>
+                <article onClick={() => setShowSources(true)} className={cn('link', s.admin__article)}>
                     <Text color='secondary'>
                         {locale === 'ru' ? 'Полезные ссылки' : 'Sources'}
                     </Text>
                 </article>
 
-                <article onClick={() => setShowPartners(true)} className={cn('article', 'link', s.admin__article)}>
+                <article onClick={() => setShowPartners(true)} className={cn('link', s.admin__article)}>
                     <Text color='secondary'>
                         {locale === 'ru' ? 'Партнеры' : 'Partners'}
                     </Text>

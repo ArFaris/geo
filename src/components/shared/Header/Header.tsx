@@ -11,7 +11,7 @@ import LanguageSwitcher from '@/components/shared/LanguageSwitcher';
 import BurgerMenu from './components/BurgerMenu';
 import useBurgerMenu from '@/hooks/useBurgerMenu';
 import s from './Header.module.scss';
-import { User } from '@supabase/supabase-js';
+import { AuthChangeEvent, User, Session } from '@supabase/supabase-js';
 import { createClientT } from '@/lib/i18n/client';
 import { createClient } from '@/lib/supabase/client';
 
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ image = '/logo.png', links = navKeys, l
 
         const {
             data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
+        } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
             setUser(session?.user ?? null);
         });
 
