@@ -62,3 +62,29 @@ export const getCurrentUser = async () => {
   if (error) throw new Error(error.message);
   return data.user;
 };
+
+export const resetPassword = async (email: string) => {
+    const supabase = createClient();
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/callback`,
+    });
+    
+    if (error) {
+        return { error: error.message };
+    }
+    
+    return { error: null };
+};
+
+export const updatePassword = async (newPassword: string) => {
+    const supabase = createClient();
+    const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+    });
+    
+    if (error) {
+        return { error: error.message };
+    }
+    
+    return { error: null };
+};

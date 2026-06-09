@@ -7,10 +7,11 @@ import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import Title from '@/components/shared/Title';
 import EarthLeftIcon from '@/components/ui/icons/EarthLeft';
-import { loginUser, registerUser } from '@/lib/services/auth';
+import { loginUser, registerUser, resetPassword } from '@/lib/services/auth';
 import { UserSchema } from '@/shared/schemas/user.schema';
 import { validation } from '@/shared/utils/validation-error';
 import s from './AuthWrapper.module.scss';
+import cn from 'classnames';
 import { createClientT } from '@/lib/i18n/client';
 
 export type InputAttributes = {
@@ -31,6 +32,10 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
     const t = createClientT(locale);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [loading, setLoading] = useState(false);
+    const [resetEmail, setResetEmail] = useState('');
+    const [resetSent, setResetSent] = useState(false);
+    const [showResetForm, setShowResetForm] = useState(false);
+    const [resetRequested, setResetRequested] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         if (loading) return;
@@ -90,6 +95,98 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
         }
     };
 
+    const handleResetPassword = async () => {
+        if (!resetEmail) {
+            setErrors({ resetEmail: 'Введите email' });
+            return;
+        }
+        
+        setResetRequested(true);
+        setLoading(true);
+        const { error } = await resetPassword(resetEmail);
+        setLoading(false);
+        
+        if (error) {
+            if (error.includes('security purposes') || error.includes('only request')) {
+                setErrors({ resetEmail: 'Повторите попытку через минуту' });
+            } else {
+                setErrors({ resetEmail: error });
+            }
+            setResetRequested(false);
+        } else {
+            setResetSent(true);
+            setErrors({});
+        }
+    };
+
+    // Форма восстановления пароля
+    if (showResetForm) {
+        return (
+            <div className="page">
+                <EarthLeftIcon className={s.earth} />
+
+                <Title title={type} locale={locale} />
+
+                <div className={s.form}>
+                    {!resetSent ? (
+                        <>
+                            <div className={s.fields}>
+                                <div className={s.inputBox}>
+                                    <Input
+                                        type="email"
+                                        placeholder={t('form.email')}
+                                        value={resetEmail}
+                                        onChange={(value: string) => setResetEmail(value)}
+                                        error={!!errors.resetEmail}
+                                    />
+                                    {errors.resetEmail && (
+                                        <Text view="p-14" className={s.errorText}>
+                                            {errors.resetEmail}
+                                        </Text>
+                                    )}
+                                </div>
+                            </div>
+                            <div className={s.buttons}>
+                                <Button 
+                                    className={s.submit} 
+                                    loading={loading} 
+                                    view="light" 
+                                    onClick={handleResetPassword}
+                                    disabled={resetRequested}
+                                >
+                                    {resetRequested ? 'Отправлено' : t('form.reset_password')}
+                                </Button>
+                                <Button view="dark" onClick={() => {
+                                    setShowResetForm(false);
+                                    setResetRequested(false);
+                                    setResetSent(false);
+                                }}>
+                                    {t('form.back_to_login')}
+                                </Button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <Text view="p-16" className={s.successText}>
+                                {t('form.reset_email_sent')}
+                            </Text>
+                            <Button view="light"
+                             className={cn(s.submit, s.submit__center)}
+                             onClick={() => {
+                                setShowResetForm(false);
+                                setResetSent(false);
+                                setResetRequested(false);
+                            }}>
+                                {t('form.back_to_login')}
+                            </Button>
+                        </>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+    // Обычная форма входа/регистрации
     return (
         <form onSubmit={handleSubmit} className="page">
             <EarthLeftIcon className={s.earth} />
@@ -122,9 +219,20 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
                     )}
                 </div>
 
-                <Button loading={loading} type="submit" view="light" className={s.submit}>
-                    {t(`form.${type}`)}
-                </Button>
+                <div className={s.buttons}>
+                    <Button loading={loading} type="submit" view="light" className={s.submit}>
+                        {t(`form.${type}`)}
+                    </Button>
+
+                    {/* Кнопка "Забыли пароль?" — только для формы входа */}
+                    {type === 'login' && (
+                        <div className={s.forgotPassword}>
+                            <Button className={s.btn} view="light" onClick={() => setShowResetForm(true)}>
+                                {t('form.forgot_password')}
+                            </Button>
+                        </div>
+                    )}
+                </div>
             </div>
         </form>
     );

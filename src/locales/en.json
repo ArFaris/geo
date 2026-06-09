@@ -54,7 +54,11 @@
     "name": "Name",
     "password": "Password",
     "repeat": "Repeat password",
-    "email": "Email"
+    "email": "Email",
+    "forgot_password": "Forgot password?",
+    "reset_password": "Reset password",
+    "back_to_login": "Back to login",
+    "reset_email_sent": "Password reset link has been sent to your email"
   },
   "title": {
     "home": "Sections",
