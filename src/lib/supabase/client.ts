@@ -11,7 +11,13 @@ export const createClient = () => {
   console.log('Creating NEW client');
   client = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+          auth: {
+              detectSessionInUrl: false,
+              flowType: 'pkce',
+          },
+      }
   );
   
   return client;

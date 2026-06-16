@@ -65,15 +65,16 @@ export const getCurrentUser = async () => {
 
 export const resetPassword = async (email: string) => {
     const supabase = createClient();
+    
+    const redirectTo = typeof window !== 'undefined'
+        ? `${window.location.origin}/reset-password`
+        : `${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`;
+    
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo,
     });
     
-    if (error) {
-        return { error: error.message };
-    }
-    
-    return { error: null };
+    return { error: error?.message || null };
 };
 
 export const updatePassword = async (newPassword: string) => {
