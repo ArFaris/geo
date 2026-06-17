@@ -66,9 +66,7 @@ export const getCurrentUser = async () => {
 export const resetPassword = async (email: string) => {
     const supabase = createClient();
     
-    const redirectTo = typeof window !== 'undefined'
-        ? `${window.location.origin}/reset-password`
-        : `${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`;
+    const redirectTo = `https://geo-d7.vercel.app/reset-password`;
     
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo,

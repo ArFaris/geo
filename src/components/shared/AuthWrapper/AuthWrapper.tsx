@@ -64,8 +64,8 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
             const copyPassword = formData.get('copyPassword')?.toString() || '';
             if (userData.password !== copyPassword) {
                 setErrors({ 
-                    password: 'Passwords must match', 
-                    copyPassword: 'Passwords must match' 
+                    password: 'Пароли не совпадают', 
+                    copyPassword: 'Пароли не совпадают' 
                 });
                 return;
             }
@@ -77,6 +77,19 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
                 router.push('/login');
             } catch (error) {
                 console.error(error);
+           
+                if (error instanceof Error) {
+                    const message = error.message;
+                    if (message.includes('already registered') || message.includes('User already registered')) {
+                        setErrors({ email: 'Пользователь с таким email уже зарегистрирован' });
+                    } else if (message.includes('rate limit')) {
+                        setErrors({ email: 'Слишком много попыток. Подождите час.' });
+                    } else {
+                        setErrors({ email: message });
+                    }
+                } else {
+                    setErrors({ email: 'Произошла ошибка при регистрации' });
+                }
             } finally {
                 setLoading(false);
             }
@@ -88,7 +101,7 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
                 router.refresh();
             } catch (error) {
                 console.error(error);
-                setErrors({ userNotFound: 'Account not found' });
+                setErrors({ userNotFound: 'Аккаунт не найден' });
             } finally {
                 setLoading(false);
             }
@@ -215,6 +228,11 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
                     {errors.userNotFound && (
                         <Text view="p-14" className={s.errorText}>
                             {errors.userNotFound}
+                        </Text>
+                    )}
+                    {errors.email && (
+                        <Text view="p-14" className={s.errorText}>
+                            {errors.email}
                         </Text>
                     )}
                 </div>
