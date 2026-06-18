@@ -129,6 +129,7 @@ export default function AuthWrapper({ type, inputsAttributes, locale }: AuthWrap
         } else {
             setResetSent(true);
             setErrors({});
+            router.push('/reset-password?sent=true');
         }
     };
 
