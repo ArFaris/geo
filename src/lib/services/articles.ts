@@ -1,12 +1,10 @@
 import { createClient as createServerClient } from '@/lib/supabase/server';
-import type { Article, Articles, ArticleSearchResult } from '@/types/articles';
+import type { Article, Articles } from '@/types/articles';
 
 export const getArticlesByCategory = async ({
-  category,
-  subcategory
+  category
 }: {
   category: string;
-  subcategory?: string;
 }): Promise<Articles[]> => {
   const supabase = await createServerClient();
 
@@ -15,10 +13,6 @@ export const getArticlesByCategory = async ({
     .select('id, title, title_en, category, part')
     .eq('category', category)
     .order('part', { ascending: true });
-
-  if (subcategory) {
-    query = query.eq('subcategory', subcategory);
-  }
 
   const { data, error } = await query;
 
@@ -58,11 +52,9 @@ export const getArticle = async (id: string): Promise<Article | null> => {
     slug: data.id,
     part: data.part || undefined,
     createdAt: data.created_at,
-    readingTime: data.reading_time,
     views: data.views,
     likes: data.likes,
     category: data.category,
-    subcategory: data.subcategory,
     pdfPath: data.pdf_path || null,
   };
 };

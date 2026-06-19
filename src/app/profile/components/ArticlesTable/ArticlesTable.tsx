@@ -22,11 +22,9 @@ const convertToArticleForTable = (item: any): ArticleForTable => ({
     name: item.title,
     name_en: item.title_en || '',
     part: item.part || null,
-    readingTime: item.reading_time || null,
     views: item.views || 0,
     downloads_count: item.downloads_count || 0,
     category: item.category,
-    subcategory: item.subcategory || null,
 });
 
 const CATEGORIES = [
@@ -62,14 +60,14 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
         if (!confirmModal) return;
         await deleteArticle(confirmModal.articleId);
         setConfirmModal(null);
-        onRefresh();  // ← перезагрузка только после реального удаления
+        onRefresh();
         await loadArticles();
     };
 
     const handleEditClose = (changed: boolean = false) => {
         setEditingArticle(null);
         if (changed) {
-            onRefresh();  // ← перезагрузка только если были изменения
+            onRefresh();
             loadArticles();
         }
     };
@@ -79,13 +77,6 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
     const getCategoryLabel = (category: string) => {
         const cat = CATEGORIES.find(c => c.value === category);
         return cat ? getLocalizedText(cat.labelRu, cat.labelEn) : category;
-    };
-
-    const getSubcategoryLabel = (category: string, subcategory: string | null) => {
-        if (category !== 'articles') return '—';
-        if (subcategory === 'vestnik') return getLocalizedText('Вестник', 'Vestnik');
-        if (subcategory === 'other') return getLocalizedText('Другие статьи', 'Other');
-        return '—';
     };
 
     if (loading) {
@@ -101,9 +92,7 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
                             <th>{getLocalizedText('Название (рус)', 'Title (Ru)')}</th>
                             <th>{getLocalizedText('Название (англ)', 'Title (En)')}</th>
                             <th>{getLocalizedText('Категория', 'Category')}</th>
-                            <th>{getLocalizedText('Подкатегория', 'Subcategory')}</th>
                             <th>{getLocalizedText('Часть', 'Part')}</th>
-                            <th>{getLocalizedText('Время чтения', 'Reading time')}</th>
                             <th>{getLocalizedText('Просмотры', 'Views')}</th>
                             <th>{getLocalizedText('Скачивания', 'Downloads')}</th>
                             <th>{getLocalizedText('Действия', 'Actions')}</th>
@@ -115,9 +104,7 @@ export default function ArticlesTable({ locale, refreshTrigger, onRefresh, onClo
                                 <td>{article.name}</td>
                                 <td>{article.name_en || '—'}</td>
                                 <td>{getCategoryLabel(article.category)}</td>
-                                <td>{getSubcategoryLabel(article.category, article.subcategory)}</td>
                                 <td>{article.part || '—'}</td>
-                                <td>{article.readingTime || '—'}</td>
                                 <td>{article.views}</td>
                                 <td>{article.downloads_count || 0}</td>
                                 <td>

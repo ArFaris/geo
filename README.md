@@ -60,7 +60,7 @@
 
 ```sql
 -- Основные таблицы
-articles        # Статьи (id, title, pdf_path, category, subcategory, views, likes)
+articles        # Статьи (id, title, pdf_path, category, views, likes)
 sections        # Секции статей
 article_sections # Связь статей и секций
 users           # Пользователи (через Supabase Auth)

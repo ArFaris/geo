@@ -109,9 +109,7 @@ export async function createArticle(formData: FormData) {
         const title = formData.get('title') as string;
         const title_en = formData.get('title_en') as string || null;
         const category = formData.get('category') as string;
-        const subcategory = formData.get('subcategory') as string || null;
         const part_raw = formData.get('part') as string || null;
-        const reading_time_raw = formData.get('reading_time') as string || null;
         
         // Множественные секции и их подсекции
         const selectedSectionIds = JSON.parse(formData.get('selected_section_ids') as string || '[]');
@@ -121,9 +119,7 @@ export async function createArticle(formData: FormData) {
             title,
             title_en,
             category,
-            subcategory,
             part_raw,
-            reading_time_raw,
             selectedSectionIds,
             selectedSubsections,
         });
@@ -137,17 +133,6 @@ export async function createArticle(formData: FormData) {
             }
         }
 
-        // 4. Преобразование reading_time в число
-        let reading_time: number | null = null;
-        if (reading_time_raw) {
-            const parsed = parseInt(reading_time_raw, 10);
-            if (!isNaN(parsed) && parsed > 0) {
-                reading_time = parsed;
-            }
-        }
-
-        console.log('Parsed values:', { part, reading_time });
-
         // 5. Создание статьи в Supabase
         console.log('Creating article in Supabase...');
         const { data: article, error } = await supabase
@@ -156,9 +141,7 @@ export async function createArticle(formData: FormData) {
                 title: title?.trim(),
                 title_en: title_en?.trim(),
                 category,
-                subcategory: category === 'articles' ? subcategory : null,
                 part: part,
-                reading_time: reading_time,
                 views: 0,
                 pdf_path: 'pending', 
             })
@@ -260,9 +243,7 @@ export async function updateArticle(id: string, formData: FormData) {
     const title = formData.get('title') as string;
     const title_en = formData.get('title_en') as string || null;
     const category = formData.get('category') as string;
-    const subcategory = formData.get('subcategory') as string || null;
     const part = formData.get('part') as string || null;
-    const reading_time = formData.get('reading_time') as string || null;
     
     // МНОЖЕСТВЕННЫЕ секции (массив)
     const selectedSectionIdsRaw = formData.get('selected_section_ids') as string || '[]';
@@ -272,9 +253,7 @@ export async function updateArticle(id: string, formData: FormData) {
         title,
         title_en,
         category,
-        subcategory,
         part,
-        reading_time,
         selectedSectionIdsRaw,
         selectedSubsectionsRaw,
     });
@@ -298,9 +277,7 @@ export async function updateArticle(id: string, formData: FormData) {
             title, 
             title_en, 
             category, 
-            subcategory: category === 'articles' ? subcategory : null, 
-            part, 
-            reading_time 
+            part,
         })
         .eq('id', id);
 
@@ -447,7 +424,7 @@ export async function getArticles(page: number = 1, limit: number = 100) {
 
     const { data, error } = await supabase
         .from('articles')
-        .select('id, title, title_en, category, subcategory, part, reading_time, views, downloads_count, created_at, pdf_path')
+        .select('id, title, title_en, category, part, views, downloads_count, created_at, pdf_path')
         .order('created_at', { ascending: false })
         .range(from, to);
 

@@ -7,16 +7,12 @@ import {
 
 type GetArticlesBySectionParams = {
     category?: ArticleCategory;
-    subcategory?: string;
-
     section?: string;
     subsection?: string;
 };
 
 export const getArticles = async ({
     category,
-    subcategory,
-
     section,
     subsection,
 }: GetArticlesBySectionParams): Promise<Article[]> => {
@@ -42,7 +38,6 @@ export const getArticles = async ({
                 title,
                 title_en,
                 category,
-                subcategory,
                 part
             ),
 
@@ -71,13 +66,6 @@ export const getArticles = async ({
         query = query.eq(
             'articles.category',
             category
-        );
-    }
-
-    if (subcategory) {
-        query = query.eq(
-            'articles.subcategory',
-            subcategory
         );
     }
 
@@ -111,9 +99,6 @@ export const getArticles = async ({
 
                 category:
                     article.category as ArticleCategory,
-
-                subcategory:
-                    article.subcategory,
 
                 part: article.part
                     ? Number(article.part)

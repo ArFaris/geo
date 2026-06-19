@@ -22,10 +22,10 @@ export type Link = {
 
 const navKeys: Link[] = [
   { key: 'nav.home', to: '/' },
-  { key: 'nav.news', to: '/news/all' },
-  { key: 'nav.reviews', to: '/reviews/all' },
-  { key: 'nav.analytics', to: '/analytics/all' },
-  { key: 'nav.articles', to: '/articles/vestnik' },
+  { key: 'nav.news', to: '/news' },
+  { key: 'nav.reviews', to: '/reviews' },
+  { key: 'nav.analytics', to: '/analytics' },
+  { key: 'nav.articles', to: '/articles' },
   { key: 'nav.partners', to: '/partners' },
   { key: 'nav.sources', to: '/sources' },
 //   { key: 'nav.shop', to: '/shop' },

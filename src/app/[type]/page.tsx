@@ -88,13 +88,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ArticlesPage({ params }: PageProps) {
-    console.log('in')
-    const { type, subtype } = await params;
+    const { type } = await params;
     const locale = await getLocale();
-    const subcategory = subtype === 'all' ? undefined : subtype;
-    console.log(subcategory)
     
-    const initialArticles = await getArticlesByCategory({ category: type, subcategory: subcategory });
+    const initialArticles = await getArticlesByCategory({ category: type });
     
-    return <ArticlesClient initialArticles={initialArticles} category={type} subcategory={subcategory} locale={locale} />;
+    return <ArticlesClient initialArticles={initialArticles} category={type} locale={locale} />;
 }

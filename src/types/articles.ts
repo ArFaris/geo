@@ -4,11 +4,9 @@ export type Article = {
     slug: string;
     part?: string;
     createdAt: string;
-    readingTime: string;
     views: number;
     likes: number;
     category: string;
-    subcategory: string;
     pdfPath: string | null;
 }
 
@@ -41,9 +39,7 @@ export type ArticleForTable = {
     name: string;
     name_en: string;
     part: string | null;
-    readingTime: string | null;
     views: number;
     downloads_count: number,
     category: string;
-    subcategory: string | null;
 };

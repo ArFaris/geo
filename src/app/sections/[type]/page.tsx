@@ -29,16 +29,16 @@ export default async function SectionLinks({ params }: PageProps) {
             <div className={'earth__wrapper'}><EarthIcon className={'earth'}/></div>
             
             <div className={'links'}>
-                <Link href={`/sections/${type}/news/all${'/' + subsection || ''}`} className={'link'}>
+                <Link href={`/sections/${type}/news/${'/' + subsection || ''}`} className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.news')}</Text>
                 </Link>
-                <Link href={`/sections/${type}/reviews/all${'/' + subsection || ''}`} className={'link'}>
+                <Link href={`/sections/${type}/reviews/${'/' + subsection || ''}`} className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.reviews')}</Text>
                 </Link>
-                <Link href={`/sections/${type}/analytics/all${'/' + subsection || ''}`} className={'link'}>
+                <Link href={`/sections/${type}/analytics/${'/' + subsection || ''}`} className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.analytics')}</Text>
                 </Link>
-                <Link href={`/sections/${type}/articles/vestnik${'/' + subsection || ''}`} className={'link'}>
+                <Link href={`/sections/${type}/articles/${'/' + subsection || ''}`} className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.articles')}</Text>
                 </Link>
             </div>

@@ -27,10 +27,10 @@ type Section = {
 };
 
 const CATEGORIES = [
-    { value: 'articles', labelRu: 'Статьи', labelEn: 'Articles', hasSubcategory: true },
-    { value: 'analytics', labelRu: 'Аналитика', labelEn: 'Analytics', hasSubcategory: false },
-    { value: 'reviews', labelRu: 'Обзоры', labelEn: 'Reviews', hasSubcategory: false },
-    { value: 'news', labelRu: 'Новости', labelEn: 'News', hasSubcategory: false },
+    { value: 'articles', labelRu: 'Статьи', labelEn: 'Articles' },
+    { value: 'analytics', labelRu: 'Аналитика', labelEn: 'Analytics' },
+    { value: 'reviews', labelRu: 'Обзоры', labelEn: 'Reviews' },
+    { value: 'news', labelRu: 'Новости', labelEn: 'News' },
 ];
 
 export default function ArticleFormModal({ mode, initialData, onClose, locale }: ArticleFormModalProps) {
@@ -41,50 +41,39 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [selectedFileName, setSelectedFileName] = useState<string>('');
     
-    // Поля формы
     const [title, setTitle] = useState(isEdit ? initialData?.name || '' : '');
     const [titleEn, setTitleEn] = useState(isEdit ? initialData?.name_en || '' : '');
     const [selectedCategory, setSelectedCategory] = useState<string>(isEdit ? initialData?.category || 'articles' : 'articles');
-    const [subcategory, setSubcategory] = useState(isEdit ? initialData?.subcategory || '' : '');
     const [part, setPart] = useState(isEdit ? initialData?.part || '' : '');
-    const [readingTime, setReadingTime] = useState(isEdit ? initialData?.readingTime || '' : '');
     
-    // Множественные секции и подсекции
     const [selectedSectionIds, setSelectedSectionIds] = useState<string[]>([]);
     const [selectedSubsections, setSelectedSubsections] = useState<Record<string, string>>({});
 
-    // Загрузка всех секций
     useEffect(() => {
-        const loadSections = async () => {
-            const sectionsData = await getSectionsWithSubsections();
-            setSections(sectionsData);
-        };
-        loadSections();
-    }, []);
+        const loadData = async () => {
+            const [sectionsData, articleSectionsData] = await Promise.all([
+                getSectionsWithSubsections(),
+                isEdit && initialData ? getArticleSections(initialData.id) : Promise.resolve(null),
+            ]);
 
-    // Загрузка существующих связей при редактировании
-    useEffect(() => {
-        if (isEdit && initialData) {
-            const loadArticleSections = async () => {
-                const sectionsData = await getArticleSections(initialData.id);
-                if (sectionsData && sectionsData.length > 0) {
-                    // Массив ID секций
-                    const sectionIds = sectionsData.map(s => s.section_id);
-                    setSelectedSectionIds(sectionIds);
-                    
-                    // Подсекции (если есть)
-                    const subsectionsMap: Record<string, string> = {};
-                    sectionsData.forEach(s => {
-                        if (s.subsection_id) {
-                            subsectionsMap[s.section_id] = s.subsection_id;
-                        }
-                    });
-                    setSelectedSubsections(subsectionsMap);
-                }
-            };
-            loadArticleSections();
-        }
-    }, [isEdit, initialData]);
+            setSections(sectionsData);
+
+            if (articleSectionsData && articleSectionsData.length > 0) {
+                const sectionIds = articleSectionsData.map(s => s.section_id);
+                setSelectedSectionIds(sectionIds);
+
+                const subsectionsMap: Record<string, string> = {};
+                articleSectionsData.forEach(s => {
+                    if (s.subsection_id) {
+                        subsectionsMap[s.section_id] = s.subsection_id;
+                    }
+                });
+                setSelectedSubsections(subsectionsMap);
+            }
+        };
+
+        loadData();
+    }, [isEdit, initialData?.id]);
 
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
@@ -124,19 +113,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
             }
         }
         
-        if (selectedCategory === 'articles' && !subcategory) {
-            newErrors.subcategory = 'Выберите подкатегорию';
-        }
-        
-        if (!readingTime) {
-            newErrors.reading_time = 'Введите время чтения';
-        } else {
-            const parsed = parseInt(readingTime, 10);
-            if (isNaN(parsed) || parsed <= 0) {
-                newErrors.reading_time = 'Время чтения должно быть целым положительным числом';
-            }
-        }
-        
         if (part && part.trim().length > 0) {
             const parsed = parseInt(part, 10);
             if (isNaN(parsed)) {
@@ -144,7 +120,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
             }
         }
         
-        // Проверка подсекций для каждой выбранной секции
         for (const sectionId of selectedSectionIds) {
             const section = sections.find(s => s.section_id === sectionId);
             if (section?.subsections && section.subsections.length > 0) {
@@ -171,16 +146,12 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
         formData.append('title', title);
         formData.append('title_en', titleEn);
         formData.append('category', selectedCategory);
-        if (subcategory) formData.append('subcategory', subcategory);
         if (part) formData.append('part', part);
-        if (readingTime) formData.append('reading_time', readingTime);
         
-        // Передаём массив секций (множественный выбор)
         if (selectedSectionIds.length > 0) {
             formData.append('selected_section_ids', JSON.stringify(selectedSectionIds));
         }
         
-        // Передаём подсекции
         if (Object.keys(selectedSubsections).length > 0) {
             formData.append('selected_subsections', JSON.stringify(selectedSubsections));
         }
@@ -203,13 +174,11 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
         }
     };
 
-    // Множественный выбор секций (через чекбоксы)
     const handleSectionCheckboxChange = (sectionId: string, checked: boolean) => {
         if (checked) {
             setSelectedSectionIds([...selectedSectionIds, sectionId]);
         } else {
             setSelectedSectionIds(selectedSectionIds.filter(id => id !== sectionId));
-            // Удаляем подсекцию для этой секции
             const newSubsections = { ...selectedSubsections };
             delete newSubsections[sectionId];
             setSelectedSubsections(newSubsections);
@@ -262,7 +231,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
 
                 <div className={s.content}>
                     <form onSubmit={handleSubmit} className={s.form} noValidate>
-                        {/* Заголовки и категории (как было) */}
                         <div className={s.field}>
                             <label>{getLocalizedText('Заголовок (русский)', 'Title (Russian)')} *</label>
                             <input 
@@ -307,35 +275,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
                             {errors.category && <span className={s.error}>{errors.category}</span>}
                         </div>
 
-                        {selectedCategory === 'articles' && (
-                            <div className={s.field}>
-                                <label>{getLocalizedText('Подкатегория', 'Subcategory')} *</label>
-                                <div className={s.radioGroup}>
-                                    <label className={s.radioLabel}>
-                                        <input 
-                                            type="radio" 
-                                            name="subcategory" 
-                                            value="vestnik"
-                                            checked={subcategory === 'vestnik'}
-                                            onChange={() => setSubcategory('vestnik')}
-                                        />
-                                        {getLocalizedText('Вестник', 'Vestnik')}
-                                    </label>
-                                    <label className={s.radioLabel}>
-                                        <input 
-                                            type="radio" 
-                                            name="subcategory" 
-                                            value="other"
-                                            checked={subcategory === 'other'}
-                                            onChange={() => setSubcategory('other')}
-                                        />
-                                        {getLocalizedText('Другие статьи', 'Other articles')}
-                                    </label>
-                                </div>
-                                {errors.subcategory && <span className={s.error}>{errors.subcategory}</span>}
-                            </div>
-                        )}
-
                         <div className={s.field}>
                             <label>{getLocalizedText('Часть/раздел', 'Part')}</label>
                             <input 
@@ -345,19 +284,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
                                 className={errors.part ? s.errorInput : ''}
                             />
                             {errors.part && <span className={s.error}>{errors.part}</span>}
-                        </div>
-
-                        <div className={s.field}>
-                            <label>{getLocalizedText('Время чтения (минут)', 'Reading time (minutes)')} *</label>
-                            <input 
-                                type="number" 
-                                value={readingTime}
-                                onChange={(e) => setReadingTime(e.target.value)}
-                                min="1" 
-                                step="1"
-                                className={errors.reading_time ? s.errorInput : ''}
-                            />
-                            {errors.reading_time && <span className={s.error}>{errors.reading_time}</span>}
                         </div>
 
                         <div className={s.field}>
@@ -385,7 +311,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
                             {errors.pdf && <span className={s.error}>{errors.pdf}</span>}
                         </div>
 
-                        {/* Секции — множественный выбор (через чекбоксы) */}
                         <div className={s.field}>
                             <label>{getLocalizedText('Секции', 'Sections')}</label>
                             <div className={s.checkboxGroup}>
@@ -403,7 +328,6 @@ export default function ArticleFormModal({ mode, initialData, onClose, locale }:
                             </div>
                         </div>
 
-                        {/* Подсекции для каждой выбранной секции */}
                         {selectedSectionIds.map(sectionId => {
                             const section = sections.find(s => s.section_id === sectionId);
                             const hasSubsections = section?.subsections && section.subsections.length > 0;

@@ -22,12 +22,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
     
     const categoryName = t(`title.${article.category}`);
-    const readingTimeText = `${article.readingTime} минут чтения`;
     
     return {
         title: `${article.name} | Гео-D7`,
-        description: `${article.name_en || article.name.substring(0, 160)}. ${categoryName}. ${readingTimeText}. Геодезия, спутниковая навигация GNSS, высокоточное позиционирование.`,
-        keywords: `${article.category}, ${article.subcategory}, геодезия, навигация, GNSS, позиционирование, синхронизация, геодинамика, координатные системы`,
+        description: `${article.name_en || article.name.substring(0, 160)}. ${categoryName}. Геодезия, спутниковая навигация GNSS, высокоточное позиционирование.`,
+        keywords: `${article.category}, геодезия, навигация, GNSS, позиционирование, синхронизация, геодинамика, координатные системы`,
         authors: [{ name: 'Эксперт Гео-D7' }],
         openGraph: {
             title: article.name,
@@ -37,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             type: 'article',
             publishedTime: article.createdAt,
             authors: [categoryName],
-            tags: [article.category, article.subcategory, 'геодезия', 'GNSS'],
+            tags: [article.category, 'геодезия', 'GNSS'],
         },
         twitter: {
             card: 'summary',

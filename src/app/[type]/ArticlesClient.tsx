@@ -13,26 +13,24 @@ import { debounce } from 'lodash';
 import { Articles } from '@/types/articles';
 import { createClientT } from '@/lib/i18n/client';
 import '@/styles/global.scss';
-import { ARTICLES_SUBTITLES, NAVIGATION_SUBTITLES, POSITIONING_SUBTITLES } from '@/lib/constants/subtitles';
+import { NAVIGATION_SUBTITLES, POSITIONING_SUBTITLES } from '@/lib/constants/subtitles';
 
 type ArticlesClientProps = {
     initialArticles: Articles[];
     section?: string;
     subsection?: string;
     category: string;
-    subcategory?: string;
     locale: 'ru' | 'en';
     afterSlot?: React.ReactNode;
 };
 
-const ArticlesClient = ({ initialArticles, section, subsection, category, subcategory, locale, afterSlot }: ArticlesClientProps) => {
+const ArticlesClient = ({ initialArticles, section, subsection, category, locale, afterSlot }: ArticlesClientProps) => {
     const t = createClientT(locale);
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
     const [articles, setArticles] = useState<Articles[]>(initialArticles);
     const isSearch = category === 'search';
 
-    const subcategories = category === 'articles' ? ARTICLES_SUBTITLES : null;
     let subsections;
     switch (section) {
         case 'navigation':
@@ -74,7 +72,6 @@ const ArticlesClient = ({ initialArticles, section, subsection, category, subcat
             setArticles(results);
         }
     }
-    console.log('subsections', subsections)
 
     return (
         <section className={'page'}>
@@ -92,30 +89,18 @@ const ArticlesClient = ({ initialArticles, section, subsection, category, subcat
                         subsections && subsections.map(currSubsection => 
                             <Text view='p-16'
                                 className={cn('borderEffect', 'subcategory', currSubsection === subsection && 'subcategory__active')} 
-                                onClick={() => router.push(`/sections/${section}/${category}/${subcategory}/${currSubsection}`)}>
+                                onClick={() => router.push(`/sections/${section}/${category}/${currSubsection}`)}>
                                     {t(`subtitles.${section}.${currSubsection}`)}
                             </Text>          
                         )
                     }
                 </div>
-                {subcategories && <div className={'subcategories'}>
-                    <Text view='p-16'
-                        className={cn('borderEffect', 'subcategory', subcategory === 'vestnik' && 'subcategory__active')} 
-                        onClick={() => router.push(section ? `/sections/${section}/articles/vestnik/${subsection}` : '/articles/vestnik')}>
-                            {t('subtitles.articles.vestnik')}
-                    </Text>
-                    <Text view='p-16' 
-                        className={cn('borderEffect', 'subcategory', subcategory === 'other' ? 'subcategory__active' : '')} 
-                        onClick={() => router.push(section ? `/sections/${section}/articles/other/${subsection}` : '/articles/other')}>
-                            {t('subtitles.articles.other')}
-                    </Text>
-                </div>}
 
                 <div className={s.articles}>
                     {articles.length > 0 && articles.map(item => (
                         <article key={item.slug} 
                                  id={item.slug}
-                                 onClick={() => router.push(`/${category}/${subcategory || 'all'}/${item.slug}`)}
+                                 onClick={() => router.push(`/${category}/${item.slug}`)}
                                  className={'article'}>
                             {item.part && <span className={'article__part'}><Text color='primary'>{`${t('common.part')} ${item.part}`}</Text></span>}
                             <Text color='primary'>{locale === 'ru' ? `${item.name}` : `${item.name_en}`}</Text>

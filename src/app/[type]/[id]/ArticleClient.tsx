@@ -29,10 +29,8 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
     const hasRecordedView = useRef(false);
     const [isDownloading, setIsDownloading] = useState(false);
 
-    // Определяем, является ли пользователь админом (только для UI)
     const isAdmin = user?.user_metadata?.role === 'admin' || user?.app_metadata?.role === 'admin';
 
-    // Просмотр — сервер сам проверит админа
     useEffect(() => {
         if (hasRecordedView.current) return;
         hasRecordedView.current = true;
@@ -42,7 +40,7 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
 
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(`https://geo-d7.vercel.app/content/${article.category}/${article.subcategory ? `${article.subcategory}/` : ''}${article.slug}`);
+            await navigator.clipboard.writeText(`https://geo-d7.vercel.app/content/${article.category}/${article.slug}`);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (error) {
@@ -70,7 +68,6 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
         setIsDownloading(true);
         
         try {
-            // Сервер сам проверит, админ ли, и увеличит счётчик только для обычных пользователей
             await incrementArticleDownloadsAction(article.slug);
             
             const downloadUrl = `/api/pdf?path=${encodeURIComponent(pdfPath)}&download=true`;
@@ -114,7 +111,6 @@ const ArticleClient = ({ article, pdfPath, locale, user }: ArticleClientProps) =
                 </div>
 
                 <div>
-                    <Text color='accent'>{locale === 'ru' ? `время чтения: ${article.readingTime} минут` : `Reading time: ${article.readingTime} minutes`}</Text>
                     <div className={s.group}>
                         <Text>{views}</Text>
                     </div>

@@ -33,16 +33,16 @@ const HomePage = async () => {
             </div>
             
             <div className={'links'}>
-                <Link href="/news/all" className={'link'}>
+                <Link href="/news" className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.news')}</Text>
                 </Link>
-                <Link href="/reviews/all" className={'link'}>
+                <Link href="/reviews" className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.reviews')}</Text>
                 </Link>
-                <Link href="/analytics/all" className={'link'}>
+                <Link href="/analytics" className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.analytics')}</Text>
                 </Link>
-                <Link href="/articles/vestnik" className={'link'}>
+                <Link href="/articles" className={'link'}>
                     <Text color="secondary" view="subtitle">{t('nav.articles')}</Text>
                 </Link>
                 <Link href="/dictionary" className={'link'}>
