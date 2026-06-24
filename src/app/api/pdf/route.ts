@@ -11,11 +11,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Path required' }, { status: 400 });
   }
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  
-  if (!user) {
+  if (shouldDownload) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
   }
 
   try {
@@ -24,7 +26,6 @@ export async function GET(request: NextRequest) {
     if (shouldDownload) {
       const response = await fetch(signedUrl);
       const blob = await response.blob();
-
       const contentType = response.headers.get('content-type') || 'application/pdf';
       
       return new NextResponse(blob, {
